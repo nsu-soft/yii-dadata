@@ -1,0 +1,31 @@
+{
+    "name": "nsu-soft/yii-dadata",
+    "description": "DaData module for Yii 2 Framework",
+    "keywords": ["yii2", "dadata", "module", "cache"],
+    "version": "0.1",
+    "type": "library",
+    "license": "MIT",
+    "support": {
+        "issues": "https://github.com/nsu-soft/yii-dadata/issues?state=open",
+        "source": "https://github.com/nsu-soft/yii-dadata"
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "require": {
+        "php": ">=7.2",
+        "yiisoft/yii2": "~2.0.38",
+        "hflabs/dadata": "^20.12",
+        "psr/simple-cache": "^1.0.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "nsusoft\\dadata\\": "src/"
+        }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ]
+}
