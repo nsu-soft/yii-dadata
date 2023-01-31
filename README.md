@@ -4,7 +4,7 @@
 
 If you don't have [Composer](https://getcomposer.org/), you may install it by following instructions at [getcomposer.org](https://getcomposer.org/doc/00-intro.md).
 
-Add this repository to `repository` section of your composer.json file:
+Add this repository to `repositories` section of your composer.json file:\
 
 ```
 "repositories": [
