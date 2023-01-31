@@ -6,6 +6,7 @@ use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
 /**
+ * @property int $id
  * @property string $result
  * @property SourceInterface[] $sources
  */

@@ -11,7 +11,7 @@ use yii\db\ActiveRecord;
 use yii\helpers\Json;
 
 /**
- * This is the model class for table "{{%dadata_address_result}}".
+ * This is the model class for table "{{%dadata_clean_address_result}}".
  *
  * @property int $id
  * @property string $result
@@ -94,12 +94,12 @@ use yii\helpers\Json;
  * @property int|null $qc_geo
  * @property int|null $qc_complete
  * @property int|null $qc_house
- * @property string|null $metro
+ * @property array|string|null $metro
  * @property int $created_at
  * @property int|null $updated_at
- * @property AddressSource[] $sources
+ * @property CleanAddressSource[] $sources
  */
-class AddressResult extends ActiveRecord implements ResultInterface
+class CleanAddressResult extends ActiveRecord implements ResultInterface
 {
     use UniqueRecordTrait;
 
@@ -148,99 +148,6 @@ class AddressResult extends ActiveRecord implements ResultInterface
             [['beltway_hit'], 'string', 'max' => 8],
             [['beltway_distance'], 'string', 'max' => 3],
             [['result'], 'unique'],
-        ];
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function fields(): array
-    {
-        return [
-            'result',
-            'postal_code',
-            'country',
-            'country_iso_code',
-            'federal_district',
-            'region_fias_id',
-            'region_kladr_id',
-            'region_iso_code',
-            'region_with_type',
-            'region_type',
-            'region_type_full',
-            'region',
-            'area_fias_id',
-            'area_kladr_id',
-            'area_with_type',
-            'area_type',
-            'area_type_full',
-            'area',
-            'city_fias_id',
-            'city_kladr_id',
-            'city_with_type',
-            'city_type',
-            'city_type_full',
-            'city',
-            'city_area',
-            'city_district_fias_id',
-            'city_district_kladr_id',
-            'city_district_with_type',
-            'city_district_type',
-            'city_district_type_full',
-            'city_district',
-            'settlement_fias_id',
-            'settlement_kladr_id',
-            'settlement_with_type',
-            'settlement_type',
-            'settlement_type_full',
-            'settlement',
-            'street_fias_id',
-            'street_kladr_id',
-            'street_with_type',
-            'street_type',
-            'street_type_full',
-            'street',
-            'house_fias_id',
-            'house_kladr_id',
-            'house_cadnum',
-            'house_type',
-            'house_type_full',
-            'house',
-            'block_type',
-            'block_type_full',
-            'block',
-            'entrance',
-            'floor',
-            'flat_fias_id',
-            'flat_cadnum',
-            'flat_type',
-            'flat_type_full',
-            'flat',
-            'flat_area',
-            'square_meter_price',
-            'flat_price',
-            'postal_box',
-            'fias_id',
-            'fias_level',
-            'fias_actuality_state',
-            'kladr_id',
-            'capital_marker',
-            'okato',
-            'oktmo',
-            'tax_office',
-            'tax_office_legal',
-            'timezone',
-            'geo_lat',
-            'geo_lon',
-            'beltway_hit',
-            'beltway_distance',
-            'qc_geo',
-            'qc_complete',
-            'qc_house',
-            'metro' => function ($model, $field) {
-                /** @var $model AddressResult */
-                return isset($model->metro) ? Json::decode($model->metro) : null;
-            },
         ];
     }
 
@@ -358,6 +265,6 @@ class AddressResult extends ActiveRecord implements ResultInterface
      */
     public function getSources(): ActiveQuery
     {
-        return $this->hasMany(AddressSource::class, ['address_result_id' => 'id']);
+        return $this->hasMany(CleanAddressSource::class, ['address_result_id' => 'id']);
     }
 }

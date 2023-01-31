@@ -2,121 +2,104 @@
 
 namespace nsusoft\dadata\helpers;
 
-use nsusoft\dadata\api\Client;
-use nsusoft\dadata\cache\clean\CleanCacheFactory;
-use nsusoft\dadata\exceptions\CacheException;
-use nsusoft\dadata\exceptions\UnavailableServiceException;
+use nsusoft\dadata\types\enums\CleanType;
+use nsusoft\dadata\types\interfaces\clean\CleanAddressInterface;
+use nsusoft\dadata\types\interfaces\clean\CleanBirthdateInterface;
+use nsusoft\dadata\types\interfaces\clean\CleanEmailInterface;
+use nsusoft\dadata\types\interfaces\clean\CleanInterface;
+use nsusoft\dadata\factories\DbCacheFactory;
+use nsusoft\dadata\factories\DirectFactory;
+use nsusoft\dadata\factories\FactoryInterface;
 use nsusoft\dadata\Module;
-use Psr\SimpleCache\InvalidArgumentException;
-use yii\base\InvalidConfigException;
+use nsusoft\dadata\types\interfaces\clean\CleanNameInterface;
+use nsusoft\dadata\types\interfaces\clean\CleanPassportInterface;
+use nsusoft\dadata\types\interfaces\clean\CleanPhoneInterface;
+use nsusoft\dadata\types\interfaces\clean\CleanVehicleInterface;
 
 class DadataHelper
 {
     /**
      * @param string $type
      * @param string $value
-     * @return array
-     * @throws CacheException|InvalidConfigException|InvalidArgumentException|UnavailableServiceException
+     * @return CleanInterface
      */
-    public static function clean(string $type, string $value): array
+    public static function clean(string $type, string $value): CleanInterface
     {
-        $client = self::getClient();
-
-        if (!Module::getInstance()->enableCache) {
-            return $client->clean($type, $value);
-        }
-
-        $cache = CleanCacheFactory::getCacheHandler($type);
-
-        if ($cache->has($value)) {
-            return $cache->get($value);
-        }
-
-        $response = $client->clean($type, $value);
-
-        if (!$cache->set($value, $response)) {
-            throw new CacheException(Module::t('main', "A cache saving was failed."));
-        }
-
-        return $response;
+        return self::getFactory()->clean($type, $value);
     }
 
     /**
      * @param string $address
-     * @return array
-     * @throws CacheException|InvalidConfigException|InvalidArgumentException|UnavailableServiceException
+     * @return CleanAddressInterface
      */
-    public static function cleanAddress(string $address): array
+    public static function cleanAddress(string $address): CleanInterface
     {
-        return self::clean('address', $address);
+        return self::clean(CleanType::CLEAN_TYPE_ADDRESS, $address);
     }
 
     /**
      * @param string $phone
-     * @return array
-     * @throws CacheException|InvalidConfigException|InvalidArgumentException|UnavailableServiceException
+     * @return CleanPhoneInterface
      */
-    public static function cleanPhone(string $phone): array
+    public static function cleanPhone(string $phone): CleanInterface
     {
-        return self::clean('phone', $phone);
+        return self::clean(CleanType::CLEAN_TYPE_PHONE, $phone);
     }
 
     /**
      * @param string $name
-     * @return array
-     * @throws CacheException|InvalidConfigException|InvalidArgumentException|UnavailableServiceException
+     * @return CleanNameInterface
      */
-    public static function cleanName(string $name): array
+    public static function cleanName(string $name): CleanInterface
     {
-        return self::clean('name', $name);
+        return self::clean(CleanType::CLEAN_TYPE_NAME, $name);
     }
 
     /**
      * @param string $email
-     * @return array
-     * @throws CacheException|InvalidConfigException|InvalidArgumentException|UnavailableServiceException
+     * @return CleanEmailInterface
      */
-    public static function cleanEmail(string $email): array
+    public static function cleanEmail(string $email): CleanInterface
     {
-        return self::clean('email', $email);
+        return self::clean(CleanType::CLEAN_TYPE_EMAIL, $email);
     }
 
     /**
      * @param string $passport
-     * @return array
-     * @throws CacheException|InvalidConfigException|InvalidArgumentException|UnavailableServiceException
+     * @return CleanPassportInterface
      */
-    public static function cleanPassport(string $passport): array
+    public static function cleanPassport(string $passport): CleanInterface
     {
-        return self::clean('passport', $passport);
+        return self::clean(CleanType::CLEAN_TYPE_PASSPORT, $passport);
     }
 
     /**
      * @param string $birthdate
-     * @return array
-     * @throws CacheException|InvalidConfigException|InvalidArgumentException|UnavailableServiceException
+     * @return CleanBirthdateInterface
      */
-    public static function cleanBirthdate(string $birthdate): array
+    public static function cleanBirthdate(string $birthdate): CleanInterface
     {
-        return self::clean('birthdate', $birthdate);
+        return self::clean(CleanType::CLEAN_TYPE_BIRTHDATE, $birthdate);
     }
 
     /**
      * @param string $vehicle
-     * @return array
-     * @throws CacheException|InvalidConfigException|InvalidArgumentException|UnavailableServiceException
+     * @return CleanVehicleInterface
      */
-    public static function cleanVehicle(string $vehicle): array
+    public static function cleanVehicle(string $vehicle): CleanInterface
     {
-        return self::clean('vehicle', $vehicle);
+        return self::clean(CleanType::CLEAN_TYPE_VEHICLE, $vehicle);
     }
 
     /**
-     * @return Client
-     * @throws InvalidConfigException
+     * @return FactoryInterface
      */
-    private static function getClient(): Client
+    private static function getFactory(): FactoryInterface
     {
-        return new Client();
+        if (Module::getInstance()->enableDbCache) {
+            return new DbCacheFactory();
+        } else {
+            return new DirectFactory();
+        }
     }
 }

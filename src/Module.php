@@ -5,14 +5,14 @@ namespace nsusoft\dadata;
 use Yii;
 
 /**
- * Main module settings
+ * Main module settings.
  */
 class Module extends \yii\base\Module
 {
     /**
      * @var bool Set `true`, if you need to save responses from DaData to local database.
      */
-    public $enableCache = false;
+    public $enableDbCache = false;
 
     /**
      * @var string Tables prefix for DaData module. Has no effect for application tables prefix.

@@ -19,7 +19,7 @@ trait UniqueRecordTrait
 {
     /**
      * @param array $params
-     * @return ActiveRecord|null
+     * @return static|null
      */
     public static function findOrCreate(array $params = []): ?ActiveRecord
     {

@@ -2,24 +2,13 @@
 
 namespace nsusoft\dadata\validators;
 
-use nsusoft\dadata\exceptions\CacheException;
 use nsusoft\dadata\helpers\DadataHelper;
 use nsusoft\dadata\Module;
-use Psr\SimpleCache\InvalidArgumentException;
-use yii\base\InvalidConfigException;
+use nsusoft\dadata\types\interfaces\clean\CleanAddressInterface;
 use yii\validators\Validator;
 
 class AddressValidator extends Validator
 {
-    /**
-     * Quality check
-     * @link https://dadata.ru/api/clean/address/#qc
-     */
-    const QC_CODE_OK = 0;
-    const QC_CODE_UNKNOWN = 1;
-    const QC_CODE_TRASH = 2;
-    const QC_CODE_MULTIPLE = 3;
-
     /**
      * Address precision. It's equal with FIAS level.
      */
@@ -52,44 +41,41 @@ class AddressValidator extends Validator
      * @inheritDoc
      * @param $value
      * @return array|null
-     * @throws InvalidArgumentException
-     * @throws InvalidConfigException
-     * @throws CacheException
      */
     public function validateValue($value): ?array
     {
-        $standardAddress = DadataHelper::cleanAddress($value);
+        $address = DadataHelper::cleanAddress($value);
 
-        if (self::QC_CODE_TRASH == $standardAddress['qc']) {
+        if (CleanAddressInterface::QC_CODE_TRASH == $address->getQualityCheck()) {
             return [Module::t('main', "Incorrect address."), []];
         }
 
-        if (in_array($standardAddress['qc'], [self::QC_CODE_UNKNOWN, self::QC_CODE_MULTIPLE])) {
+        if (in_array($address->getQualityCheck(), [CleanAddressInterface::QC_CODE_UNKNOWN, CleanAddressInterface::QC_CODE_MULTIPLE])) {
             return [Module::t('main', "Please specify the address."), []];
         }
 
-        if (is_null($this->precision) && is_null($this->minPrecision) && self::QC_CODE_OK == $standardAddress['qc']) {
+        if (is_null($this->precision) && is_null($this->minPrecision) && CleanAddressInterface::QC_CODE_OK == $address->getQualityCheck()) {
             return null;
         }
 
         if (isset($this->precision)) {
-            return $this->validatePrecision($standardAddress);
+            return $this->validatePrecision($address);
         }
 
         if (isset($this->minPrecision)) {
-            return $this->validateMinPrecision($standardAddress);
+            return $this->validateMinPrecision($address);
         }
 
         return null;
     }
 
     /**
-     * @param array $address Standard address.
+     * @param CleanAddressInterface $address Standard address.
      * @return array|null
      */
-    private function validatePrecision(array $address): ?array
+    private function validatePrecision(CleanAddressInterface $address): ?array
     {
-        if (in_array($this->precision, $this->getPrecisionCodes()) && $address['fias_level'] === $this->precision) {
+        if (in_array($this->precision, $this->getPrecisionCodes()) && $address->getFiasLevel() === $this->precision) {
             return null;
         }
 
@@ -97,13 +83,13 @@ class AddressValidator extends Validator
     }
 
     /**
-     * @param array $address Standard address.
+     * @param CleanAddressInterface $address Standard address.
      * @return array|null
      */
-    private function validateMinPrecision(array $address): ?array
+    private function validateMinPrecision(CleanAddressInterface $address): ?array
     {
         $structure = $this->getPrecisionsStructure();
-        $addressPrecision = $address['fias_level'];
+        $addressPrecision = $address->getFiasLevel();
 
         if (in_array($this->minPrecision, $this->getPrecisionCodes()) && $structure[$addressPrecision] >= $structure[$this->minPrecision]) {
             return null;

@@ -15,4 +15,11 @@ interface SourceInterface
      * @return ActiveQuery
      */
     public function getResult(): ActiveQuery;
+
+    /**
+     * Sets result identifier for source model.
+     * @param int $resultId
+     * @return void
+     */
+    public function setResultId(int $resultId): void;
 }

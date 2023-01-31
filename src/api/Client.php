@@ -11,6 +11,9 @@ use GuzzleHttp\Exception\GuzzleException;
 use yii\base\Component;
 use yii\base\InvalidConfigException;
 
+/**
+ * Wrapper for DadataClient. Isolates all exceptions from DadataClient and replace them by module exceptions.
+ */
 class Client extends Component
 {
     /**

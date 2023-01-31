@@ -9,7 +9,7 @@ use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "{{%dadata_address_source}}".
+ * This is the model class for table "{{%dadata_clean_address_source}}".
  *
  * @property int $id
  * @property int $result_id
@@ -18,9 +18,9 @@ use yii\db\ActiveRecord;
  * @property string|null $unparsed_parts
  * @property int $created_at
  * @property int|null $updated_at
- * @property AddressResult $result
+ * @property CleanAddressResult $result
  */
-class AddressSource extends ActiveRecord implements SourceInterface
+class CleanAddressSource extends ActiveRecord implements SourceInterface
 {
     /**
      * {@inheritdoc}
@@ -53,19 +53,7 @@ class AddressSource extends ActiveRecord implements SourceInterface
             [['source'], 'string', 'max' => 250],
             [['source'], 'unique'],
             [['unparsed_parts'], 'string', 'max' => 250],
-            [['result_id'], 'exist', 'skipOnError' => true, 'targetClass' => AddressResult::class, 'targetAttribute' => ['result_id' => 'id']],
-        ];
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function fields(): array
-    {
-        return [
-            'source',
-            'qc',
-            'unparsed_parts',
+            [['result_id'], 'exist', 'skipOnError' => true, 'targetClass' => CleanAddressResult::class, 'targetAttribute' => ['result_id' => 'id']],
         ];
     }
 
@@ -86,11 +74,19 @@ class AddressSource extends ActiveRecord implements SourceInterface
     }
 
     /**
-     * Gets query for [[AddressResult]].
+     * Gets query for [[CleanAddressResult]].
      * @return ActiveQuery
      */
     public function getResult(): ActiveQuery
     {
-        return $this->hasOne(AddressResult::class, ['id' => 'result_id']);
+        return $this->hasOne(CleanAddressResult::class, ['id' => 'result_id']);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setResultId(int $resultId): void
+    {
+        $this->result_id = $resultId;
     }
 }
