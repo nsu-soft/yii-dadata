@@ -33,6 +33,7 @@ class AddressValidator extends Validator
     const PRECISION_BUILDING = 8;
     const PRECISION_ROOM = 9;
     const PRECISION_PLAN_STRUCTURE = 65;
+    const PRECISION_LAND_PLOT = 75;
     const PRECISION_ADDITIONAL_TERRITORY = 90;
     const PRECISION_ADDITIONAL_TERRITORY_STREET = 91;
     const PRECISION_FOREIGN = -1;
@@ -127,6 +128,7 @@ class AddressValidator extends Validator
             self::PRECISION_BUILDING,
             self::PRECISION_ROOM,
             self::PRECISION_PLAN_STRUCTURE,
+            self::PRECISION_LAND_PLOT,
             self::PRECISION_ADDITIONAL_TERRITORY,
             self::PRECISION_ADDITIONAL_TERRITORY_STREET,
             self::PRECISION_FOREIGN,
@@ -151,6 +153,7 @@ class AddressValidator extends Validator
             self::PRECISION_BUILDING => 5,
             self::PRECISION_ROOM => 6,
             self::PRECISION_PLAN_STRUCTURE => 4,
+            self::PRECISION_LAND_PLOT => 5,
             self::PRECISION_ADDITIONAL_TERRITORY => 4,
             self::PRECISION_ADDITIONAL_TERRITORY_STREET => 5,
         ];
