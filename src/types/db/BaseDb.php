@@ -5,7 +5,7 @@ namespace nsusoft\dadata\types\db;
 use nsusoft\dadata\interfaces\SourceInterface;
 use yii\base\Component;
 
-class BaseCache extends Component
+class BaseDb extends Component
 {
     /**
      * @var SourceInterface
