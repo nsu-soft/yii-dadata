@@ -2,6 +2,7 @@
 
 namespace nsusoft\dadata\factories;
 
+use nsusoft\dadata\adapters\SuggestAdapter;
 use nsusoft\dadata\types\db\clean\CleanAddressDb;
 use nsusoft\dadata\types\db\clean\CleanBirthdateDb;
 use nsusoft\dadata\types\db\clean\CleanDb;
@@ -15,6 +16,7 @@ use nsusoft\dadata\exceptions\CacheException;
 use nsusoft\dadata\Module;
 use nsusoft\dadata\types\enums\CleanType;
 use nsusoft\dadata\types\interfaces\clean\CleanInterface;
+use nsusoft\dadata\types\interfaces\suggest\SuggestInterface;
 use Psr\SimpleCache\CacheInterface;
 use Psr\SimpleCache\InvalidArgumentException;
 use yii\base\InvalidCallException;
@@ -43,6 +45,18 @@ class DbCacheFactory extends BaseFactory
         $wrapper->setSourceModel($cache->get($value));
 
         return $wrapper;
+    }
+
+    public function suggest(string $type, string $value, array $options = []): SuggestInterface
+    {
+//        $suggest = new SuggestAdapter([
+//            'client' => $this->getClient(),
+//            'type' => $type,
+//            'value' => $value,
+//            'options' => $options,
+//        ]);
+//
+//        $suggest->call();
     }
 
     /**

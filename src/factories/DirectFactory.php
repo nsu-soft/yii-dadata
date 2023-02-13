@@ -2,9 +2,11 @@
 
 namespace nsusoft\dadata\factories;
 
+use nsusoft\dadata\adapters\SuggestAdapter;
 use nsusoft\dadata\types\interfaces\clean\CleanInterface;
 use nsusoft\dadata\Module;
 use nsusoft\dadata\types\enums\CleanType;
+use nsusoft\dadata\types\interfaces\suggest\SuggestInterface;
 use nsusoft\dadata\types\responses\clean\CleanAddressResponse;
 use nsusoft\dadata\types\responses\clean\CleanBirthdateResponse;
 use nsusoft\dadata\types\responses\clean\CleanEmailResponse;
@@ -31,6 +33,18 @@ class DirectFactory extends BaseFactory
         $wrapper->setRawData($this->getClient()->clean($type, $value));
 
         return $wrapper;
+    }
+
+    public function suggest(string $type, string $value, array $options = []): SuggestInterface
+    {
+//        $suggest = new SuggestAdapter([
+//            'client' => $this->getClient(),
+//            'type' => $type,
+//            'value' => $value,
+//            'options' => $options,
+//        ]);
+//
+//        $suggest->call();
     }
 
     /**

@@ -27,7 +27,7 @@ class Module extends \yii\base\Module
     /**
      * @var string Secret for DaData API.
      */
-    public $secret;
+    public $secret = null;
 
     /**
      * @inheritdoc
