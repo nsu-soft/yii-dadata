@@ -1,0 +1,36 @@
+version: '3.7'
+services:
+  nginx:
+    image: nginx:alpine
+    volumes:
+      - .:/usr/share/nginx/html
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d
+      - ./log/nginx:/var/log/nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - php
+  php:
+    build: ./docker/php
+    volumes:
+      - .:/usr/share/nginx/html
+    depends_on:
+      - mysql
+  mysql:
+    image: mysql:5.7
+#    command: --max_allowed_packet=1073741824
+    environment:
+      MYSQL_DATABASE: dadata
+      MYSQL_USER: dadata
+      MYSQL_PASSWORD: dadata
+      MYSQL_ROOT_PASSWORD: root
+    expose:
+      - 3306
+    volumes:
+      - mysqldata:/var/lib/mysql
+      - ./docker/mysql/conf.d:/etc/mysql/conf.d
+    ports:
+      - "3306:3306"
+
+volumes:
+  mysqldata:
