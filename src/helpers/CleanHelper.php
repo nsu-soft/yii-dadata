@@ -20,7 +20,7 @@ class CleanHelper
      */
     public static function address(string $address): CleanInterface
     {
-        return DadataHelper::clean(CleanType::CLEAN_TYPE_ADDRESS, $address);
+        return DadataHelper::clean(CleanType::ADDRESS, $address);
     }
 
     /**
@@ -29,7 +29,7 @@ class CleanHelper
      */
     public static function phone(string $phone): CleanInterface
     {
-        return DadataHelper::clean(CleanType::CLEAN_TYPE_PHONE, $phone);
+        return DadataHelper::clean(CleanType::PHONE, $phone);
     }
 
     /**
@@ -38,7 +38,7 @@ class CleanHelper
      */
     public static function name(string $name): CleanInterface
     {
-        return DadataHelper::clean(CleanType::CLEAN_TYPE_NAME, $name);
+        return DadataHelper::clean(CleanType::NAME, $name);
     }
 
     /**
@@ -47,7 +47,7 @@ class CleanHelper
      */
     public static function email(string $email): CleanInterface
     {
-        return DadataHelper::clean(CleanType::CLEAN_TYPE_EMAIL, $email);
+        return DadataHelper::clean(CleanType::EMAIL, $email);
     }
 
     /**
@@ -56,7 +56,7 @@ class CleanHelper
      */
     public static function passport(string $passport): CleanInterface
     {
-        return DadataHelper::clean(CleanType::CLEAN_TYPE_PASSPORT, $passport);
+        return DadataHelper::clean(CleanType::PASSPORT, $passport);
     }
 
     /**
@@ -65,7 +65,7 @@ class CleanHelper
      */
     public static function birthdate(string $birthdate): CleanInterface
     {
-        return DadataHelper::clean(CleanType::CLEAN_TYPE_BIRTHDATE, $birthdate);
+        return DadataHelper::clean(CleanType::BIRTHDATE, $birthdate);
     }
 
     /**
@@ -74,6 +74,6 @@ class CleanHelper
      */
     public static function vehicle(string $vehicle): CleanInterface
     {
-        return DadataHelper::clean(CleanType::CLEAN_TYPE_VEHICLE, $vehicle);
+        return DadataHelper::clean(CleanType::VEHICLE, $vehicle);
     }
 }

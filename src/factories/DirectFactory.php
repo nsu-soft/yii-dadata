@@ -3,6 +3,7 @@
 namespace nsusoft\dadata\factories;
 
 use nsusoft\dadata\adapters\SuggestAdapter;
+use nsusoft\dadata\types\enums\SuggestType;
 use nsusoft\dadata\types\interfaces\clean\CleanInterface;
 use nsusoft\dadata\Module;
 use nsusoft\dadata\types\enums\CleanType;
@@ -37,6 +38,10 @@ class DirectFactory extends BaseFactory
 
     public function suggest(string $type, string $value, array $options = []): SuggestInterface
     {
+        if (!SuggestType::exists($type)) {
+            throw new InvalidCallException(Module::t('main', 'Invalid suggest type.'));
+        }
+
 //        $suggest = new SuggestAdapter([
 //            'client' => $this->getClient(),
 //            'type' => $type,
@@ -53,19 +58,19 @@ class DirectFactory extends BaseFactory
      */
     protected function getCleanData(string $type): CleanInterface
     {
-       if (CleanType::CLEAN_TYPE_ADDRESS === $type) {
+       if (CleanType::ADDRESS === $type) {
            return new CleanAddressResponse();
-       } else if (CleanType::CLEAN_TYPE_PHONE === $type) {
+       } else if (CleanType::PHONE === $type) {
            return new CleanPhoneResponse();
-       } else if (CleanType::CLEAN_TYPE_NAME === $type) {
+       } else if (CleanType::NAME === $type) {
            return new CleanNameResponse();
-       } else if (CleanType::CLEAN_TYPE_EMAIL === $type) {
+       } else if (CleanType::EMAIL === $type) {
            return new CleanEmailResponse();
-       } else if (CleanType::CLEAN_TYPE_PASSPORT === $type) {
+       } else if (CleanType::PASSPORT === $type) {
            return new CleanPassportResponse();
-       } else if (CleanType::CLEAN_TYPE_BIRTHDATE === $type) {
+       } else if (CleanType::BIRTHDATE === $type) {
            return new CleanBirthdateResponse();
-       } else if (CleanType::CLEAN_TYPE_VEHICLE === $type) {
+       } else if (CleanType::VEHICLE === $type) {
            return new CleanVehicleResponse();
        }
 

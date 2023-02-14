@@ -15,6 +15,7 @@ use nsusoft\dadata\cache\db\clean\CleanAddressCache;
 use nsusoft\dadata\exceptions\CacheException;
 use nsusoft\dadata\Module;
 use nsusoft\dadata\types\enums\CleanType;
+use nsusoft\dadata\types\enums\SuggestType;
 use nsusoft\dadata\types\interfaces\clean\CleanInterface;
 use nsusoft\dadata\types\interfaces\suggest\SuggestInterface;
 use Psr\SimpleCache\CacheInterface;
@@ -49,6 +50,10 @@ class DbCacheFactory extends BaseFactory
 
     public function suggest(string $type, string $value, array $options = []): SuggestInterface
     {
+        if (!SuggestType::exists($type)) {
+            throw new InvalidCallException(Module::t('main', 'Invalid suggest type.'));
+        }
+
 //        $suggest = new SuggestAdapter([
 //            'client' => $this->getClient(),
 //            'type' => $type,
@@ -65,19 +70,19 @@ class DbCacheFactory extends BaseFactory
      */
     protected function getCleanData(string $type): CleanInterface
     {
-        if (CleanType::CLEAN_TYPE_ADDRESS === $type) {
+        if (CleanType::ADDRESS === $type) {
             return new CleanAddressDb();
-        } else if (CleanType::CLEAN_TYPE_PHONE === $type) {
+        } else if (CleanType::PHONE === $type) {
             return new CleanPhoneDb();
-        } else if (CleanType::CLEAN_TYPE_NAME === $type) {
+        } else if (CleanType::NAME === $type) {
             return new CleanNameDb();
-        } else if (CleanType::CLEAN_TYPE_EMAIL === $type) {
+        } else if (CleanType::EMAIL === $type) {
             return new CleanEmailDb();
-        } else if (CleanType::CLEAN_TYPE_PASSPORT === $type) {
+        } else if (CleanType::PASSPORT === $type) {
             return new CleanPassportDb();
-        } else if (CleanType::CLEAN_TYPE_BIRTHDATE === $type) {
+        } else if (CleanType::BIRTHDATE === $type) {
             return new CleanBirthdateDb();
-        } else if (CleanType::CLEAN_TYPE_VEHICLE === $type) {
+        } else if (CleanType::VEHICLE === $type) {
             return new CleanVehicleDb();
         }
 
@@ -90,7 +95,7 @@ class DbCacheFactory extends BaseFactory
      */
     private function getCleanCache(string $type): CacheInterface
     {
-        if (CleanType::CLEAN_TYPE_ADDRESS === $type) {
+        if (CleanType::ADDRESS === $type) {
             return new CleanAddressCache();
         }
 //        else if (CleanType::CLEAN_TYPE_PHONE === $type) {
