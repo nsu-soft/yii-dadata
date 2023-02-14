@@ -1,10 +1,10 @@
 <?php
 
-namespace nsusoft\dadata\types\responses\clean;
+namespace nsusoft\dadata\types\direct\clean;
 
 use nsusoft\dadata\types\interfaces\clean\CleanAddressInterface;
 
-class CleanAddressResponse extends CleanResponse implements CleanAddressInterface
+class CleanAddressDirect extends CleanDirect implements CleanAddressInterface
 {
     /**
      * @inheritDoc

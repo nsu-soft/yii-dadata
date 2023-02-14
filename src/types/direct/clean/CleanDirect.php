@@ -1,11 +1,11 @@
 <?php
 
-namespace nsusoft\dadata\types\responses\clean;
+namespace nsusoft\dadata\types\direct\clean;
 
 use nsusoft\dadata\types\interfaces\clean\CleanInterface;
-use nsusoft\dadata\types\responses\BaseResponse;
+use nsusoft\dadata\types\direct\BaseResponse;
 
-class CleanResponse extends BaseResponse implements CleanInterface
+class CleanDirect extends BaseResponse implements CleanInterface
 {
     /**
      * @inheritDoc

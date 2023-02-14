@@ -2,11 +2,11 @@
 
 namespace nsusoft\dadata\types\interfaces\clean;
 
-use nsusoft\dadata\types\responses\clean\CleanAddressResponse;
+use nsusoft\dadata\types\direct\clean\CleanAddressDirect;
 
 /**
  * @link https://dadata.ru/api/clean/address/ Documentation page.
- * @see CleanAddressResponse
+ * @see CleanAddressDirect
  * @property string|null $postalCode
  * @property string|null $country
  * @property string|null $countryIsoCode

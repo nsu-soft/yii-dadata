@@ -1,6 +1,6 @@
 <?php
 
-namespace nsusoft\dadata\types\responses;
+namespace nsusoft\dadata\types\direct;
 
 use yii\base\Component;
 
