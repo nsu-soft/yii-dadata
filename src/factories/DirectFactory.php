@@ -8,21 +8,21 @@ use nsusoft\dadata\types\interfaces\clean\CleanInterface;
 use nsusoft\dadata\Module;
 use nsusoft\dadata\types\enums\CleanType;
 use nsusoft\dadata\types\interfaces\suggest\SuggestInterface;
-use nsusoft\dadata\types\responses\clean\CleanAddressResponse;
-use nsusoft\dadata\types\responses\clean\CleanBirthdateResponse;
-use nsusoft\dadata\types\responses\clean\CleanEmailResponse;
-use nsusoft\dadata\types\responses\clean\CleanNameResponse;
-use nsusoft\dadata\types\responses\clean\CleanPassportResponse;
-use nsusoft\dadata\types\responses\clean\CleanPhoneResponse;
-use nsusoft\dadata\types\responses\clean\CleanResponse;
-use nsusoft\dadata\types\responses\clean\CleanVehicleResponse;
+use nsusoft\dadata\types\direct\clean\CleanAddressDirect;
+use nsusoft\dadata\types\direct\clean\CleanBirthdateDirect;
+use nsusoft\dadata\types\direct\clean\CleanEmailDirect;
+use nsusoft\dadata\types\direct\clean\CleanNameDirect;
+use nsusoft\dadata\types\direct\clean\CleanPassportDirect;
+use nsusoft\dadata\types\direct\clean\CleanPhoneDirect;
+use nsusoft\dadata\types\direct\clean\CleanDirect;
+use nsusoft\dadata\types\direct\clean\CleanVehicleDirect;
 use yii\base\InvalidCallException;
 
 class DirectFactory extends BaseFactory
 {
     /**
      * @inheritDoc
-     * @return CleanResponse
+     * @return CleanDirect
      */
     public function clean(string $type, string $value): CleanInterface
     {
@@ -54,24 +54,24 @@ class DirectFactory extends BaseFactory
 
     /**
      * @param string $type
-     * @return CleanResponse
+     * @return CleanDirect
      */
     protected function getCleanData(string $type): CleanInterface
     {
        if (CleanType::ADDRESS === $type) {
-           return new CleanAddressResponse();
+           return new CleanAddressDirect();
        } else if (CleanType::PHONE === $type) {
-           return new CleanPhoneResponse();
+           return new CleanPhoneDirect();
        } else if (CleanType::NAME === $type) {
-           return new CleanNameResponse();
+           return new CleanNameDirect();
        } else if (CleanType::EMAIL === $type) {
-           return new CleanEmailResponse();
+           return new CleanEmailDirect();
        } else if (CleanType::PASSPORT === $type) {
-           return new CleanPassportResponse();
+           return new CleanPassportDirect();
        } else if (CleanType::BIRTHDATE === $type) {
-           return new CleanBirthdateResponse();
+           return new CleanBirthdateDirect();
        } else if (CleanType::VEHICLE === $type) {
-           return new CleanVehicleResponse();
+           return new CleanVehicleDirect();
        }
 
         throw new InvalidCallException(Module::t('main', 'Invalid clean type.'));

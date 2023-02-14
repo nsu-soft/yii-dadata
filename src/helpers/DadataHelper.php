@@ -2,6 +2,7 @@
 
 namespace nsusoft\dadata\helpers;
 
+use nsusoft\dadata\handlers\HandlerFactory;
 use nsusoft\dadata\types\enums\CleanType;
 use nsusoft\dadata\types\interfaces\clean\CleanAddressInterface;
 use nsusoft\dadata\types\interfaces\clean\CleanBirthdateInterface;
@@ -26,7 +27,8 @@ class DadataHelper
      */
     public static function clean(string $type, string $value): CleanInterface
     {
-        return self::getFactory()->clean($type, $value);
+        return HandlerFactory::getChain()->clean($type, $value);
+//        return self::getFactory()->clean($type, $value);
     }
 
     /**
@@ -107,7 +109,8 @@ class DadataHelper
      */
     public static function suggest(string $type, string $value, array $options = []): SuggestInterface
     {
-        return self::getFactory()->suggest($type, $value, $options);
+        return HandlerFactory::getChain()->suggest($type, $value, $options);
+//        return self::getFactory()->suggest($type, $value, $options);
     }
 
     /**
