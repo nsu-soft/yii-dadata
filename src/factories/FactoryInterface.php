@@ -3,13 +3,19 @@
 namespace nsusoft\dadata\factories;
 
 use nsusoft\dadata\types\interfaces\clean\CleanInterface;
+use nsusoft\dadata\types\interfaces\suggest\SuggestInterface;
 
 interface FactoryInterface
 {
     /**
      * @param string $type
-     * @param string $value
      * @return CleanInterface
      */
-    public function clean(string $type, string $value): CleanInterface;
+    public function createClean(string $type): CleanInterface;
+
+    /**
+     * @param string $type
+     * @return SuggestInterface
+     */
+    public function createSuggest(string $type): SuggestInterface;
 }

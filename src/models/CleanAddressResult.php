@@ -5,6 +5,7 @@ namespace nsusoft\dadata\models;
 use nsusoft\dadata\interfaces\ResultInterface;
 use nsusoft\dadata\Module;
 use nsusoft\dadata\traits\UniqueRecordTrait;
+use nsusoft\dadata\types\interfaces\clean\CleanAddressInterface;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
@@ -245,6 +246,105 @@ class CleanAddressResult extends ActiveRecord implements ResultInterface
     }
 
     /**
+     * @param CleanAddressInterface|array $data
+     * @param string|null $formName
+     * @return bool
+     */
+    public function load($data, $formName = null): bool
+    {
+        if (is_array($data)) {
+            return parent::load($data, $formName);
+        }
+
+        return parent::load(
+            [
+                'result' => $data->getResult(),
+                'postal_code' => $data->getPostalCode(),
+                'country' => $data->getCountry(),
+                'country_iso_code' => $data->getCountryIsoCode(),
+                'federal_district' => $data->getFederalDistrict(),
+                'region_fias_id' => $data->getRegionFiasId(),
+                'region_kladr_id' => $data->getRegionKladrId(),
+                'region_iso_code' => $data->getRegionIsoCode(),
+                'region_with_type' => $data->getRegionWithType(),
+                'region_type' => $data->getRegionType(),
+                'region_type_full' => $data->getRegionTypeFull(),
+                'region' => $data->getRegion(),
+                'area_fias_id' => $data->getAreaFiasId(),
+                'area_kladr_id' => $data->getAreaKladrId(),
+                'area_with_type' => $data->getAreaWithType(),
+                'area_type' => $data->getAreaType(),
+                'area_type_full' => $data->getAreaTypeFull(),
+                'area' => $data->getArea(),
+                'city_fias_id' => $data->getCityFiasId(),
+                'city_kladr_id' => $data->getCityKladrId(),
+                'city_with_type' => $data->getCityWithType(),
+                'city_type' => $data->getCityType(),
+                'city_type_full' => $data->getCityTypeFull(),
+                'city' => $data->getCity(),
+                'city_area' => $data->getCityArea(),
+                'city_district_fias_id' => $data->getCityDistrictFiasId(),
+                'city_district_kladr_id' => $data->getCityDistrictKladrId(),
+                'city_district_with_type' => $data->getCityDistrictWithType(),
+                'city_district_type' => $data->getCityDistrictType(),
+                'city_district_type_full' => $data->getCityDistrictTypeFull(),
+                'city_district' => $data->getCityDistrict(),
+                'settlement_fias_id' => $data->getSettlementFiasId(),
+                'settlement_kladr_id' => $data->getSettlementKladrId(),
+                'settlement_with_type' => $data->getSettlementWithType(),
+                'settlement_type' => $data->getSettlementType(),
+                'settlement_type_full' => $data->getSettlementTypeFull(),
+                'settlement' => $data->getSettlement(),
+                'street_fias_id' => $data->getStreetFiasId(),
+                'street_kladr_id' => $data->getStreetKladrId(),
+                'street_with_type' => $data->getStreetWithType(),
+                'street_type' => $data->getStreetType(),
+                'street_type_full' => $data->getStreetTypeFull(),
+                'street' => $data->getStreet(),
+                'house_fias_id' => $data->getHouseFiasId(),
+                'house_kladr_id' => $data->getHouseKladrId(),
+                'house_cadnum' => $data->getHouseCadastralNumber(),
+                'house_type' => $data->getHouseType(),
+                'house_type_full' => $data->getHouseTypeFull(),
+                'house' => $data->getHouse(),
+                'block_type' => $data->getBlockType(),
+                'block_type_full' => $data->getBlockTypeFull(),
+                'block' => $data->getBlock(),
+                'entrance' => $data->getEntrance(),
+                'floor' => $data->getFloor(),
+                'flat_fias_id' => $data->getFlatFiasId(),
+                'flat_cadnum' => $data->getFlatCadastralNumber(),
+                'flat_type' => $data->getFlatType(),
+                'flat_type_full' => $data->getFlatTypeFull(),
+                'flat' => $data->getFlat(),
+                'flat_area' => $data->getFlatArea(),
+                'square_meter_price' => $data->getSquareMeterPrice(),
+                'flat_price' => $data->getFlatPrice(),
+                'postal_box' => $data->getPostalBox(),
+                'fias_id' => $data->getFiasId(),
+                'fias_level' => $data->getFiasLevel(),
+                'fias_actuality_state' => $data->getFiasActualityState(),
+                'kladr_id' => $data->getKladrId(),
+                'capital_marker' => $data->getCapitalMarker(),
+                'okato' => $data->getOkato(),
+                'oktmo' => $data->getOktmo(),
+                'tax_office' => $data->getTaxOffice(),
+                'tax_office_legal' => $data->getTaxOfficeLegal(),
+                'timezone' => $data->getTimezone(),
+                'geo_lat' => $data->getGeographicalLatitude(),
+                'geo_lon' => $data->getGeographicalLongitude(),
+                'beltway_hit' => $data->getBeltwayHit(),
+                'beltway_distance' => $data->getBeltwayDistance(),
+                'qc_geo' => $data->getQualityCheckGeographical(),
+                'qc_complete' => $data->getQualityCheckComplete(),
+                'qc_house' => $data->getQualityCheckHouse(),
+                'metro' => $data->getMetro(),
+            ],
+            $formName
+        );
+    }
+
+    /**
      * @return bool
      */
     public function beforeValidate(): bool
@@ -266,5 +366,13 @@ class CleanAddressResult extends ActiveRecord implements ResultInterface
     public function getSources(): ActiveQuery
     {
         return $this->hasMany(CleanAddressSource::class, ['address_result_id' => 'id']);
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getId(): ?int
+    {
+        return $this->id;
     }
 }

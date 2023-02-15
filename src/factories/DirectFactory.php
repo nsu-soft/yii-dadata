@@ -2,59 +2,95 @@
 
 namespace nsusoft\dadata\factories;
 
+use nsusoft\dadata\types\direct\suggest\SuggestAddressDirect;
+use nsusoft\dadata\types\direct\suggest\SuggestDirect;
+use nsusoft\dadata\types\enums\SuggestType;
 use nsusoft\dadata\types\interfaces\clean\CleanInterface;
 use nsusoft\dadata\Module;
 use nsusoft\dadata\types\enums\CleanType;
-use nsusoft\dadata\types\responses\clean\CleanAddressResponse;
-use nsusoft\dadata\types\responses\clean\CleanBirthdateResponse;
-use nsusoft\dadata\types\responses\clean\CleanEmailResponse;
-use nsusoft\dadata\types\responses\clean\CleanNameResponse;
-use nsusoft\dadata\types\responses\clean\CleanPassportResponse;
-use nsusoft\dadata\types\responses\clean\CleanPhoneResponse;
-use nsusoft\dadata\types\responses\clean\CleanResponse;
-use nsusoft\dadata\types\responses\clean\CleanVehicleResponse;
+use nsusoft\dadata\types\interfaces\suggest\SuggestInterface;
+use nsusoft\dadata\types\direct\clean\CleanAddressDirect;
+use nsusoft\dadata\types\direct\clean\CleanBirthdateDirect;
+use nsusoft\dadata\types\direct\clean\CleanEmailDirect;
+use nsusoft\dadata\types\direct\clean\CleanNameDirect;
+use nsusoft\dadata\types\direct\clean\CleanPassportDirect;
+use nsusoft\dadata\types\direct\clean\CleanPhoneDirect;
+use nsusoft\dadata\types\direct\clean\CleanDirect;
+use nsusoft\dadata\types\direct\clean\CleanVehicleDirect;
 use yii\base\InvalidCallException;
 
 class DirectFactory extends BaseFactory
 {
     /**
      * @inheritDoc
-     * @return CleanResponse
+     * @return CleanDirect
      */
-    public function clean(string $type, string $value): CleanInterface
+    public function createClean(string $type): CleanInterface
     {
-        if (!CleanType::exists($type)) {
-            throw new InvalidCallException(Module::t('main', 'Invalid clean type.'));
+        if (CleanType::ADDRESS === $type) {
+            return new CleanAddressDirect();
+        } else if (CleanType::PHONE === $type) {
+            return new CleanPhoneDirect();
+        } else if (CleanType::NAME === $type) {
+            return new CleanNameDirect();
+        } else if (CleanType::EMAIL === $type) {
+            return new CleanEmailDirect();
+        } else if (CleanType::PASSPORT === $type) {
+            return new CleanPassportDirect();
+        } else if (CleanType::BIRTHDATE === $type) {
+            return new CleanBirthdateDirect();
+        } else if (CleanType::VEHICLE === $type) {
+            return new CleanVehicleDirect();
         }
 
-        $wrapper = $this->getCleanData($type);
-        $wrapper->setRawData($this->getClient()->clean($type, $value));
-
-        return $wrapper;
+        throw new InvalidCallException(Module::t('main', 'Invalid clean type.'));
     }
 
     /**
      * @param string $type
-     * @return CleanResponse
+     * @return SuggestDirect
      */
-    protected function getCleanData(string $type): CleanInterface
+    public function createSuggest(string $type): SuggestInterface
     {
-       if (CleanType::CLEAN_TYPE_ADDRESS === $type) {
-           return new CleanAddressResponse();
-       } else if (CleanType::CLEAN_TYPE_PHONE === $type) {
-           return new CleanPhoneResponse();
-       } else if (CleanType::CLEAN_TYPE_NAME === $type) {
-           return new CleanNameResponse();
-       } else if (CleanType::CLEAN_TYPE_EMAIL === $type) {
-           return new CleanEmailResponse();
-       } else if (CleanType::CLEAN_TYPE_PASSPORT === $type) {
-           return new CleanPassportResponse();
-       } else if (CleanType::CLEAN_TYPE_BIRTHDATE === $type) {
-           return new CleanBirthdateResponse();
-       } else if (CleanType::CLEAN_TYPE_VEHICLE === $type) {
-           return new CleanVehicleResponse();
-       }
+        if (SuggestType::ADDRESS === $type) {
+            return new SuggestAddressDirect();
+        }
+//        else if (SuggestType::PARTY === $type) {
+//
+//        } else if (SuggestType::BANK === $type) {
+//
+//        } else if (SuggestType::NAME === $type) {
+//
+//        } else if (SuggestType::EMAIL === $type) {
+//
+//        } else if (SuggestType::FMS_UNIT === $type) {
+//
+//        } else if (SuggestType::POSTAL_UNIT === $type) {
+//
+//        } else if (SuggestType::FNS_UNIT === $type) {
+//
+//        } else if (SuggestType::FTS_UNIT === $type) {
+//
+//        } else if (SuggestType::REGION_COURT === $type) {
+//
+//        } else if (SuggestType::METRO === $type) {
+//
+//        } else if (SuggestType::CAR_BRAND === $type) {
+//
+//        } else if (SuggestType::MKTU === $type) {
+//
+//        } else if (SuggestType::COUNTRY === $type) {
+//
+//        } else if (SuggestType::CURRENCY === $type) {
+//
+//        } else if (SuggestType::OKVED === $type) {
+//
+//        } else if (SuggestType::OKPD === $type) {
+//
+//        } else if (SuggestType::OKTMO === $type) {
+//
+//        }
 
-        throw new InvalidCallException(Module::t('main', 'Invalid clean type.'));
+        throw new InvalidCallException(Module::t('main', 'Invalid suggest type.'));
     }
 }

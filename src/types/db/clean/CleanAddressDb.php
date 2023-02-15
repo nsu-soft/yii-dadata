@@ -14,6 +14,14 @@ class CleanAddressDb extends CleanDb implements CleanAddressInterface
     /**
      * @inheritDoc
      */
+    public function getResult(): string
+    {
+        return $this->sourceModel->result->result;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function getPostalCode(): ?string
     {
         return $this->sourceModel->result->postal_code;
@@ -617,14 +625,6 @@ class CleanAddressDb extends CleanDb implements CleanAddressInterface
     public function getBeltwayDistance(): ?string
     {
         return $this->sourceModel->result->beltway_distance;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getQualityCheck(): ?int
-    {
-        return $this->sourceModel->qc;
     }
 
     /**

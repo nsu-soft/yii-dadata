@@ -4,6 +4,7 @@ namespace nsusoft\dadata\models;
 
 use nsusoft\dadata\interfaces\SourceInterface;
 use nsusoft\dadata\Module;
+use nsusoft\dadata\types\interfaces\clean\CleanAddressInterface;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
@@ -71,6 +72,27 @@ class CleanAddressSource extends ActiveRecord implements SourceInterface
             'created_at' => Module::t('main', 'Created at'),
             'updated_at' => Module::t('main', 'Updated at'),
         ];
+    }
+
+    /**
+     * @param CleanAddressInterface|array $data
+     * @param string|null $formName
+     * @return bool
+     */
+    public function load($data, $formName = null): bool
+    {
+        if (is_array($data)) {
+            return parent::load($data, $formName);
+        }
+
+        return parent::load(
+            [
+                'source' => $data->getSource(),
+                'qc' => $data->getQualityCheck(),
+                'unparsed_parts' => $data->getUnparsedParts(),
+            ],
+            $formName
+        );
     }
 
     /**
