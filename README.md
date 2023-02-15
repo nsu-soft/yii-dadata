@@ -31,7 +31,7 @@ Add the following lines to your configuration file:
         'class' => 'nsusoft\dadata\Module',
         'token' => 'enter-your-dadata-token',
         'secret' => 'enter-your-dadata-secret',
-        'cachePriority' = [DbHandler::class],
+        'cachePriority' => [DbHandler::class],
     ],
 ],
 ```
