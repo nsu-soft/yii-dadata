@@ -14,7 +14,7 @@ interface CleanInterface
     public function getSource(): string;
 
     /**
-     * @return string
+     * @return int|null
      */
-    public function getResult(): string;
+    public function getQualityCheck(): ?int;
 }

@@ -2,7 +2,7 @@
     "name": "nsu-soft/yii-dadata",
     "description": "DaData module for Yii 2 Framework",
     "keywords": ["yii2", "dadata", "module", "cache"],
-    "version": "0.2.1",
+    "version": "0.3.0",
     "type": "library",
     "license": "BSD 3-Clause",
     "support": {
@@ -27,5 +27,10 @@
             "type": "composer",
             "url": "https://asset-packagist.org"
         }
-    ]
+    ],
+    "config": {
+        "allow-plugins": {
+            "yiisoft/yii2-composer": true
+        }
+    }
 }

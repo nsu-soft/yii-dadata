@@ -11,8 +11,14 @@ class Module extends \yii\base\Module
 {
     /**
      * @var bool Set `true`, if you need to save responses from DaData to local database.
+     * @deprecated Will be removed in version v0.4. Use 'cachePriority' = [DbHandler::class] in module configuration instead of this option.
      */
     public $enableDbCache = false;
+
+    /**
+     * @var array From high to low level. Base level is a direct API call.
+     */
+    public $cachePriority = [];
 
     /**
      * @var string Tables prefix for DaData module. Has no effect for application tables prefix.
@@ -27,7 +33,7 @@ class Module extends \yii\base\Module
     /**
      * @var string Secret for DaData API.
      */
-    public $secret;
+    public $secret = null;
 
     /**
      * @inheritdoc

@@ -31,7 +31,7 @@ Add the following lines to your configuration file:
         'class' => 'nsusoft\dadata\Module',
         'token' => 'enter-your-dadata-token',
         'secret' => 'enter-your-dadata-secret',
-        'enableDbCache' => true, // You need to apply migrations to using this option
+        'cachePriority' = [DbHandler::class],
     ],
 ],
 ```
@@ -57,7 +57,7 @@ namespace app\forms;
 
 use app\models\City;
 use app\models\Region;
-use nsusoft\dadata\helpers\DadataHelper;
+use nsusoft\dadata\helpers\CleanHelper;
 use nsusoft\dadata\plugins\TimezoneConverter;
 use nsusoft\dadata\validators\AddressValidator;
 use yii\base\Model;
@@ -95,7 +95,7 @@ class AddressForm extends Model
      */
     private function saveRegion(): bool
     {
-        $address = DadataHelper::cleanAddress($this->address);
+        $address = CleanHelper::address($this->address);
         
         $this->region = new Region();
         $this->region->name = $address->getRegion();
@@ -113,7 +113,7 @@ class AddressForm extends Model
      */
     private function saveCity(): bool
     {
-        $address = DadataHelper::cleanAddress($this->address);
+        $address = CleanHelper::address($this->address);
         
         $this->city = new City();
         $this->city->name = $address->getCity();
