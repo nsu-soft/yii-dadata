@@ -4,6 +4,7 @@ namespace nsusoft\dadata\factories;
 
 use nsusoft\dadata\types\direct\suggest\SuggestAddressDirect;
 use nsusoft\dadata\types\direct\suggest\SuggestDirect;
+use nsusoft\dadata\types\direct\suggest\SuggestEmailDirect;
 use nsusoft\dadata\types\enums\SuggestType;
 use nsusoft\dadata\types\interfaces\clean\CleanInterface;
 use nsusoft\dadata\Module;
@@ -61,9 +62,11 @@ class DirectFactory extends BaseFactory
 //
 //        } else if (SuggestType::NAME === $type) {
 //
-//        } else if (SuggestType::EMAIL === $type) {
-//
-//        } else if (SuggestType::FMS_UNIT === $type) {
+//        }
+        else if (SuggestType::EMAIL === $type) {
+            return new SuggestEmailDirect();
+        }
+//        else if (SuggestType::FMS_UNIT === $type) {
 //
 //        } else if (SuggestType::POSTAL_UNIT === $type) {
 //
