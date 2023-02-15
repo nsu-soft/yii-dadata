@@ -19,6 +19,12 @@ interface ResultInterface
     public function getSources(): ActiveQuery;
 
     /**
+     * Gets result identifier. Empty if record hasn't already saved.
+     * @return int|null
+     */
+    public function getId(): ?int;
+
+    /**
      * @param array $params
      * @return ActiveRecord
      */

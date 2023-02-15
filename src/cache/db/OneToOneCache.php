@@ -2,6 +2,7 @@
 
 namespace nsusoft\dadata\cache\db;
 
+use nsusoft\dadata\interfaces\ResultInterface;
 use nsusoft\dadata\interfaces\SourceInterface;
 use Psr\SimpleCache\CacheInterface;
 use Psr\SimpleCache\InvalidArgumentException;
@@ -9,7 +10,7 @@ use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 use yii\db\StaleObjectException;
 
-abstract class BaseCache implements CacheInterface
+abstract class OneToOneCache implements CacheInterface
 {
     /**
      * @inheritDoc
@@ -41,7 +42,7 @@ abstract class BaseCache implements CacheInterface
         }
 
         $sourceModel = $this->createSource();
-        $sourceModel->setResultId($resultModel->id);
+        $sourceModel->setResultId($resultModel->getId());
 
         if (!$sourceModel->load($value, '') || !$sourceModel->save()) {
             return false;
@@ -137,10 +138,10 @@ abstract class BaseCache implements CacheInterface
     abstract protected function createSource(): SourceInterface;
 
     /**
-     * @param array $value
-     * @return ActiveRecord
+     * @param mixed $value
+     * @return ActiveRecord|ResultInterface
      */
-    abstract protected function createResult(array $value): ActiveRecord;
+    abstract protected function createResult($value): ActiveRecord;
 
     /**
      * @param string $source

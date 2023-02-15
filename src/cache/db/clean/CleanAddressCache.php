@@ -2,14 +2,14 @@
 
 namespace nsusoft\dadata\cache\db\clean;
 
-use nsusoft\dadata\cache\db\BaseCache;
+use nsusoft\dadata\cache\db\OneToOneCache;
 use nsusoft\dadata\interfaces\SourceInterface;
 use nsusoft\dadata\models\CleanAddressResult;
 use nsusoft\dadata\models\CleanAddressSource;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
-class CleanAddressCache extends BaseCache
+class CleanAddressCache extends OneToOneCache
 {
     /**
      * @return CleanAddressSource
@@ -20,12 +20,12 @@ class CleanAddressCache extends BaseCache
     }
 
     /**
-     * @param array $value
+     * @param mixed $value
      * @return CleanAddressResult
      */
-    protected function createResult(array $value): ActiveRecord
+    protected function createResult($value): ActiveRecord
     {
-        return CleanAddressResult::findOrCreate(['result' => $value['result']]);
+        return CleanAddressResult::findOrCreate(['result' => $value->getResult()]);
     }
 
     /**
