@@ -2,22 +2,14 @@
 
 namespace nsusoft\dadata\factories;
 
-use nsusoft\dadata\types\interfaces\clean\CleanInterface;
-use nsusoft\dadata\api\Client;
-
 abstract class BaseFactory implements FactoryInterface
 {
     /**
-     * @return Client
+     * Checks if Factory is using cache.
+     * @return bool
      */
-    protected function getClient(): Client
+    function isCacheable(): bool
     {
-        return new Client();
+        return $this instanceof CacheFactoryInterface;
     }
-
-    /**
-     * @param string $type
-     * @return CleanInterface
-     */
-    abstract protected function getCleanData(string $type): CleanInterface;
 }

@@ -9,16 +9,13 @@ interface FactoryInterface
 {
     /**
      * @param string $type
-     * @param string $value
      * @return CleanInterface
      */
-    public function clean(string $type, string $value): CleanInterface;
+    public function createClean(string $type): CleanInterface;
 
     /**
      * @param string $type
-     * @param string $value
-     * @param array $options
      * @return SuggestInterface
      */
-    public function suggest(string $type, string $value, array $options = []): SuggestInterface;
+    public function createSuggest(string $type): SuggestInterface;
 }

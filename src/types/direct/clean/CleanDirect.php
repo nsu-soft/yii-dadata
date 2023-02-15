@@ -3,9 +3,9 @@
 namespace nsusoft\dadata\types\direct\clean;
 
 use nsusoft\dadata\types\interfaces\clean\CleanInterface;
-use nsusoft\dadata\types\direct\BaseResponse;
+use nsusoft\dadata\types\direct\BaseDirect;
 
-class CleanDirect extends BaseResponse implements CleanInterface
+abstract class CleanDirect extends BaseDirect implements CleanInterface
 {
     /**
      * @inheritDoc
@@ -18,8 +18,8 @@ class CleanDirect extends BaseResponse implements CleanInterface
     /**
      * @inheritDoc
      */
-    public function getResult(): string
+    public function getQualityCheck(): ?int
     {
-        return $this->rawData['result'];
+        return $this->rawData['qc'] ?? null;
     }
 }

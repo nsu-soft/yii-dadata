@@ -7,7 +7,7 @@ use yii\base\Component;
 /**
  * Base class for types, which are representing responses from Dadata API.
  */
-abstract class BaseResponse extends Component
+abstract class BaseDirect extends Component
 {
     /**
      * @var array Raw data from Dadata API.

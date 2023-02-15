@@ -10,9 +10,9 @@ class SuggestHelper
     /**
      * @param string $address
      * @param array $options
-     * @return SuggestInterface
+     * @return SuggestInterface[]
      */
-    public static function address(string $address, array $options = []): SuggestInterface
+    public static function address(string $address, array $options = []): array
     {
         return DadataHelper::suggest(SuggestType::ADDRESS, $address, $options);
     }
@@ -20,9 +20,9 @@ class SuggestHelper
     /**
      * @param string $party
      * @param array $options
-     * @return SuggestInterface
+     * @return SuggestInterface[]
      */
-    public static function party(string $party, array $options = []): SuggestInterface
+    public static function party(string $party, array $options = []): array
     {
         return DadataHelper::suggest(SuggestType::PARTY, $party, $options);
     }
@@ -30,9 +30,9 @@ class SuggestHelper
     /**
      * @param string $bank
      * @param array $options
-     * @return SuggestInterface
+     * @return SuggestInterface[]
      */
-    public static function bank(string $bank, array $options = []): SuggestInterface
+    public static function bank(string $bank, array $options = []): array
     {
         return DadataHelper::suggest(SuggestType::BANK, $bank, $options);
     }
@@ -40,9 +40,9 @@ class SuggestHelper
     /**
      * @param string $name
      * @param array $options
-     * @return SuggestInterface
+     * @return SuggestInterface[]
      */
-    public static function name(string $name, array $options = []): SuggestInterface
+    public static function name(string $name, array $options = []): array
     {
         return DadataHelper::suggest(SuggestType::NAME, $name, $options);
     }
@@ -50,9 +50,9 @@ class SuggestHelper
     /**
      * @param string $email
      * @param array $options
-     * @return SuggestInterface
+     * @return SuggestInterface[]
      */
-    public static function email(string $email, array $options = []): SuggestInterface
+    public static function email(string $email, array $options = []): array
     {
         return DadataHelper::suggest(SuggestType::EMAIL, $email, $options);
     }
@@ -60,9 +60,9 @@ class SuggestHelper
     /**
      * @param string $fmsUnit
      * @param array $options
-     * @return SuggestInterface
+     * @return SuggestInterface[]
      */
-    public static function fmsUnit(string $fmsUnit, array $options = []): SuggestInterface
+    public static function fmsUnit(string $fmsUnit, array $options = []): array
     {
         return DadataHelper::suggest(SuggestType::FMS_UNIT, $fmsUnit, $options);
     }
@@ -70,9 +70,9 @@ class SuggestHelper
     /**
      * @param string $postalUnit
      * @param array $options
-     * @return SuggestInterface
+     * @return SuggestInterface[]
      */
-    public static function postalUnit(string $postalUnit, array $options = []): SuggestInterface
+    public static function postalUnit(string $postalUnit, array $options = []): array
     {
         return DadataHelper::suggest(SuggestType::POSTAL_UNIT, $postalUnit, $options);
     }
@@ -80,9 +80,9 @@ class SuggestHelper
     /**
      * @param string $fnsUnit
      * @param array $options
-     * @return SuggestInterface
+     * @return SuggestInterface[]
      */
-    public static function fnsUnit(string $fnsUnit, array $options = []): SuggestInterface
+    public static function fnsUnit(string $fnsUnit, array $options = []): array
     {
         return DadataHelper::suggest(SuggestType::FNS_UNIT, $fnsUnit, $options);
     }
@@ -90,9 +90,9 @@ class SuggestHelper
     /**
      * @param string $ftsUnit
      * @param array $options
-     * @return SuggestInterface
+     * @return SuggestInterface[]
      */
-    public static function ftsUnit(string $ftsUnit, array $options = []): SuggestInterface
+    public static function ftsUnit(string $ftsUnit, array $options = []): array
     {
         return DadataHelper::suggest(SuggestType::FTS_UNIT, $ftsUnit, $options);
     }
@@ -100,9 +100,9 @@ class SuggestHelper
     /**
      * @param string $regionCourt
      * @param array $options
-     * @return SuggestInterface
+     * @return SuggestInterface[]
      */
-    public static function regionCourt(string $regionCourt, array $options = []): SuggestInterface
+    public static function regionCourt(string $regionCourt, array $options = []): array
     {
         return DadataHelper::suggest(SuggestType::REGION_COURT, $regionCourt, $options);
     }
@@ -110,9 +110,9 @@ class SuggestHelper
     /**
      * @param string $metro
      * @param array $options
-     * @return SuggestInterface
+     * @return SuggestInterface[]
      */
-    public static function metro(string $metro, array $options = []): SuggestInterface
+    public static function metro(string $metro, array $options = []): array
     {
         return DadataHelper::suggest(SuggestType::METRO, $metro, $options);
     }
@@ -120,9 +120,9 @@ class SuggestHelper
     /**
      * @param string $carBrand
      * @param array $options
-     * @return SuggestInterface
+     * @return SuggestInterface[]
      */
-    public static function carBrand(string $carBrand, array $options = []): SuggestInterface
+    public static function carBrand(string $carBrand, array $options = []): array
     {
         return DadataHelper::suggest(SuggestType::CAR_BRAND, $carBrand, $options);
     }
@@ -130,9 +130,9 @@ class SuggestHelper
     /**
      * @param string $mktu
      * @param array $options
-     * @return SuggestInterface
+     * @return SuggestInterface[]
      */
-    public static function mktu(string $mktu, array $options = []): SuggestInterface
+    public static function mktu(string $mktu, array $options = []): array
     {
         return DadataHelper::suggest(SuggestType::MKTU, $mktu, $options);
     }
@@ -140,9 +140,9 @@ class SuggestHelper
     /**
      * @param string $country
      * @param array $options
-     * @return SuggestInterface
+     * @return SuggestInterface[]
      */
-    public static function country(string $country, array $options = []): SuggestInterface
+    public static function country(string $country, array $options = []): array
     {
         return DadataHelper::suggest(SuggestType::COUNTRY, $country, $options);
     }
@@ -150,9 +150,9 @@ class SuggestHelper
     /**
      * @param string $currency
      * @param array $options
-     * @return SuggestInterface
+     * @return SuggestInterface[]
      */
-    public static function currency(string $currency, array $options = []): SuggestInterface
+    public static function currency(string $currency, array $options = []): array
     {
         return DadataHelper::suggest(SuggestType::CURRENCY, $currency, $options);
     }
@@ -160,9 +160,9 @@ class SuggestHelper
     /**
      * @param string $okved
      * @param array $options
-     * @return SuggestInterface
+     * @return SuggestInterface[]
      */
-    public static function okved(string $okved, array $options = []): SuggestInterface
+    public static function okved(string $okved, array $options = []): array
     {
         return DadataHelper::suggest(SuggestType::OKVED, $okved, $options);
     }
@@ -170,9 +170,9 @@ class SuggestHelper
     /**
      * @param string $okpd
      * @param array $options
-     * @return SuggestInterface
+     * @return SuggestInterface[]
      */
-    public static function okpd(string $okpd, array $options = []): SuggestInterface
+    public static function okpd(string $okpd, array $options = []): array
     {
         return DadataHelper::suggest(SuggestType::OKPD, $okpd, $options);
     }
@@ -180,9 +180,9 @@ class SuggestHelper
     /**
      * @param string $oktmo
      * @param array $options
-     * @return SuggestInterface
+     * @return SuggestInterface[]
      */
-    public static function oktmo(string $oktmo, array $options = []): SuggestInterface
+    public static function oktmo(string $oktmo, array $options = []): array
     {
         return DadataHelper::suggest(SuggestType::OKTMO, $oktmo, $options);
     }

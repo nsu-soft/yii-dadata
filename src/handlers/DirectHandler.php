@@ -2,18 +2,14 @@
 
 namespace nsusoft\dadata\handlers;
 
+use nsusoft\dadata\adapters\SuggestAdapter;
 use nsusoft\dadata\api\Client;
+use nsusoft\dadata\factories\DirectFactory;
+use nsusoft\dadata\factories\FactoryInterface;
 use nsusoft\dadata\Module;
 use nsusoft\dadata\types\enums\CleanType;
+use nsusoft\dadata\types\enums\SuggestType;
 use nsusoft\dadata\types\interfaces\clean\CleanInterface;
-use nsusoft\dadata\types\direct\clean\CleanAddressDirect;
-use nsusoft\dadata\types\direct\clean\CleanBirthdateDirect;
-use nsusoft\dadata\types\direct\clean\CleanEmailDirect;
-use nsusoft\dadata\types\direct\clean\CleanNameDirect;
-use nsusoft\dadata\types\direct\clean\CleanPassportDirect;
-use nsusoft\dadata\types\direct\clean\CleanPhoneDirect;
-use nsusoft\dadata\types\direct\clean\CleanDirect;
-use nsusoft\dadata\types\direct\clean\CleanVehicleDirect;
 use yii\base\InvalidCallException;
 
 class DirectHandler extends BaseHandler
@@ -27,44 +23,54 @@ class DirectHandler extends BaseHandler
             throw new InvalidCallException(Module::t('main', 'Invalid clean type.'));
         }
 
-        $rawData = $this->getClient()->clean($type, $value);
+        $clean = $this->createFactory()->createClean($type);
+        $clean->setRawData($this->createClient()->clean($type, $value));
 
-        $wrapper = $this->getCleanData($type);
-        $wrapper->setRawData($rawData);
+        return $clean;
+    }
 
-        return $wrapper;
+    /**
+     * @inheritDoc
+     */
+    public function suggest(string $type, string $value, array $options = []): array
+    {
+        if (!SuggestType::exists($type)) {
+            throw new InvalidCallException(Module::t('main', 'Invalid suggest type.'));
+        }
+
+        $suggestMethod = new SuggestAdapter([
+            'client' => $this->createClient(),
+            'type' => $type,
+            'value' => $value,
+            'options' => $options,
+        ]);
+
+        $rawSuggests = $suggestMethod->call();
+        $factory = $this->createFactory();
+        $suggests = [];
+
+        foreach ($rawSuggests as $rawSuggest) {
+            $suggest = $factory->createSuggest($type);
+            $suggest->setRawData($rawSuggest);
+            $suggests[] = $suggest;
+        }
+
+        return $suggests;
+    }
+
+    /**
+     * @return DirectFactory
+     */
+    protected function createFactory(): FactoryInterface
+    {
+        return new DirectFactory();
     }
 
     /**
      * @return Client
      */
-    private function getClient(): Client
+    private function createClient(): Client
     {
         return new Client();
-    }
-
-    /**
-     * @param string $type
-     * @return CleanDirect
-     */
-    protected function getCleanData(string $type): CleanInterface
-    {
-        if (CleanType::ADDRESS === $type) {
-            return new CleanAddressDirect();
-        } else if (CleanType::PHONE === $type) {
-            return new CleanPhoneDirect();
-        } else if (CleanType::NAME === $type) {
-            return new CleanNameDirect();
-        } else if (CleanType::EMAIL === $type) {
-            return new CleanEmailDirect();
-        } else if (CleanType::PASSPORT === $type) {
-            return new CleanPassportDirect();
-        } else if (CleanType::BIRTHDATE === $type) {
-            return new CleanBirthdateDirect();
-        } else if (CleanType::VEHICLE === $type) {
-            return new CleanVehicleDirect();
-        }
-
-        throw new InvalidCallException(Module::t('main', 'Invalid clean type.'));
     }
 }

@@ -2,8 +2,9 @@
 
 namespace nsusoft\dadata\validators;
 
-use nsusoft\dadata\helpers\DadataHelper;
+use nsusoft\dadata\helpers\CleanHelper;
 use nsusoft\dadata\Module;
+use nsusoft\dadata\types\enums\AddressQualityCheckCode;
 use nsusoft\dadata\types\interfaces\clean\CleanAddressInterface;
 use yii\validators\Validator;
 
@@ -44,17 +45,17 @@ class AddressValidator extends Validator
      */
     public function validateValue($value): ?array
     {
-        $address = DadataHelper::cleanAddress($value);
+        $address = CleanHelper::address($value);
 
-        if (CleanAddressInterface::QC_CODE_TRASH == $address->getQualityCheck()) {
+        if (AddressQualityCheckCode::QC_CODE_TRASH == $address->getQualityCheck()) {
             return [Module::t('main', "Incorrect address."), []];
         }
 
-        if (in_array($address->getQualityCheck(), [CleanAddressInterface::QC_CODE_UNKNOWN, CleanAddressInterface::QC_CODE_MULTIPLE])) {
+        if (in_array($address->getQualityCheck(), [AddressQualityCheckCode::QC_CODE_UNKNOWN, AddressQualityCheckCode::QC_CODE_MULTIPLE])) {
             return [Module::t('main', "Please specify the address."), []];
         }
 
-        if (is_null($this->precision) && is_null($this->minPrecision) && CleanAddressInterface::QC_CODE_OK == $address->getQualityCheck()) {
+        if (is_null($this->precision) && is_null($this->minPrecision) && AddressQualityCheckCode::QC_CODE_OK == $address->getQualityCheck()) {
             return null;
         }
 

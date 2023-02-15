@@ -7,6 +7,9 @@ use yii\base\Component;
 
 class HandlerFactory extends Component
 {
+    /**
+     * @return HandlerInterface
+     */
     public static function getChain(): HandlerInterface
     {
         $cachePriority = Module::getInstance()->cachePriority;

@@ -2,11 +2,11 @@
 
 namespace nsusoft\dadata\handlers;
 
+use nsusoft\dadata\factories\FactoryInterface;
 use nsusoft\dadata\types\interfaces\clean\CleanInterface;
-use nsusoft\dadata\types\interfaces\suggest\SuggestInterface;
 use yii\base\Component;
 
-class BaseHandler extends Component implements HandlerInterface
+abstract class BaseHandler extends Component implements HandlerInterface
 {
     /**
      * @var HandlerInterface
@@ -37,12 +37,18 @@ class BaseHandler extends Component implements HandlerInterface
     /**
      * @inheritDoc
      */
-    public function suggest(string $type, string $value, array $options = []): ?SuggestInterface
+    public function suggest(string $type, string $value, array $options = []): array
     {
         if (isset($this->next)) {
             return $this->next->suggest($type, $value, $options);
         }
 
-        return null;
+        return [];
     }
+
+    /**
+     * Gets wrappers creator.
+     * @return FactoryInterface
+     */
+    abstract protected function createFactory(): FactoryInterface;
 }

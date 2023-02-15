@@ -1,6 +1,6 @@
 <?php
 
-namespace nsusoft\dadata\types\direct\clean;
+namespace nsusoft\dadata\types\direct\suggest;
 
 use nsusoft\dadata\types\direct\traits\AreaTrait;
 use nsusoft\dadata\types\direct\traits\BeltwayTrait;
@@ -12,20 +12,23 @@ use nsusoft\dadata\types\direct\traits\FlatTrait;
 use nsusoft\dadata\types\direct\traits\GeoPositionTrait;
 use nsusoft\dadata\types\direct\traits\HouseTrait;
 use nsusoft\dadata\types\direct\traits\RegionTrait;
+use nsusoft\dadata\types\direct\traits\RoomTrait;
 use nsusoft\dadata\types\direct\traits\SettlementTrait;
+use nsusoft\dadata\types\direct\traits\SteadTrait;
 use nsusoft\dadata\types\direct\traits\StreetTrait;
-use nsusoft\dadata\types\interfaces\clean\CleanAddressInterface;
+use nsusoft\dadata\types\direct\traits\SubAreaTrait;
+use nsusoft\dadata\types\interfaces\suggest\SuggestAddressInterface;
 
-class CleanAddressDirect extends CleanDirect implements CleanAddressInterface
+class SuggestAddressDirect extends SuggestDirect implements SuggestAddressInterface
 {
-    use CountryTrait, RegionTrait, AreaTrait, CityTrait, CityDistrictTrait, SettlementTrait, StreetTrait, HouseTrait, BlockTrait, FlatTrait, BeltwayTrait, GeoPositionTrait;
+    use CountryTrait, RegionTrait, AreaTrait, SubAreaTrait, CityTrait, CityDistrictTrait, SettlementTrait, StreetTrait, HouseTrait, BlockTrait, FlatTrait, RoomTrait, SteadTrait, BeltwayTrait, GeoPositionTrait;
 
     /**
      * @inheritDoc
      */
-    public function getResult(): string
+    public function getUnrestrictedValue(): string
     {
-        return $this->rawData['result'];
+        return $this->rawData['unrestricted_value'];
     }
 
     /**
@@ -167,22 +170,6 @@ class CleanAddressDirect extends CleanDirect implements CleanAddressInterface
     /**
      * @inheritDoc
      */
-    public function getQualityCheckComplete(): ?int
-    {
-        return $this->rawData['qc_complete'] ?? null;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getQualityCheckHouse(): ?int
-    {
-        return $this->rawData['qc_house'] ?? null;
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function getMetro(): array
     {
         return $this->rawData['metro'] ?? [];
@@ -191,8 +178,16 @@ class CleanAddressDirect extends CleanDirect implements CleanAddressInterface
     /**
      * @inheritDoc
      */
-    public function getUnparsedParts(): ?string
+    public function getGeonameId(): ?string
     {
-        return $this->rawData['unparsed_parts'] ?? null;
+        return $this->rawData['geoname_id'] ?? null;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getHistoryValues(): array
+    {
+        return $this->rawData['history_values'] ?? [];
     }
 }

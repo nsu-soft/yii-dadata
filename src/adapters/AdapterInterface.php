@@ -15,7 +15,7 @@ interface AdapterInterface
 
     /**
      * Call method from API.
-     * @return mixed
+     * @return array
      */
-    public function call();
+    public function call(): array;
 }

@@ -25,7 +25,7 @@ interface HandlerInterface
      * @param string $type
      * @param string $value
      * @param array $options
-     * @return SuggestInterface|null
+     * @return SuggestInterface[]
      */
-    public function suggest(string $type, string $value, array $options = []): ?SuggestInterface;
+    public function suggest(string $type, string $value, array $options = []): array;
 }

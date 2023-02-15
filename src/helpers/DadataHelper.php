@@ -8,10 +8,6 @@ use nsusoft\dadata\types\interfaces\clean\CleanAddressInterface;
 use nsusoft\dadata\types\interfaces\clean\CleanBirthdateInterface;
 use nsusoft\dadata\types\interfaces\clean\CleanEmailInterface;
 use nsusoft\dadata\types\interfaces\clean\CleanInterface;
-use nsusoft\dadata\factories\DbCacheFactory;
-use nsusoft\dadata\factories\DirectFactory;
-use nsusoft\dadata\factories\FactoryInterface;
-use nsusoft\dadata\Module;
 use nsusoft\dadata\types\interfaces\clean\CleanNameInterface;
 use nsusoft\dadata\types\interfaces\clean\CleanPassportInterface;
 use nsusoft\dadata\types\interfaces\clean\CleanPhoneInterface;
@@ -28,7 +24,6 @@ class DadataHelper
     public static function clean(string $type, string $value): CleanInterface
     {
         return HandlerFactory::getChain()->clean($type, $value);
-//        return self::getFactory()->clean($type, $value);
     }
 
     /**
@@ -105,23 +100,10 @@ class DadataHelper
      * @param string $type
      * @param string $value
      * @param array $options
-     * @return SuggestInterface
+     * @return SuggestInterface[]
      */
-    public static function suggest(string $type, string $value, array $options = []): SuggestInterface
+    public static function suggest(string $type, string $value, array $options = []): array
     {
         return HandlerFactory::getChain()->suggest($type, $value, $options);
-//        return self::getFactory()->suggest($type, $value, $options);
-    }
-
-    /**
-     * @return FactoryInterface
-     */
-    private static function getFactory(): FactoryInterface
-    {
-        if (Module::getInstance()->enableDbCache) {
-            return new DbCacheFactory();
-        } else {
-            return new DirectFactory();
-        }
     }
 }
