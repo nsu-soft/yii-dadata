@@ -30,8 +30,8 @@ class Client extends Component
         $token = Module::getInstance()->token;
         $secret = Module::getInstance()->secret;
 
-        if (!isset($token, $secret)) {
-            throw new InvalidConfigException(Module::t('main', "You should specify token and secret before using DaData module."));
+        if (is_null($token)) {
+            throw new InvalidConfigException(Module::t('main', "You should specify token before using DaData module."));
         }
 
         $this->client = new DadataClient($token, $secret);
