@@ -12,9 +12,13 @@ use nsusoft\dadata\types\interfaces\clean\CleanPassportInterface;
 use nsusoft\dadata\types\interfaces\clean\CleanPhoneInterface;
 use nsusoft\dadata\types\interfaces\clean\CleanVehicleInterface;
 
+/**
+ * @link https://dadata.ru/api/clean/
+ */
 class CleanHelper
 {
     /**
+     * @link https://dadata.ru/api/clean/address/
      * @param string $address
      * @return CleanAddressInterface
      */
@@ -24,6 +28,7 @@ class CleanHelper
     }
 
     /**
+     * @link https://dadata.ru/api/clean/phone/
      * @param string $phone
      * @return CleanPhoneInterface
      */
@@ -33,6 +38,7 @@ class CleanHelper
     }
 
     /**
+     * @link https://dadata.ru/api/clean/name/
      * @param string $name
      * @return CleanNameInterface
      */
@@ -42,6 +48,7 @@ class CleanHelper
     }
 
     /**
+     * @link https://dadata.ru/api/clean/email/
      * @param string $email
      * @return CleanEmailInterface
      */
@@ -51,6 +58,7 @@ class CleanHelper
     }
 
     /**
+     * @link https://dadata.ru/api/clean/passport/
      * @param string $passport
      * @return CleanPassportInterface
      */
@@ -60,6 +68,7 @@ class CleanHelper
     }
 
     /**
+     * @link https://dadata.ru/api/clean/birthdate/
      * @param string $birthdate
      * @return CleanBirthdateInterface
      */
@@ -69,6 +78,7 @@ class CleanHelper
     }
 
     /**
+     * @link https://dadata.ru/api/clean/vehicle/
      * @param string $vehicle
      * @return CleanVehicleInterface
      */

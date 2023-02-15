@@ -31,7 +31,7 @@ Add the following lines to your configuration file:
         'class' => 'nsusoft\dadata\Module',
         'token' => 'enter-your-dadata-token',
         'secret' => 'enter-your-dadata-secret',
-        'cachePriority' = [DbHandler::class],
+        'cachePriority' => [DbHandler::class],
     ],
 ],
 ```
@@ -48,7 +48,7 @@ yii migrate --migrationPath=@vendor/nsu-soft/yii-dadata/src/migrations
 
 ## Usage
 
-Example:
+Clean address:
 
 ```php
 <?php
@@ -136,6 +136,36 @@ class AddressForm extends Model
         }
         
         return $this->saveRegion() && $this->saveCity(); 
+    }
+}
+```
+
+Suggest address:
+
+```php
+<?php
+
+namespace app\controllers;
+
+use nsusoft\dadata\helpers\SuggestHelper;
+use yii\web\Controller;
+use yii\web\Response;
+
+class SuggestController extends Controller
+{
+    /**
+     * @param string $query
+     * @return array
+     */
+    public function actionAddress(string $query): array
+    {
+        $items = [];
+        
+        foreach (SuggestHelper::address($query) as $suggest) {
+            $items[] = $suggest->getValue();
+        }
+        
+        return $items;
     }
 }
 ```
