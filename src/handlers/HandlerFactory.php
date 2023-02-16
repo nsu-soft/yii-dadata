@@ -3,9 +3,8 @@
 namespace nsusoft\dadata\handlers;
 
 use nsusoft\dadata\Module;
-use yii\base\Component;
 
-class HandlerFactory extends Component
+class HandlerFactory
 {
     /**
      * @return HandlerInterface
