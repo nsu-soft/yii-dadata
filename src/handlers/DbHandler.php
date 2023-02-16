@@ -18,8 +18,9 @@ class DbHandler extends BaseHandler
      */
     public function clean(string $type, string $value): ?CleanInterface
     {
-        $cache = $this->createFactory()->createCleanCache($type);
-        $clean = $this->createFactory()->createClean($type);
+        $factory = $this->createFactory();
+        $clean = $factory->createClean($type);
+        $cache = $factory->createCleanCache($type);
 
         if ($cache->has($value)) {
             $clean->setSourceModel($cache->get($value));
