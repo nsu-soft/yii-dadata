@@ -5,6 +5,7 @@ namespace nsusoft\dadata\helpers;
 use nsusoft\dadata\dto\DtoInterface;
 use nsusoft\dadata\dto\suggest\AddressDto;
 use nsusoft\dadata\dto\suggest\EmailDto;
+use nsusoft\dadata\dto\suggest\party\PartyDto;
 use nsusoft\dadata\types\enums\SuggestType;
 
 /**
@@ -27,7 +28,7 @@ class SuggestHelper
      * @link https://dadata.ru/api/suggest/party/
      * @param string $party
      * @param array $options
-     * @return DtoInterface[]
+     * @return PartyDto[]
      */
     public static function party(string $party, array $options = []): array
     {

@@ -10,8 +10,9 @@ class SuggestEmailsAdapter extends BaseAdapter
 {
     /**
      * @inheritDoc
+     * @return EmailDto[]
      */
-    public function populate()
+    public function populate(): array
     {
         $result = [];
 

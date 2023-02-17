@@ -4,11 +4,12 @@ namespace nsusoft\dadata\factories;
 
 use nsusoft\dadata\adapters\dto\AdapterInterface;
 use nsusoft\dadata\adapters\dto\direct\clean\CleanAddressesAdapter;
+use nsusoft\dadata\adapters\dto\direct\suggest\parties\SuggestPartiesAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\SuggestAddressesAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\SuggestEmailsAdapter;
-use nsusoft\dadata\types\enums\SuggestType;
 use nsusoft\dadata\Module;
 use nsusoft\dadata\types\enums\CleanType;
+use nsusoft\dadata\types\enums\SuggestType;
 use yii\base\InvalidCallException;
 
 class DirectFactory extends BaseFactory
@@ -47,10 +48,10 @@ class DirectFactory extends BaseFactory
     {
         if (SuggestType::ADDRESS === $type) {
             return new SuggestAddressesAdapter();
+        } else if (SuggestType::PARTY === $type) {
+            return new SuggestPartiesAdapter();
         }
-//        else if (SuggestType::PARTY === $type) {
-//
-//        } else if (SuggestType::BANK === $type) {
+//        else if (SuggestType::BANK === $type) {
 //
 //        } else if (SuggestType::NAME === $type) {
 //
