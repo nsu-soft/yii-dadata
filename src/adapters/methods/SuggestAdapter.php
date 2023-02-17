@@ -1,6 +1,6 @@
 <?php
 
-namespace nsusoft\dadata\adapters;
+namespace nsusoft\dadata\adapters\methods;
 
 use Dadata\Settings;
 use nsusoft\dadata\Module;
@@ -39,7 +39,7 @@ class SuggestAdapter extends BaseAdapter
             unset($this->options['count']);
         }
 
-        return $this->convert($this->client->suggest($this->type, $this->value, $count, $this->options));
+        return $this->client->suggest($this->type, $this->value, $count, $this->options);
     }
 
     /**
@@ -67,32 +67,5 @@ class SuggestAdapter extends BaseAdapter
     public function setOptions(array $options): void
     {
         $this->options = $options;
-    }
-
-    /**
-     * @param array $suggests
-     * @return void
-     */
-    private function convert(array $suggests): array
-    {
-        $items = [];
-
-        foreach ($suggests as $suggest) {
-            $items[] = $this->convertItem($suggest);
-        }
-
-        return $items;
-    }
-
-    /**
-     * @param array $suggest
-     * @return array
-     */
-    private function convertItem(array $suggest): array
-    {
-        $data = $suggest['data'];
-        unset($suggest['data']);
-
-        return array_merge($suggest, $data);
     }
 }

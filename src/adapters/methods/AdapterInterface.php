@@ -1,6 +1,6 @@
 <?php
 
-namespace nsusoft\dadata\adapters;
+namespace nsusoft\dadata\adapters\methods;
 
 use nsusoft\dadata\api\Client;
 

@@ -2,18 +2,11 @@
 
 namespace nsusoft\dadata\factories;
 
-use nsusoft\dadata\types\db\clean\CleanAddressDb;
-use nsusoft\dadata\types\db\clean\CleanBirthdateDb;
-use nsusoft\dadata\types\db\clean\CleanEmailDb;
-use nsusoft\dadata\types\db\clean\CleanNameDb;
-use nsusoft\dadata\types\db\clean\CleanPassportDb;
-use nsusoft\dadata\types\db\clean\CleanPhoneDb;
-use nsusoft\dadata\types\db\clean\CleanVehicleDb;
+use nsusoft\dadata\adapters\dto\AdapterInterface;
+use nsusoft\dadata\adapters\dto\db\clean\CleanAddressAdapter;
 use nsusoft\dadata\cache\db\clean\CleanAddressCache;
 use nsusoft\dadata\Module;
 use nsusoft\dadata\types\enums\CleanType;
-use nsusoft\dadata\types\interfaces\clean\CleanInterface;
-use nsusoft\dadata\types\interfaces\suggest\SuggestInterface;
 use Psr\SimpleCache\CacheInterface;
 use yii\base\InvalidCallException;
 
@@ -22,23 +15,24 @@ class DbFactory extends BaseFactory implements CacheFactoryInterface
     /**
      * @inheritDoc
      */
-    public function createClean(string $type): CleanInterface
+    public function createClean(string $type): AdapterInterface
     {
         if (CleanType::ADDRESS === $type) {
-            return new CleanAddressDb();
-        } else if (CleanType::PHONE === $type) {
-            return new CleanPhoneDb();
-        } else if (CleanType::NAME === $type) {
-            return new CleanNameDb();
-        } else if (CleanType::EMAIL === $type) {
-            return new CleanEmailDb();
-        } else if (CleanType::PASSPORT === $type) {
-            return new CleanPassportDb();
-        } else if (CleanType::BIRTHDATE === $type) {
-            return new CleanBirthdateDb();
-        } else if (CleanType::VEHICLE === $type) {
-            return new CleanVehicleDb();
+            return new CleanAddressAdapter();
         }
+//        else if (CleanType::PHONE === $type) {
+//
+//        } else if (CleanType::NAME === $type) {
+//
+//        } else if (CleanType::EMAIL === $type) {
+//
+//        } else if (CleanType::PASSPORT === $type) {
+//
+//        } else if (CleanType::BIRTHDATE === $type) {
+//
+//        } else if (CleanType::VEHICLE === $type) {
+//
+//        }
 
         throw new InvalidCallException(Module::t('main', 'Invalid clean type.'));
     }
@@ -46,7 +40,7 @@ class DbFactory extends BaseFactory implements CacheFactoryInterface
     /**
      * @inheritDoc
      */
-    public function createSuggest(string $type): SuggestInterface
+    public function createSuggest(string $type): AdapterInterface
     {
 //        if (SuggestType::ADDRESS === $type) {
 //

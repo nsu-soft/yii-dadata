@@ -2,8 +2,7 @@
 
 namespace nsusoft\dadata\handlers;
 
-use nsusoft\dadata\types\interfaces\clean\CleanInterface;
-use nsusoft\dadata\types\interfaces\suggest\SuggestInterface;
+use nsusoft\dadata\dto\DtoInterface;
 
 interface HandlerInterface
 {
@@ -17,15 +16,15 @@ interface HandlerInterface
     /**
      * @param string $type
      * @param string $value
-     * @return CleanInterface|null
+     * @return DtoInterface|null
      */
-    public function clean(string $type, string $value): ?CleanInterface;
+    public function clean(string $type, string $value): ?DtoInterface;
 
     /**
      * @param string $type
      * @param string $value
      * @param array $options
-     * @return SuggestInterface[]
+     * @return DtoInterface[]
      */
     public function suggest(string $type, string $value, array $options = []): array;
 }

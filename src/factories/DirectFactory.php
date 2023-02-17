@@ -2,59 +2,50 @@
 
 namespace nsusoft\dadata\factories;
 
-use nsusoft\dadata\types\direct\suggest\SuggestAddressDirect;
-use nsusoft\dadata\types\direct\suggest\SuggestDirect;
-use nsusoft\dadata\types\direct\suggest\SuggestEmailDirect;
+use nsusoft\dadata\adapters\dto\AdapterInterface;
+use nsusoft\dadata\adapters\dto\direct\clean\CleanAddressAdapter;
+use nsusoft\dadata\adapters\dto\direct\suggest\SuggestAddressesAdapter;
 use nsusoft\dadata\types\enums\SuggestType;
-use nsusoft\dadata\types\interfaces\clean\CleanInterface;
 use nsusoft\dadata\Module;
 use nsusoft\dadata\types\enums\CleanType;
-use nsusoft\dadata\types\interfaces\suggest\SuggestInterface;
-use nsusoft\dadata\types\direct\clean\CleanAddressDirect;
-use nsusoft\dadata\types\direct\clean\CleanBirthdateDirect;
-use nsusoft\dadata\types\direct\clean\CleanEmailDirect;
-use nsusoft\dadata\types\direct\clean\CleanNameDirect;
-use nsusoft\dadata\types\direct\clean\CleanPassportDirect;
-use nsusoft\dadata\types\direct\clean\CleanPhoneDirect;
-use nsusoft\dadata\types\direct\clean\CleanDirect;
-use nsusoft\dadata\types\direct\clean\CleanVehicleDirect;
 use yii\base\InvalidCallException;
 
 class DirectFactory extends BaseFactory
 {
     /**
      * @inheritDoc
-     * @return CleanDirect
+     * @return AdapterInterface
      */
-    public function createClean(string $type): CleanInterface
+    public function createClean(string $type): AdapterInterface
     {
         if (CleanType::ADDRESS === $type) {
-            return new CleanAddressDirect();
-        } else if (CleanType::PHONE === $type) {
-            return new CleanPhoneDirect();
-        } else if (CleanType::NAME === $type) {
-            return new CleanNameDirect();
-        } else if (CleanType::EMAIL === $type) {
-            return new CleanEmailDirect();
-        } else if (CleanType::PASSPORT === $type) {
-            return new CleanPassportDirect();
-        } else if (CleanType::BIRTHDATE === $type) {
-            return new CleanBirthdateDirect();
-        } else if (CleanType::VEHICLE === $type) {
-            return new CleanVehicleDirect();
+            return new CleanAddressAdapter();
         }
+//        else if (CleanType::PHONE === $type) {
+//
+//        } else if (CleanType::NAME === $type) {
+//
+//        } else if (CleanType::EMAIL === $type) {
+//
+//        } else if (CleanType::PASSPORT === $type) {
+//
+//        } else if (CleanType::BIRTHDATE === $type) {
+//
+//        } else if (CleanType::VEHICLE === $type) {
+//
+//        }
 
         throw new InvalidCallException(Module::t('main', 'Invalid clean type.'));
     }
 
     /**
      * @param string $type
-     * @return SuggestDirect
+     * @return AdapterInterface
      */
-    public function createSuggest(string $type): SuggestInterface
+    public function createSuggest(string $type): AdapterInterface
     {
         if (SuggestType::ADDRESS === $type) {
-            return new SuggestAddressDirect();
+            return new SuggestAddressesAdapter();
         }
 //        else if (SuggestType::PARTY === $type) {
 //
@@ -63,9 +54,9 @@ class DirectFactory extends BaseFactory
 //        } else if (SuggestType::NAME === $type) {
 //
 //        }
-        else if (SuggestType::EMAIL === $type) {
-            return new SuggestEmailDirect();
-        }
+//        else if (SuggestType::EMAIL === $type) {
+//
+//        }
 //        else if (SuggestType::FMS_UNIT === $type) {
 //
 //        } else if (SuggestType::POSTAL_UNIT === $type) {

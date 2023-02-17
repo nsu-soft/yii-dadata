@@ -3,6 +3,7 @@
 namespace nsusoft\dadata\cache\db\clean;
 
 use nsusoft\dadata\cache\db\OneToOneCache;
+use nsusoft\dadata\dto\clean\AddressDto;
 use nsusoft\dadata\interfaces\SourceInterface;
 use nsusoft\dadata\models\CleanAddressResult;
 use nsusoft\dadata\models\CleanAddressSource;
@@ -20,12 +21,12 @@ class CleanAddressCache extends OneToOneCache
     }
 
     /**
-     * @param mixed $value
+     * @param AddressDto $value
      * @return CleanAddressResult
      */
     protected function createResult($value): ActiveRecord
     {
-        return CleanAddressResult::findOrCreate(['result' => $value->getResult()]);
+        return CleanAddressResult::findOrCreate(['result' => $value->result]);
     }
 
     /**

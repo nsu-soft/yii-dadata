@@ -2,14 +2,14 @@
 
 namespace nsusoft\dadata\handlers;
 
-use nsusoft\dadata\adapters\SuggestAdapter;
+use nsusoft\dadata\adapters\methods\SuggestAdapter;
 use nsusoft\dadata\api\Client;
+use nsusoft\dadata\dto\DtoInterface;
 use nsusoft\dadata\factories\DirectFactory;
 use nsusoft\dadata\factories\FactoryInterface;
 use nsusoft\dadata\Module;
 use nsusoft\dadata\types\enums\CleanType;
 use nsusoft\dadata\types\enums\SuggestType;
-use nsusoft\dadata\types\interfaces\clean\CleanInterface;
 use yii\base\InvalidCallException;
 
 class DirectHandler extends BaseHandler
@@ -17,16 +17,16 @@ class DirectHandler extends BaseHandler
     /**
      * @inheritDoc
      */
-    public function clean(string $type, string $value): ?CleanInterface
+    public function clean(string $type, string $value): ?DtoInterface
     {
         if (!CleanType::exists($type)) {
             throw new InvalidCallException(Module::t('main', 'Invalid clean type.'));
         }
 
-        $clean = $this->createFactory()->createClean($type);
-        $clean->setRawData($this->createClient()->clean($type, $value));
+        $adapter = $this->createFactory()->createClean($type);
+        $adapter->setSource($this->createClient()->clean($type, $value));
 
-        return $clean;
+        return $adapter->populate();
     }
 
     /**
@@ -45,17 +45,10 @@ class DirectHandler extends BaseHandler
             'options' => $options,
         ]);
 
-        $rawSuggests = $suggestMethod->call();
-        $factory = $this->createFactory();
-        $suggests = [];
+        $adapter = $this->createFactory()->createSuggest($type);
+        $adapter->setSource($suggestMethod->call());
 
-        foreach ($rawSuggests as $rawSuggest) {
-            $suggest = $factory->createSuggest($type);
-            $suggest->setRawData($rawSuggest);
-            $suggests[] = $suggest;
-        }
-
-        return $suggests;
+        return $adapter->populate();
     }
 
     /**

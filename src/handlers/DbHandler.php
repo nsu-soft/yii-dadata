@@ -2,11 +2,11 @@
 
 namespace nsusoft\dadata\handlers;
 
+use nsusoft\dadata\dto\DtoInterface;
 use nsusoft\dadata\exceptions\CacheException;
 use nsusoft\dadata\factories\DbFactory;
 use nsusoft\dadata\factories\FactoryInterface;
 use nsusoft\dadata\Module;
-use nsusoft\dadata\types\interfaces\clean\CleanInterface;
 use Psr\SimpleCache\InvalidArgumentException;
 
 class DbHandler extends BaseHandler
@@ -16,15 +16,15 @@ class DbHandler extends BaseHandler
      * @throws CacheException
      * @throws InvalidArgumentException
      */
-    public function clean(string $type, string $value): ?CleanInterface
+    public function clean(string $type, string $value): ?DtoInterface
     {
         $factory = $this->createFactory();
-        $clean = $factory->createClean($type);
+        $adapter = $factory->createClean($type);
         $cache = $factory->createCleanCache($type);
 
         if ($cache->has($value)) {
-            $clean->setSourceModel($cache->get($value));
-            return $clean;
+            $adapter->setSource($cache->get($value));
+            return $adapter->populate();
         }
 
         $cleanParent = parent::clean($type, $value);
@@ -33,9 +33,9 @@ class DbHandler extends BaseHandler
             throw new CacheException(Module::t('main', "A cache saving was failed."));
         }
 
-        $clean->setSourceModel($cache->get($value));
+        $adapter->setSource($cache->get($value));
 
-        return $clean;
+        return $adapter->populate();
     }
 
     /**

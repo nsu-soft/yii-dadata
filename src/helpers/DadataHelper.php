@@ -2,18 +2,17 @@
 
 namespace nsusoft\dadata\helpers;
 
+use nsusoft\dadata\dto\DtoInterface;
 use nsusoft\dadata\handlers\HandlerFactory;
-use nsusoft\dadata\types\interfaces\clean\CleanInterface;
-use nsusoft\dadata\types\interfaces\suggest\SuggestInterface;
 
 class DadataHelper
 {
     /**
      * @param string $type
      * @param string $value
-     * @return CleanInterface
+     * @return DtoInterface|null
      */
-    public static function clean(string $type, string $value): CleanInterface
+    public static function clean(string $type, string $value): ?DtoInterface
     {
         return HandlerFactory::getChain()->clean($type, $value);
     }
@@ -22,7 +21,7 @@ class DadataHelper
      * @param string $type
      * @param string $value
      * @param array $options
-     * @return SuggestInterface[]
+     * @return DtoInterface[]
      */
     public static function suggest(string $type, string $value, array $options = []): array
     {

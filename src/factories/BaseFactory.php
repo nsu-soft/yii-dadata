@@ -8,7 +8,7 @@ abstract class BaseFactory implements FactoryInterface
      * Checks if Factory is using cache.
      * @return bool
      */
-    function isCacheable(): bool
+    public function isCacheable(): bool
     {
         return $this instanceof CacheFactoryInterface;
     }
