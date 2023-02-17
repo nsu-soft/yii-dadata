@@ -102,7 +102,7 @@ class CleanAddressesAdapter extends BaseAdapter
         $dto->qualityCheck = $this->source['qc'];
         $dto->unparsedParts = $this->source['unparsed_parts'];
 
-        $metroAdapter = new CleanMetroStationsAdapter(['source' => $this->source['metro']]);
+        $metroAdapter = new CleanMetroStationsAdapter(['source' => $this->source['metro'] ?? []]);
         $dto->metro = $metroAdapter->populate();
 
         return $dto;

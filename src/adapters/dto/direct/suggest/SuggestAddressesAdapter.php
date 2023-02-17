@@ -117,7 +117,7 @@ class SuggestAddressesAdapter extends BaseAdapter
             $dto->flatPrice = $item['data']['flat_price'];
             $dto->timezone = $item['data']['timezone'];
 
-            $metroAdapter = new SuggestMetroStationsAdapter(['source' => $item['data']['metro']]);
+            $metroAdapter = new SuggestMetroStationsAdapter(['source' => $item['data']['metro'] ?? []]);
             $dto->metro = $metroAdapter->populate();
 
             $result[] = $dto;
