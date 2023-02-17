@@ -4,6 +4,7 @@ namespace nsusoft\dadata\helpers;
 
 use nsusoft\dadata\dto\DtoInterface;
 use nsusoft\dadata\dto\suggest\AddressDto;
+use nsusoft\dadata\dto\suggest\EmailDto;
 use nsusoft\dadata\types\enums\SuggestType;
 
 /**
@@ -59,7 +60,7 @@ class SuggestHelper
      * @link https://dadata.ru/api/suggest/email/
      * @param string $email
      * @param array $options
-     * @return DtoInterface[]
+     * @return EmailDto[]
      */
     public static function email(string $email, array $options = []): array
     {

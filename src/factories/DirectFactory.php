@@ -3,8 +3,9 @@
 namespace nsusoft\dadata\factories;
 
 use nsusoft\dadata\adapters\dto\AdapterInterface;
-use nsusoft\dadata\adapters\dto\direct\clean\CleanAddressAdapter;
+use nsusoft\dadata\adapters\dto\direct\clean\CleanAddressesAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\SuggestAddressesAdapter;
+use nsusoft\dadata\adapters\dto\direct\suggest\SuggestEmailsAdapter;
 use nsusoft\dadata\types\enums\SuggestType;
 use nsusoft\dadata\Module;
 use nsusoft\dadata\types\enums\CleanType;
@@ -19,7 +20,7 @@ class DirectFactory extends BaseFactory
     public function createClean(string $type): AdapterInterface
     {
         if (CleanType::ADDRESS === $type) {
-            return new CleanAddressAdapter();
+            return new CleanAddressesAdapter();
         }
 //        else if (CleanType::PHONE === $type) {
 //
@@ -54,9 +55,9 @@ class DirectFactory extends BaseFactory
 //        } else if (SuggestType::NAME === $type) {
 //
 //        }
-//        else if (SuggestType::EMAIL === $type) {
-//
-//        }
+        else if (SuggestType::EMAIL === $type) {
+            return new SuggestEmailsAdapter();
+        }
 //        else if (SuggestType::FMS_UNIT === $type) {
 //
 //        } else if (SuggestType::POSTAL_UNIT === $type) {
