@@ -6,6 +6,9 @@ use nsusoft\dadata\adapters\dto\BaseAdapter;
 use nsusoft\dadata\dto\DtoInterface;
 use nsusoft\dadata\dto\suggest\party\OwnerNameDto;
 
+/**
+ * @property array $source
+ */
 class SuggestOwnerAdapter extends BaseAdapter
 {
     /**

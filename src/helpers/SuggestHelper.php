@@ -4,6 +4,7 @@ namespace nsusoft\dadata\helpers;
 
 use nsusoft\dadata\dto\DtoInterface;
 use nsusoft\dadata\dto\suggest\AddressDto;
+use nsusoft\dadata\dto\suggest\bank\BankDto;
 use nsusoft\dadata\dto\suggest\EmailDto;
 use nsusoft\dadata\dto\suggest\party\PartyDto;
 use nsusoft\dadata\types\enums\SuggestType;
@@ -39,7 +40,7 @@ class SuggestHelper
      * @link https://dadata.ru/api/suggest/bank/
      * @param string $bank
      * @param array $options
-     * @return DtoInterface[]
+     * @return BankDto[]
      */
     public static function bank(string $bank, array $options = []): array
     {

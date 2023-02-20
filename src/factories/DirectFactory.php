@@ -4,6 +4,7 @@ namespace nsusoft\dadata\factories;
 
 use nsusoft\dadata\adapters\dto\AdapterInterface;
 use nsusoft\dadata\adapters\dto\direct\clean\CleanAddressesAdapter;
+use nsusoft\dadata\adapters\dto\direct\suggest\bank\SuggestBanksAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\parties\SuggestPartiesAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\SuggestAddressesAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\SuggestEmailsAdapter;
@@ -50,10 +51,10 @@ class DirectFactory extends BaseFactory
             return new SuggestAddressesAdapter();
         } else if (SuggestType::PARTY === $type) {
             return new SuggestPartiesAdapter();
+        } else if (SuggestType::BANK === $type) {
+            return new SuggestBanksAdapter();
         }
-//        else if (SuggestType::BANK === $type) {
-//
-//        } else if (SuggestType::NAME === $type) {
+//        else if (SuggestType::NAME === $type) {
 //
 //        }
         else if (SuggestType::EMAIL === $type) {

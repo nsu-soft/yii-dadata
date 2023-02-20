@@ -6,6 +6,9 @@ use nsusoft\dadata\adapters\dto\BaseAdapter;
 use nsusoft\dadata\dto\DtoInterface;
 use nsusoft\dadata\dto\suggest\party\PartyDto;
 
+/**
+ * @property array $source
+ */
 class SuggestPartiesAdapter extends BaseAdapter
 {
     /**
@@ -50,7 +53,9 @@ class SuggestPartiesAdapter extends BaseAdapter
 
             $dto->branchCount = $item['data']['branch_count'];
             $dto->branchType = $item['data']['branch_type'];
-            $dto->address = $item['data']['address'];
+
+            $addressAdapter = new SuggestAddressAdapter(['source' => $item['data']['address']]);
+            $dto->address = $addressAdapter->populate();
 
             $stateAdapter = new SuggestStateAdapter(['source' => $item['data']['state']]);
             $dto->state = $stateAdapter->populate();

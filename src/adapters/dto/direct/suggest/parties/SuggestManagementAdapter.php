@@ -6,6 +6,9 @@ use nsusoft\dadata\adapters\dto\BaseAdapter;
 use nsusoft\dadata\dto\DtoInterface;
 use nsusoft\dadata\dto\suggest\party\ManagementDto;
 
+/**
+ * @property array $source
+ */
 class SuggestManagementAdapter extends BaseAdapter
 {
     /**

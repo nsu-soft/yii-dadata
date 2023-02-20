@@ -1,37 +1,37 @@
 <?php
 
-namespace nsusoft\dadata\adapters\dto\direct\suggest\parties;
+namespace nsusoft\dadata\adapters\dto\direct\suggest\bank;
 
 use nsusoft\dadata\adapters\dto\BaseAdapter;
 use nsusoft\dadata\dto\DtoInterface;
-use nsusoft\dadata\dto\suggest\party\OpfDto;
+use nsusoft\dadata\dto\suggest\bank\BankNameDto;
 
 /**
  * @property array $source
  */
-class SuggestOpfAdapter extends BaseAdapter
+class SuggestBankNameAdapter extends BaseAdapter
 {
     /**
      * @inheritDoc
+     * @return BankNameDto
      */
-    public function populate(): OpfDto
+    public function populate(): BankNameDto
     {
         $dto = $this->createDto();
 
-        $dto->code = $this->source['code'];
+        $dto->payment = $this->source['payment'];
         $dto->full = $this->source['full'];
         $dto->short = $this->source['short'];
-        $dto->type = $this->source['type'];
 
         return $dto;
     }
 
     /**
      * @inheritDoc
-     * @return OpfDto
+     * @return BankNameDto
      */
     protected function createDto(): DtoInterface
     {
-        return new OpfDto();
+        return new BankNameDto();
     }
 }
