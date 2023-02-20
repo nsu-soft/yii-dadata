@@ -8,6 +8,7 @@ use nsusoft\dadata\dto\suggest\bank\BankDto;
 use nsusoft\dadata\dto\suggest\EmailDto;
 use nsusoft\dadata\dto\suggest\FmsUnitDto;
 use nsusoft\dadata\dto\suggest\FnsUnitDto;
+use nsusoft\dadata\dto\suggest\FtsUnitDto;
 use nsusoft\dadata\dto\suggest\NameDto;
 use nsusoft\dadata\dto\suggest\party\PartyDto;
 use nsusoft\dadata\dto\suggest\PostalUnitDto;
@@ -110,7 +111,7 @@ class SuggestHelper
      * @link https://dadata.ru/api/suggest/fts_unit/
      * @param string $ftsUnit
      * @param array $options
-     * @return DtoInterface[]
+     * @return FtsUnitDto[]
      */
     public static function ftsUnit(string $ftsUnit, array $options = []): array
     {
