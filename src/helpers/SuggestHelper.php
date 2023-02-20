@@ -12,6 +12,7 @@ use nsusoft\dadata\dto\suggest\FtsUnitDto;
 use nsusoft\dadata\dto\suggest\NameDto;
 use nsusoft\dadata\dto\suggest\party\PartyDto;
 use nsusoft\dadata\dto\suggest\PostalUnitDto;
+use nsusoft\dadata\dto\suggest\RegionCourtDto;
 use nsusoft\dadata\types\enums\SuggestType;
 
 /**
@@ -122,7 +123,7 @@ class SuggestHelper
      * @link https://dadata.ru/api/suggest/region_court/
      * @param string $regionCourt
      * @param array $options
-     * @return DtoInterface[]
+     * @return RegionCourtDto[]
      */
     public static function regionCourt(string $regionCourt, array $options = []): array
     {

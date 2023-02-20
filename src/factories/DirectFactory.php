@@ -13,6 +13,7 @@ use nsusoft\dadata\adapters\dto\direct\suggest\SuggestFnsUnitsAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\SuggestFtsUnitsAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\SuggestNamesAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\SuggestPostalUnitsAdapter;
+use nsusoft\dadata\adapters\dto\direct\suggest\SuggestRegionCourtsAdapter;
 use nsusoft\dadata\Module;
 use nsusoft\dadata\types\enums\CleanType;
 use nsusoft\dadata\types\enums\SuggestType;
@@ -70,10 +71,10 @@ class DirectFactory extends BaseFactory
             return new SuggestFnsUnitsAdapter();
         } else if (SuggestType::FTS_UNIT === $type) {
             return new SuggestFtsUnitsAdapter();
+        } else if (SuggestType::REGION_COURT === $type) {
+            return new SuggestRegionCourtsAdapter();
         }
-//        else if (SuggestType::REGION_COURT === $type) {
-//
-//        } else if (SuggestType::METRO === $type) {
+//        else if (SuggestType::METRO === $type) {
 //
 //        } else if (SuggestType::CAR_BRAND === $type) {
 //
