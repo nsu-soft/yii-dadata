@@ -9,6 +9,7 @@ use nsusoft\dadata\dto\suggest\EmailDto;
 use nsusoft\dadata\dto\suggest\FmsUnitDto;
 use nsusoft\dadata\dto\suggest\NameDto;
 use nsusoft\dadata\dto\suggest\party\PartyDto;
+use nsusoft\dadata\dto\suggest\PostalUnitDto;
 use nsusoft\dadata\types\enums\SuggestType;
 
 /**
@@ -86,7 +87,7 @@ class SuggestHelper
      * @link https://dadata.ru/api/suggest/postal_unit/
      * @param string $postalUnit
      * @param array $options
-     * @return DtoInterface[]
+     * @return PostalUnitDto[]
      */
     public static function postalUnit(string $postalUnit, array $options = []): array
     {

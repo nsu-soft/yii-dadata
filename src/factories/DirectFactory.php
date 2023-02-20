@@ -10,6 +10,7 @@ use nsusoft\dadata\adapters\dto\direct\suggest\SuggestAddressesAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\SuggestEmailsAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\SuggestFmsUnitsAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\SuggestNamesAdapter;
+use nsusoft\dadata\adapters\dto\direct\suggest\SuggestPostalUnitsAdapter;
 use nsusoft\dadata\Module;
 use nsusoft\dadata\types\enums\CleanType;
 use nsusoft\dadata\types\enums\SuggestType;
@@ -61,10 +62,10 @@ class DirectFactory extends BaseFactory
             return new SuggestEmailsAdapter();
         } else if (SuggestType::FMS_UNIT === $type) {
             return new SuggestFmsUnitsAdapter();
+        } else if (SuggestType::POSTAL_UNIT === $type) {
+            return new SuggestPostalUnitsAdapter();
         }
-//        else if (SuggestType::POSTAL_UNIT === $type) {
-//
-//        } else if (SuggestType::FNS_UNIT === $type) {
+//        else if (SuggestType::FNS_UNIT === $type) {
 //
 //        } else if (SuggestType::FTS_UNIT === $type) {
 //
