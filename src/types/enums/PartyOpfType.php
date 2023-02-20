@@ -2,7 +2,7 @@
 
 namespace nsusoft\dadata\types\enums;
 
-class OpfType extends BaseEnum
+class PartyOpfType extends BaseEnum
 {
     const YEAR_1999 = '99';
     const YEAR_2012 = '2012';
