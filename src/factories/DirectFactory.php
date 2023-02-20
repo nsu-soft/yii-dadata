@@ -8,6 +8,7 @@ use nsusoft\dadata\adapters\dto\direct\suggest\bank\SuggestBanksAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\parties\SuggestPartiesAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\SuggestAddressesAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\SuggestEmailsAdapter;
+use nsusoft\dadata\adapters\dto\direct\suggest\SuggestNamesAdapter;
 use nsusoft\dadata\Module;
 use nsusoft\dadata\types\enums\CleanType;
 use nsusoft\dadata\types\enums\SuggestType;
@@ -53,11 +54,9 @@ class DirectFactory extends BaseFactory
             return new SuggestPartiesAdapter();
         } else if (SuggestType::BANK === $type) {
             return new SuggestBanksAdapter();
-        }
-//        else if (SuggestType::NAME === $type) {
-//
-//        }
-        else if (SuggestType::EMAIL === $type) {
+        } else if (SuggestType::NAME === $type) {
+            return new SuggestNamesAdapter();
+        } else if (SuggestType::EMAIL === $type) {
             return new SuggestEmailsAdapter();
         }
 //        else if (SuggestType::FMS_UNIT === $type) {

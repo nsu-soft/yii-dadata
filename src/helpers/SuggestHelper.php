@@ -6,6 +6,7 @@ use nsusoft\dadata\dto\DtoInterface;
 use nsusoft\dadata\dto\suggest\AddressDto;
 use nsusoft\dadata\dto\suggest\bank\BankDto;
 use nsusoft\dadata\dto\suggest\EmailDto;
+use nsusoft\dadata\dto\suggest\NameDto;
 use nsusoft\dadata\dto\suggest\party\PartyDto;
 use nsusoft\dadata\types\enums\SuggestType;
 
@@ -51,7 +52,7 @@ class SuggestHelper
      * @link https://dadata.ru/api/suggest/name/
      * @param string $name
      * @param array $options
-     * @return DtoInterface[]
+     * @return NameDto[]
      */
     public static function name(string $name, array $options = []): array
     {
