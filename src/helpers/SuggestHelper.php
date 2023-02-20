@@ -6,6 +6,7 @@ use nsusoft\dadata\dto\DtoInterface;
 use nsusoft\dadata\dto\suggest\AddressDto;
 use nsusoft\dadata\dto\suggest\bank\BankDto;
 use nsusoft\dadata\dto\suggest\EmailDto;
+use nsusoft\dadata\dto\suggest\FmsUnitDto;
 use nsusoft\dadata\dto\suggest\NameDto;
 use nsusoft\dadata\dto\suggest\party\PartyDto;
 use nsusoft\dadata\types\enums\SuggestType;
@@ -74,7 +75,7 @@ class SuggestHelper
      * @link https://dadata.ru/api/suggest/fms_unit/
      * @param string $fmsUnit
      * @param array $options
-     * @return DtoInterface[]
+     * @return FmsUnitDto[]
      */
     public static function fmsUnit(string $fmsUnit, array $options = []): array
     {
