@@ -9,6 +9,7 @@ use nsusoft\dadata\adapters\dto\direct\suggest\parties\SuggestPartiesAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\SuggestAddressesAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\SuggestEmailsAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\SuggestFmsUnitsAdapter;
+use nsusoft\dadata\adapters\dto\direct\suggest\SuggestFnsUnitsAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\SuggestNamesAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\SuggestPostalUnitsAdapter;
 use nsusoft\dadata\Module;
@@ -64,10 +65,10 @@ class DirectFactory extends BaseFactory
             return new SuggestFmsUnitsAdapter();
         } else if (SuggestType::POSTAL_UNIT === $type) {
             return new SuggestPostalUnitsAdapter();
+        } else if (SuggestType::FNS_UNIT === $type) {
+            return new SuggestFnsUnitsAdapter();
         }
-//        else if (SuggestType::FNS_UNIT === $type) {
-//
-//        } else if (SuggestType::FTS_UNIT === $type) {
+//        else if (SuggestType::FTS_UNIT === $type) {
 //
 //        } else if (SuggestType::REGION_COURT === $type) {
 //
