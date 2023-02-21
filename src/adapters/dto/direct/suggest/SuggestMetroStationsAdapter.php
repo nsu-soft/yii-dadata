@@ -23,6 +23,7 @@ class SuggestMetroStationsAdapter extends BaseAdapter
             $dto = $this->createDto();
 
             $dto->value = $item['value'];
+            $dto->unrestrictedValue = $item['unrestricted_value'];
             $dto->cityKladrId = $item['data']['city_kladr_id'];
             $dto->cityFiasId = $item['data']['city_fias_id'];
             $dto->city = $item['data']['city'];

@@ -11,6 +11,10 @@ class MetroStationDto implements DtoInterface
      */
     public $value;
     /**
+     * @var string
+     */
+    public $unrestrictedValue;
+    /**
      * @var string|null
      */
     public $cityKladrId;

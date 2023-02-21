@@ -5,6 +5,7 @@ namespace nsusoft\dadata\helpers;
 use nsusoft\dadata\dto\DtoInterface;
 use nsusoft\dadata\dto\suggest\AddressDto;
 use nsusoft\dadata\dto\suggest\bank\BankDto;
+use nsusoft\dadata\dto\suggest\CarBrandDto;
 use nsusoft\dadata\dto\suggest\EmailDto;
 use nsusoft\dadata\dto\suggest\FmsUnitDto;
 use nsusoft\dadata\dto\suggest\FnsUnitDto;
@@ -146,7 +147,7 @@ class SuggestHelper
      * @link https://dadata.ru/api/suggest/car_brand/
      * @param string $carBrand
      * @param array $options
-     * @return DtoInterface[]
+     * @return CarBrandDto[]
      */
     public static function carBrand(string $carBrand, array $options = []): array
     {

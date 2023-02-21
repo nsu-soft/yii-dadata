@@ -4,16 +4,16 @@ namespace nsusoft\dadata\adapters\dto\direct\suggest;
 
 use nsusoft\dadata\adapters\dto\BaseAdapter;
 use nsusoft\dadata\dto\DtoInterface;
-use nsusoft\dadata\dto\suggest\EmailDto;
+use nsusoft\dadata\dto\suggest\CarBrandDto;
 
 /**
  * @property array $source
  */
-class SuggestEmailsAdapter extends BaseAdapter
+class SuggestCarBrandsAdapter extends BaseAdapter
 {
     /**
      * @inheritDoc
-     * @return EmailDto[]
+     * @return CarBrandDto[]
      */
     public function populate(): array
     {
@@ -21,10 +21,13 @@ class SuggestEmailsAdapter extends BaseAdapter
 
         foreach ($this->source as $item) {
             $dto = $this->createDto();
+
             $dto->value = $item['value'];
             $dto->unrestrictedValue = $item['unrestricted_value'];
-            $dto->local = $item['data']['local'];
-            $dto->domain = $item['data']['domain'];
+            $dto->id = $item['data']['id'];
+            $dto->name = $item['data']['name'];
+            $dto->nameRu = $item['data']['name_ru'];
+
             $result[] = $dto;
         }
 
@@ -33,10 +36,10 @@ class SuggestEmailsAdapter extends BaseAdapter
 
     /**
      * @inheritDoc
-     * @return EmailDto
+     * @return CarBrandDto
      */
     protected function createDto(): DtoInterface
     {
-        return new EmailDto();
+        return new CarBrandDto();
     }
 }
