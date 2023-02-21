@@ -1,10 +1,10 @@
 <?php
 
-namespace nsusoft\dadata\adapters\dto\direct\suggest;
+namespace nsusoft\dadata\adapters\dto\direct\suggest\address;
 
 use nsusoft\dadata\adapters\dto\BaseAdapter;
-use nsusoft\dadata\dto\suggest\AddressDto;
 use nsusoft\dadata\dto\DtoInterface;
+use nsusoft\dadata\dto\suggest\AddressDto;
 
 /**
  * @property array $source

@@ -4,13 +4,14 @@ namespace nsusoft\dadata\factories;
 
 use nsusoft\dadata\adapters\dto\AdapterInterface;
 use nsusoft\dadata\adapters\dto\direct\clean\CleanAddressesAdapter;
+use nsusoft\dadata\adapters\dto\direct\suggest\address\SuggestAddressesAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\bank\SuggestBanksAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\parties\SuggestPartiesAdapter;
-use nsusoft\dadata\adapters\dto\direct\suggest\SuggestAddressesAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\SuggestEmailsAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\SuggestFmsUnitsAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\SuggestFnsUnitsAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\SuggestFtsUnitsAdapter;
+use nsusoft\dadata\adapters\dto\direct\suggest\SuggestMetroStationsAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\SuggestNamesAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\SuggestPostalUnitsAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\SuggestRegionCourtsAdapter;
@@ -73,10 +74,10 @@ class DirectFactory extends BaseFactory
             return new SuggestFtsUnitsAdapter();
         } else if (SuggestType::REGION_COURT === $type) {
             return new SuggestRegionCourtsAdapter();
+        } else if (SuggestType::METRO === $type) {
+            return new SuggestMetroStationsAdapter();
         }
-//        else if (SuggestType::METRO === $type) {
-//
-//        } else if (SuggestType::CAR_BRAND === $type) {
+//        else if (SuggestType::CAR_BRAND === $type) {
 //
 //        } else if (SuggestType::MKTU === $type) {
 //

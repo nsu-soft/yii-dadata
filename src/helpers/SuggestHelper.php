@@ -9,6 +9,7 @@ use nsusoft\dadata\dto\suggest\EmailDto;
 use nsusoft\dadata\dto\suggest\FmsUnitDto;
 use nsusoft\dadata\dto\suggest\FnsUnitDto;
 use nsusoft\dadata\dto\suggest\FtsUnitDto;
+use nsusoft\dadata\dto\suggest\MetroStationDto;
 use nsusoft\dadata\dto\suggest\NameDto;
 use nsusoft\dadata\dto\suggest\party\PartyDto;
 use nsusoft\dadata\dto\suggest\PostalUnitDto;
@@ -134,7 +135,7 @@ class SuggestHelper
      * @link https://dadata.ru/api/suggest/metro/
      * @param string $metro
      * @param array $options
-     * @return DtoInterface[]
+     * @return MetroStationDto[]
      */
     public static function metro(string $metro, array $options = []): array
     {
