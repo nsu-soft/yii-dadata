@@ -15,6 +15,7 @@ use nsusoft\dadata\dto\suggest\FtsUnitDto;
 use nsusoft\dadata\dto\suggest\MetroStationDto;
 use nsusoft\dadata\dto\suggest\MktuDto;
 use nsusoft\dadata\dto\suggest\NameDto;
+use nsusoft\dadata\dto\suggest\OkvedDto;
 use nsusoft\dadata\dto\suggest\party\PartyDto;
 use nsusoft\dadata\dto\suggest\PostalUnitDto;
 use nsusoft\dadata\dto\suggest\RegionCourtDto;
@@ -194,7 +195,7 @@ class SuggestHelper
      * @link https://dadata.ru/api/suggest/okved2/
      * @param string $okved
      * @param array $options
-     * @return DtoInterface[]
+     * @return OkvedDto[]
      */
     public static function okved(string $okved, array $options = []): array
     {
