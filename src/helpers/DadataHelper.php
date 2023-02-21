@@ -27,4 +27,15 @@ class DadataHelper
     {
         return HandlerFactory::getChain()->suggest($type, $value, $options);
     }
+
+    /**
+     * @param string $type
+     * @param string $value
+     * @param array $options
+     * @return DtoInterface
+     */
+    public static function findById(string $type, string $value, array $options = []): ?DtoInterface
+    {
+        return HandlerFactory::getChain()->findById($type, $value, $options);
+    }
 }

@@ -17,4 +17,10 @@ interface FactoryInterface
      * @return AdapterInterface
      */
     public function createSuggest(string $type): AdapterInterface;
+
+    /**
+     * @param string $type
+     * @return AdapterInterface
+     */
+    public function createFindById(string $type): AdapterInterface;
 }

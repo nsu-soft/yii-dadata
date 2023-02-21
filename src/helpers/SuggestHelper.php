@@ -2,7 +2,6 @@
 
 namespace nsusoft\dadata\helpers;
 
-use nsusoft\dadata\dto\DtoInterface;
 use nsusoft\dadata\dto\suggest\AddressDto;
 use nsusoft\dadata\dto\suggest\bank\BankDto;
 use nsusoft\dadata\dto\suggest\CarBrandDto;
@@ -16,10 +15,12 @@ use nsusoft\dadata\dto\suggest\MetroStationDto;
 use nsusoft\dadata\dto\suggest\MktuDto;
 use nsusoft\dadata\dto\suggest\NameDto;
 use nsusoft\dadata\dto\suggest\OkpdDto;
+use nsusoft\dadata\dto\suggest\OktmoDto;
 use nsusoft\dadata\dto\suggest\OkvedDto;
 use nsusoft\dadata\dto\suggest\party\PartyDto;
 use nsusoft\dadata\dto\suggest\PostalUnitDto;
 use nsusoft\dadata\dto\suggest\RegionCourtDto;
+use nsusoft\dadata\types\enums\FindByIdType;
 use nsusoft\dadata\types\enums\SuggestType;
 
 /**
@@ -218,10 +219,10 @@ class SuggestHelper
      * @link https://dadata.ru/api/suggest/oktmo/
      * @param string $oktmo
      * @param array $options
-     * @return DtoInterface[]
+     * @return OktmoDto[]
      */
     public static function oktmo(string $oktmo, array $options = []): array
     {
-        return DadataHelper::suggest(SuggestType::OKTMO, $oktmo, $options);
+        return [DadataHelper::findById(FindByIdType::OKTMO, $oktmo, $options)];
     }
 }

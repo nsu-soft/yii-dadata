@@ -17,4 +17,10 @@ interface CacheFactoryInterface
      * @return CacheInterface
      */
     public function createSuggestCache(string $type): CacheInterface;
+
+    /**
+     * @param string $type
+     * @return CacheInterface
+     */
+    public function createFindByIdCache(string $type): CacheInterface;
 }

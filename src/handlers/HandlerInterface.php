@@ -27,4 +27,12 @@ interface HandlerInterface
      * @return DtoInterface[]
      */
     public function suggest(string $type, string $value, array $options = []): array;
+
+    /**
+     * @param string $type
+     * @param string $value
+     * @param array $options
+     * @return DtoInterface|null
+     */
+    public function findById(string $type, string $value, array $options = []): ?DtoInterface;
 }

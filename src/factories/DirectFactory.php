@@ -18,11 +18,13 @@ use nsusoft\dadata\adapters\dto\direct\suggest\SuggestMetroStationsAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\SuggestMktuItemsAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\SuggestNamesAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\SuggestOkpdItemsAdapter;
+use nsusoft\dadata\adapters\dto\direct\suggest\SuggestOktmoAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\SuggestOkvedItemsAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\SuggestPostalUnitsAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\SuggestRegionCourtsAdapter;
 use nsusoft\dadata\Module;
 use nsusoft\dadata\types\enums\CleanType;
+use nsusoft\dadata\types\enums\FindByIdType;
 use nsusoft\dadata\types\enums\SuggestType;
 use yii\base\InvalidCallException;
 
@@ -95,9 +97,38 @@ class DirectFactory extends BaseFactory
         } else if (SuggestType::OKPD === $type) {
             return new SuggestOkpdItemsAdapter();
         }
-//        else if (SuggestType::OKTMO === $type) {
-//
-//        }
+
+        throw new InvalidCallException(Module::t('main', 'Invalid suggest type.'));
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function createFindById(string $type): AdapterInterface
+    {
+        if (FindByIdType::POSTAL_UNIT === $type) {
+            return new SuggestPostalUnitsAdapter();
+        } else if (FindByIdType::FNS_UNIT === $type) {
+            return new SuggestFnsUnitsAdapter();
+        } else if (FindByIdType::FTS_UNIT === $type) {
+            return new SuggestFtsUnitsAdapter();
+        } else if (FindByIdType::REGION_COURT === $type) {
+            return new SuggestRegionCourtsAdapter();
+        } else if (FindByIdType::CAR_BRAND === $type) {
+            return new SuggestCarBrandsAdapter();
+        } else if (FindByIdType::MKTU === $type) {
+            return new SuggestMktuItemsAdapter();
+        } else if (FindByIdType::COUNTRY === $type) {
+            return new SuggestCountriesAdapter();
+        } else if (FindByIdType::CURRENCY === $type) {
+            return new SuggestCurrenciesAdapter();
+        } else if (FindByIdType::OKVED === $type) {
+            return new SuggestOkvedItemsAdapter();
+        } else if (FindByIdType::OKPD === $type) {
+            return new SuggestOkpdItemsAdapter();
+        } else if (FindByIdType::OKTMO === $type) {
+            return new SuggestOktmoAdapter();
+        }
 
         throw new InvalidCallException(Module::t('main', 'Invalid suggest type.'));
     }

@@ -76,7 +76,37 @@ class DbFactory extends BaseFactory implements CacheFactoryInterface
 //
 //        } else if (SuggestType::OKPD === $type) {
 //
-//        } else if (SuggestType::OKTMO === $type) {
+//        }
+
+        throw new InvalidCallException(Module::t('main', 'Invalid suggest type.'));
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function createFindById(string $type): AdapterInterface
+    {
+//        if (FindByIdType::POSTAL_UNIT === $type) {
+//
+//        } else if (FindByIdType::FNS_UNIT === $type) {
+//
+//        } else if (FindByIdType::FTS_UNIT === $type) {
+//
+//        } else if (FindByIdType::REGION_COURT === $type) {
+//
+//        } else if (FindByIdType::CAR_BRAND === $type) {
+//
+//        } else if (FindByIdType::MKTU === $type) {
+//
+//        } else if (FindByIdType::COUNTRY === $type) {
+//
+//        } else if (FindByIdType::CURRENCY === $type) {
+//
+//        } else if (FindByIdType::OKVED === $type) {
+//
+//        } else if (FindByIdType::OKPD === $type) {
+//
+//        } else if (FindByIdType::OKTMO === $type) {
 //
 //        }
 
@@ -147,7 +177,34 @@ class DbFactory extends BaseFactory implements CacheFactoryInterface
 //
 //        } else if (SuggestType::OKPD === $type) {
 //
-//        } else if (SuggestType::OKTMO === $type) {
+//        }
+
+        throw new InvalidCallException(Module::t('main', 'Invalid suggest type.'));
+    }
+
+    public function createFindByIdCache(string $type): CacheInterface
+    {
+//        if (FindByIdType::POSTAL_UNIT === $type) {
+//
+//        } else if (FindByIdType::FNS_UNIT === $type) {
+//
+//        } else if (FindByIdType::FTS_UNIT === $type) {
+//
+//        } else if (FindByIdType::REGION_COURT === $type) {
+//
+//        } else if (FindByIdType::CAR_BRAND === $type) {
+//
+//        } else if (FindByIdType::MKTU === $type) {
+//
+//        } else if (FindByIdType::COUNTRY === $type) {
+//
+//        } else if (FindByIdType::CURRENCY === $type) {
+//
+//        } else if (FindByIdType::OKVED === $type) {
+//
+//        } else if (FindByIdType::OKPD === $type) {
+//
+//        } else if (FindByIdType::OKTMO === $type) {
 //
 //        }
 

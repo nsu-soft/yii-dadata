@@ -47,6 +47,18 @@ abstract class BaseHandler extends Component implements HandlerInterface
     }
 
     /**
+     * @inheritDoc
+     */
+    public function findById(string $type, string $value, array $options = []): ?DtoInterface
+    {
+        if (isset($this->next)) {
+            return $this->next->findById($type, $value, $options);
+        }
+
+        return null;
+    }
+
+    /**
      * Gets wrappers creator.
      * @return FactoryInterface
      */
