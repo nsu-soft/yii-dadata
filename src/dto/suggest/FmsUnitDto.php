@@ -4,6 +4,9 @@ namespace nsusoft\dadata\dto\suggest;
 
 use nsusoft\dadata\dto\DtoInterface;
 
+/**
+ * @link https://dadata.ru/api/suggest/fms_unit/
+ */
 class FmsUnitDto implements DtoInterface
 {
     /**

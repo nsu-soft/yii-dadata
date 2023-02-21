@@ -13,6 +13,7 @@ use nsusoft\dadata\adapters\dto\direct\suggest\SuggestFmsUnitsAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\SuggestFnsUnitsAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\SuggestFtsUnitsAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\SuggestMetroStationsAdapter;
+use nsusoft\dadata\adapters\dto\direct\suggest\SuggestMktuItemsAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\SuggestNamesAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\SuggestPostalUnitsAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\SuggestRegionCourtsAdapter;
@@ -79,10 +80,10 @@ class DirectFactory extends BaseFactory
             return new SuggestMetroStationsAdapter();
         } else if (SuggestType::CAR_BRAND === $type) {
             return new SuggestCarBrandsAdapter();
+        } else if (SuggestType::MKTU === $type) {
+            return new SuggestMktuItemsAdapter();
         }
-//        else if (SuggestType::MKTU === $type) {
-//
-//        } else if (SuggestType::COUNTRY === $type) {
+//        else if (SuggestType::COUNTRY === $type) {
 //
 //        } else if (SuggestType::CURRENCY === $type) {
 //

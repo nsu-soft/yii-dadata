@@ -11,6 +11,7 @@ use nsusoft\dadata\dto\suggest\FmsUnitDto;
 use nsusoft\dadata\dto\suggest\FnsUnitDto;
 use nsusoft\dadata\dto\suggest\FtsUnitDto;
 use nsusoft\dadata\dto\suggest\MetroStationDto;
+use nsusoft\dadata\dto\suggest\MktuDto;
 use nsusoft\dadata\dto\suggest\NameDto;
 use nsusoft\dadata\dto\suggest\party\PartyDto;
 use nsusoft\dadata\dto\suggest\PostalUnitDto;
@@ -158,7 +159,7 @@ class SuggestHelper
      * @link https://dadata.ru/api/suggest/mktu/
      * @param string $mktu
      * @param array $options
-     * @return DtoInterface[]
+     * @return MktuDto[]
      */
     public static function mktu(string $mktu, array $options = []): array
     {
