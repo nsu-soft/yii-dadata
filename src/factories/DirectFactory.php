@@ -8,6 +8,7 @@ use nsusoft\dadata\adapters\dto\direct\suggest\address\SuggestAddressesAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\bank\SuggestBanksAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\parties\SuggestPartiesAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\SuggestCarBrandsAdapter;
+use nsusoft\dadata\adapters\dto\direct\suggest\SuggestCountriesAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\SuggestEmailsAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\SuggestFmsUnitsAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\SuggestFnsUnitsAdapter;
@@ -82,10 +83,10 @@ class DirectFactory extends BaseFactory
             return new SuggestCarBrandsAdapter();
         } else if (SuggestType::MKTU === $type) {
             return new SuggestMktuItemsAdapter();
+        } else if (SuggestType::COUNTRY === $type) {
+            return new SuggestCountriesAdapter();
         }
-//        else if (SuggestType::COUNTRY === $type) {
-//
-//        } else if (SuggestType::CURRENCY === $type) {
+//        else if (SuggestType::CURRENCY === $type) {
 //
 //        } else if (SuggestType::OKVED === $type) {
 //

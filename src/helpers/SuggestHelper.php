@@ -6,6 +6,7 @@ use nsusoft\dadata\dto\DtoInterface;
 use nsusoft\dadata\dto\suggest\AddressDto;
 use nsusoft\dadata\dto\suggest\bank\BankDto;
 use nsusoft\dadata\dto\suggest\CarBrandDto;
+use nsusoft\dadata\dto\suggest\CountryDto;
 use nsusoft\dadata\dto\suggest\EmailDto;
 use nsusoft\dadata\dto\suggest\FmsUnitDto;
 use nsusoft\dadata\dto\suggest\FnsUnitDto;
@@ -170,7 +171,7 @@ class SuggestHelper
      * @link https://dadata.ru/api/suggest/country/
      * @param string $country
      * @param array $options
-     * @return DtoInterface[]
+     * @return CountryDto[]
      */
     public static function country(string $country, array $options = []): array
     {

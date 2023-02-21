@@ -4,16 +4,16 @@ namespace nsusoft\dadata\adapters\dto\direct\suggest;
 
 use nsusoft\dadata\adapters\dto\BaseAdapter;
 use nsusoft\dadata\dto\DtoInterface;
-use nsusoft\dadata\dto\suggest\EmailDto;
+use nsusoft\dadata\dto\suggest\CountryDto;
 
 /**
  * @property array $source
  */
-class SuggestEmailsAdapter extends BaseAdapter
+class SuggestCountriesAdapter extends BaseAdapter
 {
     /**
      * @inheritDoc
-     * @return EmailDto[]
+     * @return CountryDto[]
      */
     public function populate(): array
     {
@@ -24,8 +24,11 @@ class SuggestEmailsAdapter extends BaseAdapter
 
             $dto->value = $item['value'];
             $dto->unrestrictedValue = $item['unrestricted_value'];
-            $dto->local = $item['data']['local'];
-            $dto->domain = $item['data']['domain'];
+            $dto->code = $item['data']['code'];
+            $dto->alfa2 = $item['data']['alfa2'];
+            $dto->alfa3 = $item['data']['alfa3'];
+            $dto->nameShort = $item['data']['name_short'];
+            $dto->name = $item['data']['name'];
 
             $result[] = $dto;
         }
@@ -35,10 +38,10 @@ class SuggestEmailsAdapter extends BaseAdapter
 
     /**
      * @inheritDoc
-     * @return EmailDto
+     * @return CountryDto
      */
     protected function createDto(): DtoInterface
     {
-        return new EmailDto();
+        return new CountryDto();
     }
 }
