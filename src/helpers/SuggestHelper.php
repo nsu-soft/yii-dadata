@@ -7,6 +7,7 @@ use nsusoft\dadata\dto\suggest\AddressDto;
 use nsusoft\dadata\dto\suggest\bank\BankDto;
 use nsusoft\dadata\dto\suggest\CarBrandDto;
 use nsusoft\dadata\dto\suggest\CountryDto;
+use nsusoft\dadata\dto\suggest\CurrencyDto;
 use nsusoft\dadata\dto\suggest\EmailDto;
 use nsusoft\dadata\dto\suggest\FmsUnitDto;
 use nsusoft\dadata\dto\suggest\FnsUnitDto;
@@ -182,7 +183,7 @@ class SuggestHelper
      * @link https://dadata.ru/api/suggest/currency/
      * @param string $currency
      * @param array $options
-     * @return DtoInterface[]
+     * @return CurrencyDto[]
      */
     public static function currency(string $currency, array $options = []): array
     {
