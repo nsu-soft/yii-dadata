@@ -1,6 +1,6 @@
 <?php
 
-namespace nsusoft\dadata\dto\clean;
+namespace nsusoft\dadata\dto\clean\address;
 
 use nsusoft\dadata\dto\DtoInterface;
 

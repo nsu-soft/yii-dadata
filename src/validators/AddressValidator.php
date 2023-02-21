@@ -2,7 +2,7 @@
 
 namespace nsusoft\dadata\validators;
 
-use nsusoft\dadata\dto\clean\AddressDto;
+use nsusoft\dadata\dto\clean\address\AddressDto;
 use nsusoft\dadata\helpers\CleanHelper;
 use nsusoft\dadata\Module;
 use nsusoft\dadata\types\enums\AddressQualityCheckCode;

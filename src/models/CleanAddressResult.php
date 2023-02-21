@@ -2,7 +2,7 @@
 
 namespace nsusoft\dadata\models;
 
-use nsusoft\dadata\dto\clean\AddressDto;
+use nsusoft\dadata\dto\clean\address\AddressDto;
 use nsusoft\dadata\interfaces\ResultInterface;
 use nsusoft\dadata\Module;
 use nsusoft\dadata\traits\UniqueRecordTrait;

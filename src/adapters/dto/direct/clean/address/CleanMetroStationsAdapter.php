@@ -1,9 +1,9 @@
 <?php
 
-namespace nsusoft\dadata\adapters\dto\direct\clean;
+namespace nsusoft\dadata\adapters\dto\direct\clean\address;
 
 use nsusoft\dadata\adapters\dto\BaseAdapter;
-use nsusoft\dadata\dto\clean\MetroStationDto;
+use nsusoft\dadata\dto\clean\address\MetroStationDto;
 use nsusoft\dadata\dto\DtoInterface;
 
 /**

@@ -2,7 +2,8 @@
 
 namespace nsusoft\dadata\helpers;
 
-use nsusoft\dadata\dto\clean\AddressDto;
+use nsusoft\dadata\dto\clean\address\AddressDto;
+use nsusoft\dadata\dto\clean\PhoneDto;
 use nsusoft\dadata\dto\DtoInterface;
 use nsusoft\dadata\types\enums\CleanType;
 
@@ -24,7 +25,7 @@ class CleanHelper
     /**
      * @link https://dadata.ru/api/clean/phone/
      * @param string $phone
-     * @return DtoInterface|null
+     * @return PhoneDto|null
      */
     public static function phone(string $phone): ?DtoInterface
     {

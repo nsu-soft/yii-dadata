@@ -3,7 +3,7 @@
 namespace nsusoft\dadata\cache\db\clean;
 
 use nsusoft\dadata\cache\db\OneToOneCache;
-use nsusoft\dadata\dto\clean\AddressDto;
+use nsusoft\dadata\dto\clean\address\AddressDto;
 use nsusoft\dadata\interfaces\SourceInterface;
 use nsusoft\dadata\models\CleanAddressResult;
 use nsusoft\dadata\models\CleanAddressSource;

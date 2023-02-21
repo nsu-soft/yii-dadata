@@ -2,7 +2,7 @@
 
 namespace nsusoft\dadata\dto\suggest;
 
-use nsusoft\dadata\dto\clean\MetroStationDto;
+use nsusoft\dadata\dto\clean\address\MetroStationDto;
 use nsusoft\dadata\dto\DtoInterface;
 
 /**

@@ -2,7 +2,7 @@
 
 namespace nsusoft\dadata\plugins;
 
-use nsusoft\dadata\dto\clean\AddressDto;
+use nsusoft\dadata\dto\clean\address\AddressDto;
 
 class TimezoneConverter
 {

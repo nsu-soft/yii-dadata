@@ -3,7 +3,7 @@
 namespace nsusoft\dadata\adapters\dto\db\clean;
 
 use nsusoft\dadata\adapters\dto\BaseAdapter;
-use nsusoft\dadata\dto\clean\MetroStationDto;
+use nsusoft\dadata\dto\clean\address\MetroStationDto;
 use nsusoft\dadata\dto\DtoInterface;
 
 /**

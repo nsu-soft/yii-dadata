@@ -1,9 +1,9 @@
 <?php
 
-namespace nsusoft\dadata\adapters\dto\direct\clean;
+namespace nsusoft\dadata\adapters\dto\direct\clean\address;
 
 use nsusoft\dadata\adapters\dto\BaseAdapter;
-use nsusoft\dadata\dto\clean\AddressDto;
+use nsusoft\dadata\dto\clean\address\AddressDto;
 use nsusoft\dadata\dto\DtoInterface;
 
 /**

@@ -3,7 +3,7 @@
 namespace nsusoft\dadata\adapters\dto\db\clean;
 
 use nsusoft\dadata\adapters\dto\BaseAdapter;
-use nsusoft\dadata\dto\clean\AddressDto;
+use nsusoft\dadata\dto\clean\address\AddressDto;
 use nsusoft\dadata\dto\DtoInterface;
 use nsusoft\dadata\models\CleanAddressSource;
 use yii\helpers\Json;
