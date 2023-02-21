@@ -17,6 +17,7 @@ use nsusoft\dadata\adapters\dto\direct\suggest\SuggestFtsUnitsAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\SuggestMetroStationsAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\SuggestMktuItemsAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\SuggestNamesAdapter;
+use nsusoft\dadata\adapters\dto\direct\suggest\SuggestOkpdItemsAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\SuggestOkvedItemsAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\SuggestPostalUnitsAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\SuggestRegionCourtsAdapter;
@@ -91,10 +92,10 @@ class DirectFactory extends BaseFactory
             return new SuggestCurrenciesAdapter();
         } else if (SuggestType::OKVED === $type) {
             return new SuggestOkvedItemsAdapter();
+        } else if (SuggestType::OKPD === $type) {
+            return new SuggestOkpdItemsAdapter();
         }
-//        else if (SuggestType::OKPD === $type) {
-//
-//        } else if (SuggestType::OKTMO === $type) {
+//        else if (SuggestType::OKTMO === $type) {
 //
 //        }
 

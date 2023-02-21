@@ -15,6 +15,7 @@ use nsusoft\dadata\dto\suggest\FtsUnitDto;
 use nsusoft\dadata\dto\suggest\MetroStationDto;
 use nsusoft\dadata\dto\suggest\MktuDto;
 use nsusoft\dadata\dto\suggest\NameDto;
+use nsusoft\dadata\dto\suggest\OkpdDto;
 use nsusoft\dadata\dto\suggest\OkvedDto;
 use nsusoft\dadata\dto\suggest\party\PartyDto;
 use nsusoft\dadata\dto\suggest\PostalUnitDto;
@@ -206,7 +207,7 @@ class SuggestHelper
      * @link https://dadata.ru/api/suggest/okpd2/
      * @param string $okpd
      * @param array $options
-     * @return DtoInterface[]
+     * @return OkpdDto[]
      */
     public static function okpd(string $okpd, array $options = []): array
     {
