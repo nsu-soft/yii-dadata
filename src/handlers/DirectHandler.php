@@ -14,6 +14,9 @@ use nsusoft\dadata\types\enums\FindByIdType;
 use nsusoft\dadata\types\enums\SuggestType;
 use yii\base\InvalidCallException;
 
+/**
+ * Default request handler. It's using a direct DaData API calling.
+ */
 class DirectHandler extends BaseHandler
 {
     /**

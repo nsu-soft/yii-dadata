@@ -40,7 +40,7 @@ class DirectFactory extends BaseFactory
      * @inheritDoc
      * @return AdapterInterface
      */
-    public function createClean(string $type): AdapterInterface
+    public function createClean(string $type): ?AdapterInterface
     {
         if (CleanType::ADDRESS === $type) {
             return new CleanAddressesAdapter();
@@ -65,7 +65,7 @@ class DirectFactory extends BaseFactory
      * @param string $type
      * @return AdapterInterface
      */
-    public function createSuggest(string $type): AdapterInterface
+    public function createSuggest(string $type): ?AdapterInterface
     {
         if (SuggestType::ADDRESS === $type) {
             return new SuggestAddressesAdapter();
@@ -109,7 +109,7 @@ class DirectFactory extends BaseFactory
     /**
      * @inheritDoc
      */
-    public function createFindById(string $type): AdapterInterface
+    public function createFindById(string $type): ?AdapterInterface
     {
         if (FindByIdType::POSTAL_UNIT === $type) {
             return new SuggestPostalUnitsAdapter();

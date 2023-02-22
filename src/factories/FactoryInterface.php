@@ -8,19 +8,19 @@ interface FactoryInterface
 {
     /**
      * @param string $type
-     * @return AdapterInterface
+     * @return AdapterInterface|null
      */
-    public function createClean(string $type): AdapterInterface;
+    public function createClean(string $type): ?AdapterInterface;
 
     /**
      * @param string $type
-     * @return AdapterInterface
+     * @return AdapterInterface|null
      */
-    public function createSuggest(string $type): AdapterInterface;
+    public function createSuggest(string $type): ?AdapterInterface;
 
     /**
      * @param string $type
-     * @return AdapterInterface
+     * @return AdapterInterface|null
      */
-    public function createFindById(string $type): AdapterInterface;
+    public function createFindById(string $type): ?AdapterInterface;
 }

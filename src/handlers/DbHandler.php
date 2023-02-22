@@ -9,6 +9,22 @@ use nsusoft\dadata\factories\FactoryInterface;
 use nsusoft\dadata\Module;
 use Psr\SimpleCache\InvalidArgumentException;
 
+/**
+ * Use this class in Module configuration, if you want to save DaData API responses in local database.
+ *
+ * You should apply migrations before using it.
+ *
+ * Usage example:
+ * ```php
+ * // config/web.php
+ * 'modules' => [
+ *     'dadata' => [
+ *         'class' => 'nsusoft\dadata\Module',
+ *         'cachePriority' => [DbHandler::class],
+ *     ],
+ * ],
+ * ```
+ */
 class DbHandler extends BaseHandler
 {
     /**
@@ -20,6 +36,11 @@ class DbHandler extends BaseHandler
     {
         $factory = $this->createFactory();
         $adapter = $factory->createClean($type);
+
+        if (is_null($adapter)) {
+            return parent::clean($type, $value);
+        }
+
         $cache = $factory->createCleanCache($type);
 
         if ($cache->has($value)) {

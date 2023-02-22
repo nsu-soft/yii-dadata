@@ -15,24 +15,23 @@ class DbFactory extends BaseFactory implements CacheFactoryInterface
     /**
      * @inheritDoc
      */
-    public function createClean(string $type): AdapterInterface
+    public function createClean(string $type): ?AdapterInterface
     {
         if (CleanType::ADDRESS === $type) {
             return new CleanAddressAdapter();
+        } else if (CleanType::PHONE === $type) {
+            return null; // TODO: implement
+        } else if (CleanType::PASSPORT === $type) {
+            return null; // TODO: implement
+        } else if (CleanType::NAME === $type) {
+            return null; // TODO: implement
+        } else if (CleanType::EMAIL === $type) {
+            return null; // TODO: implement
+        } else if (CleanType::BIRTHDATE === $type) {
+            return null; // TODO: implement
+        } else if (CleanType::VEHICLE === $type) {
+            return null; // TODO: implement
         }
-//        else if (CleanType::PHONE === $type) {
-//
-//        } else if (CleanType::NAME === $type) {
-//
-//        } else if (CleanType::EMAIL === $type) {
-//
-//        } else if (CleanType::PASSPORT === $type) {
-//
-//        } else if (CleanType::BIRTHDATE === $type) {
-//
-//        } else if (CleanType::VEHICLE === $type) {
-//
-//        }
 
         throw new InvalidCallException(Module::t('main', 'Invalid clean type.'));
     }
@@ -40,7 +39,7 @@ class DbFactory extends BaseFactory implements CacheFactoryInterface
     /**
      * @inheritDoc
      */
-    public function createSuggest(string $type): AdapterInterface
+    public function createSuggest(string $type): ?AdapterInterface
     {
 //        if (SuggestType::ADDRESS === $type) {
 //
@@ -84,7 +83,7 @@ class DbFactory extends BaseFactory implements CacheFactoryInterface
     /**
      * @inheritDoc
      */
-    public function createFindById(string $type): AdapterInterface
+    public function createFindById(string $type): ?AdapterInterface
     {
 //        if (FindByIdType::POSTAL_UNIT === $type) {
 //
@@ -122,17 +121,17 @@ class DbFactory extends BaseFactory implements CacheFactoryInterface
             return new CleanAddressCache();
         }
 //        else if (CleanType::CLEAN_TYPE_PHONE === $type) {
-//            return new CleanPhoneAdapter();
+//
 //        } else if (CleanType::CLEAN_TYPE_NAME === $type) {
-//            return new CleanNameAdapter();
+//
 //        } else if (CleanType::CLEAN_TYPE_EMAIL === $type) {
-//            return new CleanEmailAdapter();
+//
 //        } else if (CleanType::CLEAN_TYPE_PASSPORT === $type) {
-//            return new CleanPassportAdapter();
+//
 //        } else if (CleanType::CLEAN_TYPE_BIRTHDATE === $type) {
-//            return new CleanBirthdateAdapter();
+//
 //        } else if (CleanType::CLEAN_TYPE_VEHICLE === $type) {
-//            return new CleanVehicleAdapter();
+//
 //        }
 
         throw new InvalidCallException(Module::t('main', 'Invalid clean type.'));
