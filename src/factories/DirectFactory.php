@@ -4,6 +4,7 @@ namespace nsusoft\dadata\factories;
 
 use nsusoft\dadata\adapters\dto\AdapterInterface;
 use nsusoft\dadata\adapters\dto\direct\clean\address\CleanAddressesAdapter;
+use nsusoft\dadata\adapters\dto\direct\clean\CleanBirthdateAdapter;
 use nsusoft\dadata\adapters\dto\direct\clean\CleanEmailAdapter;
 use nsusoft\dadata\adapters\dto\direct\clean\CleanNameAdapter;
 use nsusoft\dadata\adapters\dto\direct\clean\CleanPassportAdapter;
@@ -50,10 +51,10 @@ class DirectFactory extends BaseFactory
             return new CleanNameAdapter();
         } else if (CleanType::EMAIL === $type) {
             return new CleanEmailAdapter();
+        } else if (CleanType::BIRTHDATE === $type) {
+            return new CleanBirthdateAdapter();
         }
-//        else if (CleanType::BIRTHDATE === $type) {
-//
-//        } else if (CleanType::VEHICLE === $type) {
+//        else if (CleanType::VEHICLE === $type) {
 //
 //        }
 

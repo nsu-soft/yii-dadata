@@ -3,6 +3,7 @@
 namespace nsusoft\dadata\helpers;
 
 use nsusoft\dadata\dto\clean\address\AddressDto;
+use nsusoft\dadata\dto\clean\BirthdateDto;
 use nsusoft\dadata\dto\clean\EmailDto;
 use nsusoft\dadata\dto\clean\NameDto;
 use nsusoft\dadata\dto\clean\PassportDto;
@@ -68,7 +69,7 @@ class CleanHelper
     /**
      * @link https://dadata.ru/api/clean/birthdate/
      * @param string $birthdate
-     * @return DtoInterface|null
+     * @return BirthdateDto|null
      */
     public static function birthdate(string $birthdate): ?DtoInterface
     {
