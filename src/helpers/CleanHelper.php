@@ -3,6 +3,7 @@
 namespace nsusoft\dadata\helpers;
 
 use nsusoft\dadata\dto\clean\address\AddressDto;
+use nsusoft\dadata\dto\clean\EmailDto;
 use nsusoft\dadata\dto\clean\NameDto;
 use nsusoft\dadata\dto\clean\PassportDto;
 use nsusoft\dadata\dto\clean\PhoneDto;
@@ -57,7 +58,7 @@ class CleanHelper
     /**
      * @link https://dadata.ru/api/clean/email/
      * @param string $email
-     * @return DtoInterface|null
+     * @return EmailDto|null
      */
     public static function email(string $email): ?DtoInterface
     {
