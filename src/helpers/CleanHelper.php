@@ -4,6 +4,7 @@ namespace nsusoft\dadata\helpers;
 
 use nsusoft\dadata\dto\clean\address\AddressDto;
 use nsusoft\dadata\dto\clean\NameDto;
+use nsusoft\dadata\dto\clean\PassportDto;
 use nsusoft\dadata\dto\clean\PhoneDto;
 use nsusoft\dadata\dto\DtoInterface;
 use nsusoft\dadata\types\enums\CleanType;
@@ -34,6 +35,16 @@ class CleanHelper
     }
 
     /**
+     * @link https://dadata.ru/api/clean/passport/
+     * @param string $passport
+     * @return PassportDto|null
+     */
+    public static function passport(string $passport): ?DtoInterface
+    {
+        return DadataHelper::clean(CleanType::PASSPORT, $passport);
+    }
+
+    /**
      * @link https://dadata.ru/api/clean/name/
      * @param string $name
      * @return NameDto|null
@@ -51,16 +62,6 @@ class CleanHelper
     public static function email(string $email): ?DtoInterface
     {
         return DadataHelper::clean(CleanType::EMAIL, $email);
-    }
-
-    /**
-     * @link https://dadata.ru/api/clean/passport/
-     * @param string $passport
-     * @return DtoInterface|null
-     */
-    public static function passport(string $passport): ?DtoInterface
-    {
-        return DadataHelper::clean(CleanType::PASSPORT, $passport);
     }
 
     /**
