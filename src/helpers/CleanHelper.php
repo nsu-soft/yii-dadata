@@ -8,6 +8,7 @@ use nsusoft\dadata\dto\clean\EmailDto;
 use nsusoft\dadata\dto\clean\NameDto;
 use nsusoft\dadata\dto\clean\PassportDto;
 use nsusoft\dadata\dto\clean\PhoneDto;
+use nsusoft\dadata\dto\clean\VehicleDto;
 use nsusoft\dadata\dto\DtoInterface;
 use nsusoft\dadata\types\enums\CleanType;
 
@@ -79,7 +80,7 @@ class CleanHelper
     /**
      * @link https://dadata.ru/api/clean/vehicle/
      * @param string $vehicle
-     * @return DtoInterface|null
+     * @return VehicleDto|null
      */
     public static function vehicle(string $vehicle): ?DtoInterface
     {

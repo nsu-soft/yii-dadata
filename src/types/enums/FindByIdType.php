@@ -4,17 +4,17 @@ namespace nsusoft\dadata\types\enums;
 
 class FindByIdType extends BaseEnum
 {
-    const POSTAL_UNIT = 'postal_unit';
-    const FNS_UNIT = 'fns_unit';
-    const FTS_UNIT = 'fts_unit';
-    const REGION_COURT = 'region_court';
-    const CAR_BRAND = 'car_brand';
-    const MKTU = 'mktu';
-    const COUNTRY = 'country';
-    const CURRENCY = 'currency';
-    const OKVED = 'okved2';
-    const OKPD = 'okpd2';
-    const OKTMO = 'oktmo';
+    const POSTAL_UNIT = SuggestType::POSTAL_UNIT;
+    const FNS_UNIT = SuggestType::FNS_UNIT;
+    const FTS_UNIT = SuggestType::FTS_UNIT;
+    const REGION_COURT = SuggestType::REGION_COURT;
+    const CAR_BRAND = SuggestType::CAR_BRAND;
+    const MKTU = SuggestType::MKTU;
+    const COUNTRY = SuggestType::COUNTRY;
+    const CURRENCY = SuggestType::CURRENCY;
+    const OKVED = SuggestType::OKVED;
+    const OKPD = SuggestType::OKPD;
+    const OKTMO = SuggestType::OKTMO;
 
     /**
      * @inheritDoc

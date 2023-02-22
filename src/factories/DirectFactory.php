@@ -9,6 +9,7 @@ use nsusoft\dadata\adapters\dto\direct\clean\CleanEmailAdapter;
 use nsusoft\dadata\adapters\dto\direct\clean\CleanNameAdapter;
 use nsusoft\dadata\adapters\dto\direct\clean\CleanPassportAdapter;
 use nsusoft\dadata\adapters\dto\direct\clean\CleanPhoneAdapter;
+use nsusoft\dadata\adapters\dto\direct\clean\CleanVehicleAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\address\SuggestAddressesAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\bank\SuggestBanksAdapter;
 use nsusoft\dadata\adapters\dto\direct\suggest\parties\SuggestPartiesAdapter;
@@ -53,10 +54,9 @@ class DirectFactory extends BaseFactory
             return new CleanEmailAdapter();
         } else if (CleanType::BIRTHDATE === $type) {
             return new CleanBirthdateAdapter();
+        } else if (CleanType::VEHICLE === $type) {
+            return new CleanVehicleAdapter();
         }
-//        else if (CleanType::VEHICLE === $type) {
-//
-//        }
 
         throw new InvalidCallException(Module::t('main', 'Invalid clean type.'));
     }
