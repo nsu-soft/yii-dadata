@@ -8,6 +8,19 @@ use nsusoft\dadata\Module;
 use nsusoft\dadata\types\enums\PhoneQualityCheck;
 use yii\validators\Validator;
 
+/**
+ * Validates phone using the DaData cleaning API.
+ *
+ * Usage:
+ * ```
+ * public function rules(): array
+ * {
+ *     return [
+ *         [['phone'], PhoneValidator::class, 'type' => PhoneType::MOBILE, 'isForeign' => false],
+ *     ];
+ * }
+ * ```
+ */
 class PhoneValidator extends Validator
 {
     /**
