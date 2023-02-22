@@ -8,6 +8,20 @@ use nsusoft\dadata\Module;
 use nsusoft\dadata\types\enums\AddressQualityCheck;
 use yii\validators\Validator;
 
+/**
+ * Validates address using the DaData cleaning API.
+ *
+ * Usage:
+ * ```
+ * public function rules(): array
+ * {
+ *     return [
+ *         [['mainAddress'], AddressValidator::class, 'maxPrecision' => AddressValidator::PRECISION_COUNTRY, 'minPrecision' => AddressValidator::PRECISION_BUILDING],
+ *         [['legalAddress'], AddressValidator::class, 'precision' => [AddressValidator::PRECISION_STREET, AddressValidator::PRECISION_BUILDING, AddressValidator::PRECISION_ROOM]],
+ *     ];
+ * }
+ * ```
+ */
 class AddressValidator extends Validator
 {
     /**
