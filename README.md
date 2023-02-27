@@ -86,7 +86,7 @@ class AddressForm extends Model
     {
         return [
             [['address'], 'string', 'max' => 255],
-            [['address'], AddressValidator::class, 'minPrecision' => AddressValidator::PRECISION_STREET],
+            [['address'], AddressValidator::class, 'maxPrecision' => AddressValidator::PRECISION_STREET, 'minPrecision' => AddressValidator::PRECISION_BUILDING],
         ];
     }
 
@@ -98,11 +98,11 @@ class AddressForm extends Model
         $address = CleanHelper::address($this->address);
         
         $this->region = new Region();
-        $this->region->name = $address->getRegion();
-        $this->region->type = $address->getRegionType();
-        $this->region->type_full = $address->getRegionTypeFull();
-        $this->region->name_with_type = $address->getRegionWithType();
-        $this->region->fias_id = $address->getRegionFiasId();
+        $this->region->name = $address->region;
+        $this->region->type = $address->regionType;
+        $this->region->type_full = $address->regionTypeFull;
+        $this->region->name_with_type = $address->regionWithType;
+        $this->region->fias_id = $address->regionFiasId;
         $this->region->timezone = TimezoneConverter::toIana($address);
 
         return $this->region->save();
@@ -116,11 +116,11 @@ class AddressForm extends Model
         $address = CleanHelper::address($this->address);
         
         $this->city = new City();
-        $this->city->name = $address->getCity();
-        $this->city->type = $address->getCityType();
-        $this->city->type_full = $address->getCityTypeFull();
-        $this->city->name_with_type = $address->getCityWithType();
-        $this->city->fias_id = $address->getCityFiasId();
+        $this->city->name = $address->city;
+        $this->city->type = $address->cityType;
+        $this->city->type_full = $address->cityTypeFull;
+        $this->city->name_with_type = $address->cityWithType;
+        $this->city->fias_id = $address->cityFiasId;
         $this->city->region_id = $this->region->id;
 
         return $this->city->save();
@@ -161,10 +161,12 @@ class SuggestController extends Controller
         $items = [];
         
         foreach (SuggestHelper::address($query) as $suggest) {
-            $items[] = $suggest->getValue();
+            $items[] = $suggest->value;
         }
         
         return $items;
     }
 }
 ```
+
+See `src/helpers` and `src/validators` directories for more usage examples. 

@@ -2,9 +2,26 @@
 
 namespace nsusoft\dadata\helpers;
 
+use nsusoft\dadata\dto\suggest\AddressDto;
+use nsusoft\dadata\dto\suggest\bank\BankDto;
+use nsusoft\dadata\dto\suggest\CarBrandDto;
+use nsusoft\dadata\dto\suggest\CountryDto;
+use nsusoft\dadata\dto\suggest\CurrencyDto;
+use nsusoft\dadata\dto\suggest\EmailDto;
+use nsusoft\dadata\dto\suggest\FmsUnitDto;
+use nsusoft\dadata\dto\suggest\FnsUnitDto;
+use nsusoft\dadata\dto\suggest\FtsUnitDto;
+use nsusoft\dadata\dto\suggest\MetroStationDto;
+use nsusoft\dadata\dto\suggest\MktuDto;
+use nsusoft\dadata\dto\suggest\NameDto;
+use nsusoft\dadata\dto\suggest\OkpdDto;
+use nsusoft\dadata\dto\suggest\OktmoDto;
+use nsusoft\dadata\dto\suggest\OkvedDto;
+use nsusoft\dadata\dto\suggest\party\PartyDto;
+use nsusoft\dadata\dto\suggest\PostalUnitDto;
+use nsusoft\dadata\dto\suggest\RegionCourtDto;
+use nsusoft\dadata\types\enums\FindByIdType;
 use nsusoft\dadata\types\enums\SuggestType;
-use nsusoft\dadata\types\interfaces\suggest\SuggestAddressInterface;
-use nsusoft\dadata\types\interfaces\suggest\SuggestInterface;
 
 /**
  * @link https://dadata.ru/api/suggest/
@@ -15,7 +32,7 @@ class SuggestHelper
      * @link https://dadata.ru/api/suggest/address/
      * @param string $address
      * @param array $options
-     * @return SuggestAddressInterface[]
+     * @return AddressDto[]
      */
     public static function address(string $address, array $options = []): array
     {
@@ -26,7 +43,7 @@ class SuggestHelper
      * @link https://dadata.ru/api/suggest/party/
      * @param string $party
      * @param array $options
-     * @return SuggestInterface[]
+     * @return PartyDto[]
      */
     public static function party(string $party, array $options = []): array
     {
@@ -37,7 +54,7 @@ class SuggestHelper
      * @link https://dadata.ru/api/suggest/bank/
      * @param string $bank
      * @param array $options
-     * @return SuggestInterface[]
+     * @return BankDto[]
      */
     public static function bank(string $bank, array $options = []): array
     {
@@ -48,7 +65,7 @@ class SuggestHelper
      * @link https://dadata.ru/api/suggest/name/
      * @param string $name
      * @param array $options
-     * @return SuggestInterface[]
+     * @return NameDto[]
      */
     public static function name(string $name, array $options = []): array
     {
@@ -59,7 +76,7 @@ class SuggestHelper
      * @link https://dadata.ru/api/suggest/email/
      * @param string $email
      * @param array $options
-     * @return SuggestInterface[]
+     * @return EmailDto[]
      */
     public static function email(string $email, array $options = []): array
     {
@@ -70,7 +87,7 @@ class SuggestHelper
      * @link https://dadata.ru/api/suggest/fms_unit/
      * @param string $fmsUnit
      * @param array $options
-     * @return SuggestInterface[]
+     * @return FmsUnitDto[]
      */
     public static function fmsUnit(string $fmsUnit, array $options = []): array
     {
@@ -81,7 +98,7 @@ class SuggestHelper
      * @link https://dadata.ru/api/suggest/postal_unit/
      * @param string $postalUnit
      * @param array $options
-     * @return SuggestInterface[]
+     * @return PostalUnitDto[]
      */
     public static function postalUnit(string $postalUnit, array $options = []): array
     {
@@ -92,7 +109,7 @@ class SuggestHelper
      * @link https://dadata.ru/api/suggest/fns_unit/
      * @param string $fnsUnit
      * @param array $options
-     * @return SuggestInterface[]
+     * @return FnsUnitDto[]
      */
     public static function fnsUnit(string $fnsUnit, array $options = []): array
     {
@@ -103,7 +120,7 @@ class SuggestHelper
      * @link https://dadata.ru/api/suggest/fts_unit/
      * @param string $ftsUnit
      * @param array $options
-     * @return SuggestInterface[]
+     * @return FtsUnitDto[]
      */
     public static function ftsUnit(string $ftsUnit, array $options = []): array
     {
@@ -114,7 +131,7 @@ class SuggestHelper
      * @link https://dadata.ru/api/suggest/region_court/
      * @param string $regionCourt
      * @param array $options
-     * @return SuggestInterface[]
+     * @return RegionCourtDto[]
      */
     public static function regionCourt(string $regionCourt, array $options = []): array
     {
@@ -125,7 +142,7 @@ class SuggestHelper
      * @link https://dadata.ru/api/suggest/metro/
      * @param string $metro
      * @param array $options
-     * @return SuggestInterface[]
+     * @return MetroStationDto[]
      */
     public static function metro(string $metro, array $options = []): array
     {
@@ -136,7 +153,7 @@ class SuggestHelper
      * @link https://dadata.ru/api/suggest/car_brand/
      * @param string $carBrand
      * @param array $options
-     * @return SuggestInterface[]
+     * @return CarBrandDto[]
      */
     public static function carBrand(string $carBrand, array $options = []): array
     {
@@ -147,7 +164,7 @@ class SuggestHelper
      * @link https://dadata.ru/api/suggest/mktu/
      * @param string $mktu
      * @param array $options
-     * @return SuggestInterface[]
+     * @return MktuDto[]
      */
     public static function mktu(string $mktu, array $options = []): array
     {
@@ -158,7 +175,7 @@ class SuggestHelper
      * @link https://dadata.ru/api/suggest/country/
      * @param string $country
      * @param array $options
-     * @return SuggestInterface[]
+     * @return CountryDto[]
      */
     public static function country(string $country, array $options = []): array
     {
@@ -169,7 +186,7 @@ class SuggestHelper
      * @link https://dadata.ru/api/suggest/currency/
      * @param string $currency
      * @param array $options
-     * @return SuggestInterface[]
+     * @return CurrencyDto[]
      */
     public static function currency(string $currency, array $options = []): array
     {
@@ -180,7 +197,7 @@ class SuggestHelper
      * @link https://dadata.ru/api/suggest/okved2/
      * @param string $okved
      * @param array $options
-     * @return SuggestInterface[]
+     * @return OkvedDto[]
      */
     public static function okved(string $okved, array $options = []): array
     {
@@ -191,7 +208,7 @@ class SuggestHelper
      * @link https://dadata.ru/api/suggest/okpd2/
      * @param string $okpd
      * @param array $options
-     * @return SuggestInterface[]
+     * @return OkpdDto[]
      */
     public static function okpd(string $okpd, array $options = []): array
     {
@@ -202,10 +219,10 @@ class SuggestHelper
      * @link https://dadata.ru/api/suggest/oktmo/
      * @param string $oktmo
      * @param array $options
-     * @return SuggestInterface[]
+     * @return OktmoDto[]
      */
     public static function oktmo(string $oktmo, array $options = []): array
     {
-        return DadataHelper::suggest(SuggestType::OKTMO, $oktmo, $options);
+        return [DadataHelper::findById(FindByIdType::OKTMO, $oktmo, $options)];
     }
 }

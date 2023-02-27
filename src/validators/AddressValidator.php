@@ -2,12 +2,26 @@
 
 namespace nsusoft\dadata\validators;
 
+use nsusoft\dadata\dto\clean\address\AddressDto;
 use nsusoft\dadata\helpers\CleanHelper;
 use nsusoft\dadata\Module;
-use nsusoft\dadata\types\enums\AddressQualityCheckCode;
-use nsusoft\dadata\types\interfaces\clean\CleanAddressInterface;
+use nsusoft\dadata\types\enums\AddressQualityCheck;
 use yii\validators\Validator;
 
+/**
+ * Validates address using the DaData cleaning API.
+ *
+ * Usage:
+ * ```
+ * public function rules(): array
+ * {
+ *     return [
+ *         [['mainAddress'], AddressValidator::class, 'maxPrecision' => AddressValidator::PRECISION_COUNTRY, 'minPrecision' => AddressValidator::PRECISION_BUILDING],
+ *         [['legalAddress'], AddressValidator::class, 'precision' => [AddressValidator::PRECISION_STREET, AddressValidator::PRECISION_BUILDING, AddressValidator::PRECISION_ROOM]],
+ *     ];
+ * }
+ * ```
+ */
 class AddressValidator extends Validator
 {
     /**
@@ -29,120 +43,265 @@ class AddressValidator extends Validator
     const PRECISION_FOREIGN = -1;
 
     /**
-     * @var int Address should be equal with FIAS level.
+     * @var bool Strict mode for checking. If `true`, only auto-checking values are confirmed. If `false`, you need to check
+     * some values manually.
      */
-    public $precision;
+    public $strict = true;
 
     /**
-     * @var int Minimum FIAS level for address.
+     * @var array|int Address should be equal with FIAS level.
+     */
+    public $precision = [];
+
+    /**
+     * @var int Maximum (by square) FIAS level for address.
+     */
+    public $maxPrecision;
+
+    /**
+     * @var int Minimum (by square) FIAS level for address.
      */
     public $minPrecision;
 
     /**
      * @inheritDoc
-     * @param $value
+     */
+    public function init(): void
+    {
+        if (!empty($this->precision) && !is_array($this->precision)) {
+            $this->precision = [$this->precision];
+        }
+    }
+
+    /**
+     * @inheritDoc
+     * @param string $value
      * @return array|null
      */
     public function validateValue($value): ?array
     {
         $address = CleanHelper::address($value);
 
-        if (AddressQualityCheckCode::QC_CODE_TRASH == $address->getQualityCheck()) {
+        if (AddressQualityCheck::TRASH == $address->qualityCheck) {
             return [Module::t('main', "Incorrect address."), []];
         }
 
-        if (in_array($address->getQualityCheck(), [AddressQualityCheckCode::QC_CODE_UNKNOWN, AddressQualityCheckCode::QC_CODE_MULTIPLE])) {
+        if ($this->strict && in_array($address->qualityCheck, [AddressQualityCheck::UNKNOWN, AddressQualityCheck::MULTIPLE])) {
             return [Module::t('main', "Please specify the address."), []];
         }
 
-        if (is_null($this->precision) && is_null($this->minPrecision) && AddressQualityCheckCode::QC_CODE_OK == $address->getQualityCheck()) {
-            return null;
+        if (!empty($this->precision) && !$this->validatePrecision($address)) {
+            return [Module::t('main', "Incorrect address precision."), []];
         }
 
-        if (isset($this->precision)) {
-            return $this->validatePrecision($address);
+        if (isset($this->maxPrecision) && !$this->validateMaxPrecision($address)) {
+            return [Module::t('main', "Incorrect address precision."), []];
         }
 
-        if (isset($this->minPrecision)) {
-            return $this->validateMinPrecision($address);
+        if (isset($this->minPrecision) && !$this->validateMinPrecision($address)) {
+            return [Module::t('main', "Incorrect address precision."), []];
         }
 
         return null;
     }
 
     /**
-     * @param CleanAddressInterface $address Standard address.
-     * @return array|null
+     * @param AddressDto $address
+     * @return bool
      */
-    private function validatePrecision(CleanAddressInterface $address): ?array
+    private function validatePrecision(AddressDto $address): bool
     {
-        if (in_array($this->precision, $this->getPrecisionCodes()) && $address->getFiasLevel() === $this->precision) {
-            return null;
-        }
-
-        return [Module::t('main', "Incorrect address precision."), []];
+        return in_array($address->fiasLevel, $this->precision);
     }
 
     /**
-     * @param CleanAddressInterface $address Standard address.
-     * @return array|null
+     * @param AddressDto $address
+     * @return bool
      */
-    private function validateMinPrecision(CleanAddressInterface $address): ?array
+    private function validateMaxPrecision(AddressDto $address): bool
     {
-        $structure = $this->getPrecisionsStructure();
-        $addressPrecision = $address->getFiasLevel();
-
-        if (in_array($this->minPrecision, $this->getPrecisionCodes()) && $structure[$addressPrecision] >= $structure[$this->minPrecision]) {
-            return null;
-        }
-
-        return [Module::t('main', "Incorrect address precision."), []];
-    }
-
-    /**
-     * @return int[]
-     */
-    private function getPrecisionCodes(): array
-    {
-        return [
-            self::PRECISION_COUNTRY,
-            self::PRECISION_REGION,
-            self::PRECISION_AREA,
-            self::PRECISION_CITY,
-            self::PRECISION_DISTRICT,
-            self::PRECISION_SETTLEMENT,
-            self::PRECISION_STREET,
-            self::PRECISION_BUILDING,
-            self::PRECISION_ROOM,
-            self::PRECISION_PLAN_STRUCTURE,
-            self::PRECISION_LAND_PLOT,
-            self::PRECISION_ADDITIONAL_TERRITORY,
-            self::PRECISION_ADDITIONAL_TERRITORY_STREET,
-            self::PRECISION_FOREIGN,
+        $structure = [
+            self::PRECISION_COUNTRY => [
+                self::PRECISION_COUNTRY,
+                self::PRECISION_REGION,
+                self::PRECISION_AREA,
+                self::PRECISION_CITY,
+                self::PRECISION_DISTRICT,
+                self::PRECISION_SETTLEMENT,
+                self::PRECISION_STREET,
+                self::PRECISION_BUILDING,
+                self::PRECISION_ROOM,
+                self::PRECISION_PLAN_STRUCTURE,
+                self::PRECISION_LAND_PLOT,
+                self::PRECISION_ADDITIONAL_TERRITORY,
+                self::PRECISION_ADDITIONAL_TERRITORY_STREET,
+            ],
+            self::PRECISION_REGION => [
+                self::PRECISION_REGION,
+                self::PRECISION_AREA,
+                self::PRECISION_CITY,
+                self::PRECISION_DISTRICT,
+                self::PRECISION_SETTLEMENT,
+                self::PRECISION_STREET,
+                self::PRECISION_BUILDING,
+                self::PRECISION_ROOM,
+                self::PRECISION_PLAN_STRUCTURE,
+                self::PRECISION_LAND_PLOT,
+                self::PRECISION_ADDITIONAL_TERRITORY,
+                self::PRECISION_ADDITIONAL_TERRITORY_STREET,
+            ],
+            self::PRECISION_AREA => [
+                self::PRECISION_AREA,
+                self::PRECISION_CITY,
+                self::PRECISION_DISTRICT,
+                self::PRECISION_SETTLEMENT,
+                self::PRECISION_STREET,
+                self::PRECISION_BUILDING,
+                self::PRECISION_ROOM,
+                self::PRECISION_PLAN_STRUCTURE,
+                self::PRECISION_LAND_PLOT,
+                self::PRECISION_ADDITIONAL_TERRITORY,
+                self::PRECISION_ADDITIONAL_TERRITORY_STREET,
+            ],
+            self::PRECISION_CITY => [
+                self::PRECISION_CITY,
+                self::PRECISION_DISTRICT,
+                self::PRECISION_STREET,
+                self::PRECISION_BUILDING,
+                self::PRECISION_ROOM,
+                self::PRECISION_PLAN_STRUCTURE,
+                self::PRECISION_LAND_PLOT,
+            ],
+            self::PRECISION_DISTRICT => [
+                self::PRECISION_DISTRICT,
+                self::PRECISION_STREET,
+                self::PRECISION_BUILDING,
+                self::PRECISION_ROOM,
+                self::PRECISION_PLAN_STRUCTURE,
+                self::PRECISION_LAND_PLOT,
+            ],
+            self::PRECISION_SETTLEMENT => [
+                self::PRECISION_SETTLEMENT,
+                self::PRECISION_STREET,
+                self::PRECISION_BUILDING,
+                self::PRECISION_ROOM,
+                self::PRECISION_PLAN_STRUCTURE,
+                self::PRECISION_LAND_PLOT,
+            ],
+            self::PRECISION_STREET => [
+                self::PRECISION_STREET,
+                self::PRECISION_BUILDING,
+                self::PRECISION_ROOM,
+                self::PRECISION_PLAN_STRUCTURE,
+                self::PRECISION_LAND_PLOT,
+            ],
+            self::PRECISION_BUILDING => [self::PRECISION_BUILDING, self::PRECISION_ROOM],
+            self::PRECISION_ROOM => [self::PRECISION_ROOM],
+            self::PRECISION_PLAN_STRUCTURE => [self::PRECISION_PLAN_STRUCTURE],
+            self::PRECISION_LAND_PLOT => [self::PRECISION_LAND_PLOT],
+            self::PRECISION_ADDITIONAL_TERRITORY => [self::PRECISION_ADDITIONAL_TERRITORY, self::PRECISION_ADDITIONAL_TERRITORY_STREET],
+            self::PRECISION_ADDITIONAL_TERRITORY_STREET => [self::PRECISION_ADDITIONAL_TERRITORY_STREET],
+            self::PRECISION_FOREIGN => [self::PRECISION_FOREIGN],
         ];
+
+        return in_array($address->fiasLevel, $structure[$this->maxPrecision]);
     }
 
     /**
-     * Hierarchy of precisions in flat structure.
-     * @return int[]
+     * @param AddressDto $address
+     * @return bool
      */
-    private function getPrecisionsStructure(): array
+    private function validateMinPrecision(AddressDto $address): bool
     {
-        return [
-            self::PRECISION_FOREIGN => 0,
-            self::PRECISION_COUNTRY => 0,
-            self::PRECISION_REGION => 1,
-            self::PRECISION_AREA => 2,
-            self::PRECISION_CITY => 3,
-            self::PRECISION_SETTLEMENT => 3,
-            self::PRECISION_DISTRICT => 4,
-            self::PRECISION_STREET => 4,
-            self::PRECISION_BUILDING => 5,
-            self::PRECISION_ROOM => 6,
-            self::PRECISION_PLAN_STRUCTURE => 4,
-            self::PRECISION_LAND_PLOT => 5,
-            self::PRECISION_ADDITIONAL_TERRITORY => 4,
-            self::PRECISION_ADDITIONAL_TERRITORY_STREET => 5,
+        $structure = [
+            self::PRECISION_COUNTRY => [self::PRECISION_COUNTRY],
+            self::PRECISION_REGION => [self::PRECISION_COUNTRY, self::PRECISION_REGION],
+            self::PRECISION_AREA => [self::PRECISION_COUNTRY, self::PRECISION_REGION, self::PRECISION_AREA],
+            self::PRECISION_CITY => [
+                self::PRECISION_COUNTRY,
+                self::PRECISION_REGION,
+                self::PRECISION_AREA,
+                self::PRECISION_CITY,
+            ],
+            self::PRECISION_DISTRICT => [
+                self::PRECISION_COUNTRY,
+                self::PRECISION_REGION,
+                self::PRECISION_AREA,
+                self::PRECISION_CITY,
+                self::PRECISION_DISTRICT,
+            ],
+            self::PRECISION_SETTLEMENT => [
+                self::PRECISION_COUNTRY,
+                self::PRECISION_REGION,
+                self::PRECISION_AREA,
+                self::PRECISION_SETTLEMENT,
+            ],
+            self::PRECISION_STREET => [
+                self::PRECISION_COUNTRY,
+                self::PRECISION_REGION,
+                self::PRECISION_AREA,
+                self::PRECISION_CITY,
+                self::PRECISION_DISTRICT,
+                self::PRECISION_SETTLEMENT,
+                self::PRECISION_STREET,
+            ],
+            self::PRECISION_BUILDING => [
+                self::PRECISION_COUNTRY,
+                self::PRECISION_REGION,
+                self::PRECISION_AREA,
+                self::PRECISION_CITY,
+                self::PRECISION_DISTRICT,
+                self::PRECISION_SETTLEMENT,
+                self::PRECISION_STREET,
+                self::PRECISION_BUILDING,
+            ],
+            self::PRECISION_ROOM => [
+                self::PRECISION_COUNTRY,
+                self::PRECISION_REGION,
+                self::PRECISION_AREA,
+                self::PRECISION_CITY,
+                self::PRECISION_DISTRICT,
+                self::PRECISION_SETTLEMENT,
+                self::PRECISION_STREET,
+                self::PRECISION_BUILDING,
+                self::PRECISION_ROOM,
+            ],
+            self::PRECISION_PLAN_STRUCTURE => [
+                self::PRECISION_COUNTRY,
+                self::PRECISION_REGION,
+                self::PRECISION_AREA,
+                self::PRECISION_CITY,
+                self::PRECISION_DISTRICT,
+                self::PRECISION_SETTLEMENT,
+                self::PRECISION_STREET,
+                self::PRECISION_PLAN_STRUCTURE,
+            ],
+            self::PRECISION_LAND_PLOT => [
+                self::PRECISION_COUNTRY,
+                self::PRECISION_REGION,
+                self::PRECISION_AREA,
+                self::PRECISION_CITY,
+                self::PRECISION_DISTRICT,
+                self::PRECISION_SETTLEMENT,
+                self::PRECISION_STREET,
+                self::PRECISION_LAND_PLOT,
+            ],
+            self::PRECISION_ADDITIONAL_TERRITORY => [
+                self::PRECISION_COUNTRY,
+                self::PRECISION_REGION,
+                self::PRECISION_AREA,
+                self::PRECISION_ADDITIONAL_TERRITORY,
+            ],
+            self::PRECISION_ADDITIONAL_TERRITORY_STREET => [
+                self::PRECISION_COUNTRY,
+                self::PRECISION_REGION,
+                self::PRECISION_AREA,
+                self::PRECISION_ADDITIONAL_TERRITORY,
+                self::PRECISION_ADDITIONAL_TERRITORY_STREET,
+            ],
+            self::PRECISION_FOREIGN => [self::PRECISION_FOREIGN],
         ];
+
+        return in_array($address->fiasLevel, $structure[$this->minPrecision]);
     }
 }

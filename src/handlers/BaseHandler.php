@@ -2,8 +2,8 @@
 
 namespace nsusoft\dadata\handlers;
 
+use nsusoft\dadata\dto\DtoInterface;
 use nsusoft\dadata\factories\FactoryInterface;
-use nsusoft\dadata\types\interfaces\clean\CleanInterface;
 use yii\base\Component;
 
 abstract class BaseHandler extends Component implements HandlerInterface
@@ -25,7 +25,7 @@ abstract class BaseHandler extends Component implements HandlerInterface
     /**
      * @inheritDoc
      */
-    public function clean(string $type, string $value): ?CleanInterface
+    public function clean(string $type, string $value): ?DtoInterface
     {
         if (isset($this->next)) {
             return $this->next->clean($type, $value);
@@ -44,6 +44,18 @@ abstract class BaseHandler extends Component implements HandlerInterface
         }
 
         return [];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function findById(string $type, string $value, array $options = []): ?DtoInterface
+    {
+        if (isset($this->next)) {
+            return $this->next->findById($type, $value, $options);
+        }
+
+        return null;
     }
 
     /**

@@ -2,18 +2,11 @@
 
 namespace nsusoft\dadata\factories;
 
-use nsusoft\dadata\types\db\clean\CleanAddressDb;
-use nsusoft\dadata\types\db\clean\CleanBirthdateDb;
-use nsusoft\dadata\types\db\clean\CleanEmailDb;
-use nsusoft\dadata\types\db\clean\CleanNameDb;
-use nsusoft\dadata\types\db\clean\CleanPassportDb;
-use nsusoft\dadata\types\db\clean\CleanPhoneDb;
-use nsusoft\dadata\types\db\clean\CleanVehicleDb;
+use nsusoft\dadata\adapters\dto\AdapterInterface;
+use nsusoft\dadata\adapters\dto\db\clean\CleanAddressAdapter;
 use nsusoft\dadata\cache\db\clean\CleanAddressCache;
 use nsusoft\dadata\Module;
 use nsusoft\dadata\types\enums\CleanType;
-use nsusoft\dadata\types\interfaces\clean\CleanInterface;
-use nsusoft\dadata\types\interfaces\suggest\SuggestInterface;
 use Psr\SimpleCache\CacheInterface;
 use yii\base\InvalidCallException;
 
@@ -22,22 +15,22 @@ class DbFactory extends BaseFactory implements CacheFactoryInterface
     /**
      * @inheritDoc
      */
-    public function createClean(string $type): CleanInterface
+    public function createClean(string $type): ?AdapterInterface
     {
         if (CleanType::ADDRESS === $type) {
-            return new CleanAddressDb();
+            return new CleanAddressAdapter();
         } else if (CleanType::PHONE === $type) {
-            return new CleanPhoneDb();
-        } else if (CleanType::NAME === $type) {
-            return new CleanNameDb();
-        } else if (CleanType::EMAIL === $type) {
-            return new CleanEmailDb();
+            return null; // TODO: implement
         } else if (CleanType::PASSPORT === $type) {
-            return new CleanPassportDb();
+            return null; // TODO: implement
+        } else if (CleanType::NAME === $type) {
+            return null; // TODO: implement
+        } else if (CleanType::EMAIL === $type) {
+            return null; // TODO: implement
         } else if (CleanType::BIRTHDATE === $type) {
-            return new CleanBirthdateDb();
+            return null; // TODO: implement
         } else if (CleanType::VEHICLE === $type) {
-            return new CleanVehicleDb();
+            return null; // TODO: implement
         }
 
         throw new InvalidCallException(Module::t('main', 'Invalid clean type.'));
@@ -46,7 +39,7 @@ class DbFactory extends BaseFactory implements CacheFactoryInterface
     /**
      * @inheritDoc
      */
-    public function createSuggest(string $type): SuggestInterface
+    public function createSuggest(string $type): ?AdapterInterface
     {
 //        if (SuggestType::ADDRESS === $type) {
 //
@@ -82,7 +75,37 @@ class DbFactory extends BaseFactory implements CacheFactoryInterface
 //
 //        } else if (SuggestType::OKPD === $type) {
 //
-//        } else if (SuggestType::OKTMO === $type) {
+//        }
+
+        throw new InvalidCallException(Module::t('main', 'Invalid suggest type.'));
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function createFindById(string $type): ?AdapterInterface
+    {
+//        if (FindByIdType::POSTAL_UNIT === $type) {
+//
+//        } else if (FindByIdType::FNS_UNIT === $type) {
+//
+//        } else if (FindByIdType::FTS_UNIT === $type) {
+//
+//        } else if (FindByIdType::REGION_COURT === $type) {
+//
+//        } else if (FindByIdType::CAR_BRAND === $type) {
+//
+//        } else if (FindByIdType::MKTU === $type) {
+//
+//        } else if (FindByIdType::COUNTRY === $type) {
+//
+//        } else if (FindByIdType::CURRENCY === $type) {
+//
+//        } else if (FindByIdType::OKVED === $type) {
+//
+//        } else if (FindByIdType::OKPD === $type) {
+//
+//        } else if (FindByIdType::OKTMO === $type) {
 //
 //        }
 
@@ -98,17 +121,17 @@ class DbFactory extends BaseFactory implements CacheFactoryInterface
             return new CleanAddressCache();
         }
 //        else if (CleanType::CLEAN_TYPE_PHONE === $type) {
-//            return new CleanPhoneAdapter();
+//
 //        } else if (CleanType::CLEAN_TYPE_NAME === $type) {
-//            return new CleanNameAdapter();
+//
 //        } else if (CleanType::CLEAN_TYPE_EMAIL === $type) {
-//            return new CleanEmailAdapter();
+//
 //        } else if (CleanType::CLEAN_TYPE_PASSPORT === $type) {
-//            return new CleanPassportAdapter();
+//
 //        } else if (CleanType::CLEAN_TYPE_BIRTHDATE === $type) {
-//            return new CleanBirthdateAdapter();
+//
 //        } else if (CleanType::CLEAN_TYPE_VEHICLE === $type) {
-//            return new CleanVehicleAdapter();
+//
 //        }
 
         throw new InvalidCallException(Module::t('main', 'Invalid clean type.'));
@@ -153,7 +176,34 @@ class DbFactory extends BaseFactory implements CacheFactoryInterface
 //
 //        } else if (SuggestType::OKPD === $type) {
 //
-//        } else if (SuggestType::OKTMO === $type) {
+//        }
+
+        throw new InvalidCallException(Module::t('main', 'Invalid suggest type.'));
+    }
+
+    public function createFindByIdCache(string $type): CacheInterface
+    {
+//        if (FindByIdType::POSTAL_UNIT === $type) {
+//
+//        } else if (FindByIdType::FNS_UNIT === $type) {
+//
+//        } else if (FindByIdType::FTS_UNIT === $type) {
+//
+//        } else if (FindByIdType::REGION_COURT === $type) {
+//
+//        } else if (FindByIdType::CAR_BRAND === $type) {
+//
+//        } else if (FindByIdType::MKTU === $type) {
+//
+//        } else if (FindByIdType::COUNTRY === $type) {
+//
+//        } else if (FindByIdType::CURRENCY === $type) {
+//
+//        } else if (FindByIdType::OKVED === $type) {
+//
+//        } else if (FindByIdType::OKPD === $type) {
+//
+//        } else if (FindByIdType::OKTMO === $type) {
 //
 //        }
 

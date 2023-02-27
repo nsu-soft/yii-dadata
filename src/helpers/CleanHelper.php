@@ -2,15 +2,15 @@
 
 namespace nsusoft\dadata\helpers;
 
+use nsusoft\dadata\dto\clean\address\AddressDto;
+use nsusoft\dadata\dto\clean\BirthdateDto;
+use nsusoft\dadata\dto\clean\EmailDto;
+use nsusoft\dadata\dto\clean\NameDto;
+use nsusoft\dadata\dto\clean\PassportDto;
+use nsusoft\dadata\dto\clean\PhoneDto;
+use nsusoft\dadata\dto\clean\VehicleDto;
+use nsusoft\dadata\dto\DtoInterface;
 use nsusoft\dadata\types\enums\CleanType;
-use nsusoft\dadata\types\interfaces\clean\CleanAddressInterface;
-use nsusoft\dadata\types\interfaces\clean\CleanBirthdateInterface;
-use nsusoft\dadata\types\interfaces\clean\CleanEmailInterface;
-use nsusoft\dadata\types\interfaces\clean\CleanInterface;
-use nsusoft\dadata\types\interfaces\clean\CleanNameInterface;
-use nsusoft\dadata\types\interfaces\clean\CleanPassportInterface;
-use nsusoft\dadata\types\interfaces\clean\CleanPhoneInterface;
-use nsusoft\dadata\types\interfaces\clean\CleanVehicleInterface;
 
 /**
  * @link https://dadata.ru/api/clean/
@@ -20,9 +20,9 @@ class CleanHelper
     /**
      * @link https://dadata.ru/api/clean/address/
      * @param string $address
-     * @return CleanAddressInterface
+     * @return AddressDto|null
      */
-    public static function address(string $address): CleanInterface
+    public static function address(string $address): ?DtoInterface
     {
         return DadataHelper::clean(CleanType::ADDRESS, $address);
     }
@@ -30,19 +30,29 @@ class CleanHelper
     /**
      * @link https://dadata.ru/api/clean/phone/
      * @param string $phone
-     * @return CleanPhoneInterface
+     * @return PhoneDto|null
      */
-    public static function phone(string $phone): CleanInterface
+    public static function phone(string $phone): ?DtoInterface
     {
         return DadataHelper::clean(CleanType::PHONE, $phone);
     }
 
     /**
+     * @link https://dadata.ru/api/clean/passport/
+     * @param string $passport
+     * @return PassportDto|null
+     */
+    public static function passport(string $passport): ?DtoInterface
+    {
+        return DadataHelper::clean(CleanType::PASSPORT, $passport);
+    }
+
+    /**
      * @link https://dadata.ru/api/clean/name/
      * @param string $name
-     * @return CleanNameInterface
+     * @return NameDto|null
      */
-    public static function name(string $name): CleanInterface
+    public static function name(string $name): ?DtoInterface
     {
         return DadataHelper::clean(CleanType::NAME, $name);
     }
@@ -50,29 +60,19 @@ class CleanHelper
     /**
      * @link https://dadata.ru/api/clean/email/
      * @param string $email
-     * @return CleanEmailInterface
+     * @return EmailDto|null
      */
-    public static function email(string $email): CleanInterface
+    public static function email(string $email): ?DtoInterface
     {
         return DadataHelper::clean(CleanType::EMAIL, $email);
     }
 
     /**
-     * @link https://dadata.ru/api/clean/passport/
-     * @param string $passport
-     * @return CleanPassportInterface
-     */
-    public static function passport(string $passport): CleanInterface
-    {
-        return DadataHelper::clean(CleanType::PASSPORT, $passport);
-    }
-
-    /**
      * @link https://dadata.ru/api/clean/birthdate/
      * @param string $birthdate
-     * @return CleanBirthdateInterface
+     * @return BirthdateDto|null
      */
-    public static function birthdate(string $birthdate): CleanInterface
+    public static function birthdate(string $birthdate): ?DtoInterface
     {
         return DadataHelper::clean(CleanType::BIRTHDATE, $birthdate);
     }
@@ -80,9 +80,9 @@ class CleanHelper
     /**
      * @link https://dadata.ru/api/clean/vehicle/
      * @param string $vehicle
-     * @return CleanVehicleInterface
+     * @return VehicleDto|null
      */
-    public static function vehicle(string $vehicle): CleanInterface
+    public static function vehicle(string $vehicle): ?DtoInterface
     {
         return DadataHelper::clean(CleanType::VEHICLE, $vehicle);
     }

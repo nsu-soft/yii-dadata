@@ -9,12 +9,12 @@ use yii\web\Response;
 class CleanController extends Controller
 {
     /**
-     * @param string $source
+     * @param string $query
      * @return Response
      */
-    public function actionAddress(string $source): Response
+    public function actionAddress(string $query): Response
     {
-        var_dump(CleanHelper::address($source));
+        var_dump(CleanHelper::address($query));
         exit;
     }
 }

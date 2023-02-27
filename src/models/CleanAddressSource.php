@@ -2,9 +2,9 @@
 
 namespace nsusoft\dadata\models;
 
+use nsusoft\dadata\dto\clean\address\AddressDto;
 use nsusoft\dadata\interfaces\SourceInterface;
 use nsusoft\dadata\Module;
-use nsusoft\dadata\types\interfaces\clean\CleanAddressInterface;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
@@ -75,7 +75,7 @@ class CleanAddressSource extends ActiveRecord implements SourceInterface
     }
 
     /**
-     * @param CleanAddressInterface|array $data
+     * @param AddressDto|array $data
      * @param string|null $formName
      * @return bool
      */
@@ -87,9 +87,9 @@ class CleanAddressSource extends ActiveRecord implements SourceInterface
 
         return parent::load(
             [
-                'source' => $data->getSource(),
-                'qc' => $data->getQualityCheck(),
-                'unparsed_parts' => $data->getUnparsedParts(),
+                'source' => $data->source,
+                'qc' => $data->qualityCheck,
+                'unparsed_parts' => $data->unparsedParts,
             ],
             $formName
         );
