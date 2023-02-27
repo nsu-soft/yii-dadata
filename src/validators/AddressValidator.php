@@ -43,6 +43,12 @@ class AddressValidator extends Validator
     const PRECISION_FOREIGN = -1;
 
     /**
+     * @var bool Strict mode for checking. If `true`, only auto-checking values are confirmed. If `false`, you need to check
+     * some values manually.
+     */
+    public $strict = true;
+
+    /**
      * @var array|int Address should be equal with FIAS level.
      */
     public $precision = [];
@@ -80,7 +86,7 @@ class AddressValidator extends Validator
             return [Module::t('main', "Incorrect address."), []];
         }
 
-        if (in_array($address->qualityCheck, [AddressQualityCheck::UNKNOWN, AddressQualityCheck::MULTIPLE])) {
+        if ($this->strict && in_array($address->qualityCheck, [AddressQualityCheck::UNKNOWN, AddressQualityCheck::MULTIPLE])) {
             return [Module::t('main', "Please specify the address."), []];
         }
 

@@ -24,6 +24,12 @@ use yii\validators\Validator;
 class PhoneValidator extends Validator
 {
     /**
+     * @var bool Strict mode for checking. If `true`, only auto-checking values are confirmed. If `false`, you need to check
+     * some values manually.
+     */
+    public $strict = true;
+
+    /**
      * @var array|string
      */
     public $type = [];
@@ -56,7 +62,7 @@ class PhoneValidator extends Validator
             return [Module::t('main', "Incorrect phone."), []];
         }
 
-        if (in_array($phone->qualityCheck, [PhoneQualityCheck::UNKNOWN, PhoneQualityCheck::MULTIPLE])) {
+        if ($this->strict && in_array($phone->qualityCheck, [PhoneQualityCheck::UNKNOWN, PhoneQualityCheck::MULTIPLE])) {
             return [Module::t('main', "Please specify the phone."), []];
         }
 

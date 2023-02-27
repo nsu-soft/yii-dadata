@@ -24,6 +24,12 @@ use yii\validators\Validator;
 class NameValidator extends Validator
 {
     /**
+     * @var bool Strict mode for checking. If `true`, only auto-checking values are confirmed. If `false`, you need to check
+     * some values manually.
+     */
+    public $strict = true;
+
+    /**
      * @var array|string
      */
     public $gender = [];
@@ -51,7 +57,7 @@ class NameValidator extends Validator
             return [Module::t('main', "Incorrect name."), []];
         }
 
-        if (NameQualityCheck::UNKNOWN === $name->qualityCheck) {
+        if ($this->strict && NameQualityCheck::UNKNOWN === $name->qualityCheck) {
             return [Module::t('main', "Please check the name."), []];
         }
 

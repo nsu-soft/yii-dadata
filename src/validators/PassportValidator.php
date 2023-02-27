@@ -23,6 +23,12 @@ use yii\validators\Validator;
 class PassportValidator extends Validator
 {
     /**
+     * @var bool Strict mode for checking. If `true`, only auto-checking values are confirmed. If `false`, you need to check
+     * some values manually.
+     */
+    public $strict = true;
+
+    /**
      * @inheritDoc
      * @param string $value
      * @return array|null
@@ -35,7 +41,7 @@ class PassportValidator extends Validator
             return [Module::t('main', "Incorrect passport."), []];
         }
 
-        if (in_array($passport->qualityCheck, [PassportQualityCheck::INCORRECT, PassportQualityCheck::INVALID])) {
+        if ($this->strict && in_array($passport->qualityCheck, [PassportQualityCheck::INCORRECT, PassportQualityCheck::INVALID])) {
             return [Module::t('main', "Please specify the passport."), []];
         }
 

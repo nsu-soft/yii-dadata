@@ -23,6 +23,12 @@ use yii\validators\Validator;
 class EmailValidator extends Validator
 {
     /**
+     * @var bool Strict mode for checking. If `true`, only auto-checking values are confirmed. If `false`, you need to check
+     * some values manually.
+     */
+    public $strict = true;
+
+    /**
      * @inheritDoc
      * @param string $value
      * @return array|null
@@ -35,7 +41,7 @@ class EmailValidator extends Validator
             return [Module::t('main', "Incorrect email."), []];
         }
 
-        if (in_array($email->qualityCheck, [EmailQualityCheck::INCORRECT, EmailQualityCheck::MISPRINT])) {
+        if ($this->strict && in_array($email->qualityCheck, [EmailQualityCheck::INCORRECT, EmailQualityCheck::MISPRINT])) {
             return [Module::t('main', "Please check the email."), []];
         }
 

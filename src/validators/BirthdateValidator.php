@@ -23,6 +23,12 @@ use yii\validators\Validator;
 class BirthdateValidator extends Validator
 {
     /**
+     * @var bool Strict mode for checking. If `true`, only auto-checking values are confirmed. If `false`, you need to check
+     * some values manually.
+     */
+    public $strict = true;
+
+    /**
      * @inheritDoc
      * @param string $value
      * @return array|null
@@ -35,7 +41,7 @@ class BirthdateValidator extends Validator
             return [Module::t('main', "Incorrect date."), []];
         }
 
-        if (BirthdateQualityCheck::INCORRECT === $birthdate->qualityCheck) {
+        if ($this->strict && BirthdateQualityCheck::INCORRECT === $birthdate->qualityCheck) {
             return [Module::t('main', "Please check the date."), []];
         }
 

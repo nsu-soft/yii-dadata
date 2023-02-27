@@ -23,6 +23,12 @@ use yii\validators\Validator;
 class VehicleValidator extends Validator
 {
     /**
+     * @var bool Strict mode for checking. If `true`, only auto-checking values are confirmed. If `false`, you need to check
+     * some values manually.
+     */
+    public $strict = true;
+
+    /**
      * @inheritDoc
      * @param string $value
      * @return array|null
@@ -35,7 +41,7 @@ class VehicleValidator extends Validator
             return [Module::t('main', "Incorrect vehicle."), []];
         }
 
-        if (VehicleQualityCheck::INCORRECT === $vehicle->qualityCheck) {
+        if ($this->strict && VehicleQualityCheck::INCORRECT === $vehicle->qualityCheck) {
             return [Module::t('main', "Please check the vehicle."), []];
         }
 
