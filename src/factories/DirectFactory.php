@@ -3,7 +3,7 @@
 namespace nsusoft\dadata\factories;
 
 use nsusoft\dadata\adapters\dto\AdapterInterface;
-use nsusoft\dadata\adapters\dto\direct\clean\address\CleanAddressesAdapter;
+use nsusoft\dadata\adapters\dto\direct\clean\address\CleanAddressAdapter;
 use nsusoft\dadata\adapters\dto\direct\clean\CleanBirthdateAdapter;
 use nsusoft\dadata\adapters\dto\direct\clean\CleanEmailAdapter;
 use nsusoft\dadata\adapters\dto\direct\clean\CleanNameAdapter;
@@ -43,7 +43,7 @@ class DirectFactory extends BaseFactory
     public function createClean(string $type): ?AdapterInterface
     {
         if (CleanType::ADDRESS === $type) {
-            return new CleanAddressesAdapter();
+            return new CleanAddressAdapter();
         } else if (CleanType::PHONE === $type) {
             return new CleanPhoneAdapter();
         } else if (CleanType::PASSPORT === $type) {
