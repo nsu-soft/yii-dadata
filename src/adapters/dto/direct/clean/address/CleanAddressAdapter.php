@@ -9,7 +9,7 @@ use nsusoft\dadata\dto\DtoInterface;
 /**
  * @property array $source
  */
-class CleanAddressesAdapter extends BaseAdapter
+class CleanAddressAdapter extends BaseAdapter
 {
     /**
      * @inheritDoc
