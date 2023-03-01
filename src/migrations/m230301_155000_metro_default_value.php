@@ -1,12 +1,10 @@
 <?php
 
-namespace nsusoft\dadata\migrations;
-
 use nsusoft\dadata\Module;
 use yii\db\Migration;
 
 /**
- * Class m220930_030022_move_field
+ * Class m230301_155000_metro_default_value
  */
 class m230301_155000_metro_default_value extends Migration
 {
