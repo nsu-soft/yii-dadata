@@ -25,9 +25,9 @@ use nsusoft\dadata\types\interfaces\models\GeoPositionInterface;
 interface CleanAddressInterface extends CleanInterface, AddressInterface, GeoPositionInterface, BeltwayInterface
 {
     /**
-     * @return string
+     * @return string|null
      */
-    public function getResult(): string;
+    public function getResult(): ?string;
 
     /**
      * @return string|null

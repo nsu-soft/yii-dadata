@@ -14,7 +14,7 @@ class CleanAddressDb extends CleanDb implements CleanAddressInterface
     /**
      * @inheritDoc
      */
-    public function getResult(): string
+    public function getResult(): ?string
     {
         return $this->sourceModel->result->result;
     }

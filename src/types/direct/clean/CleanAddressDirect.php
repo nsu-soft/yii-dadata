@@ -23,7 +23,7 @@ class CleanAddressDirect extends CleanDirect implements CleanAddressInterface
     /**
      * @inheritDoc
      */
-    public function getResult(): string
+    public function getResult(): ?string
     {
         return $this->rawData['result'];
     }
