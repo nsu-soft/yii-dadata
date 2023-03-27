@@ -15,7 +15,7 @@ use yii\helpers\Json;
  * This is the model class for table "{{%dadata_clean_address_result}}".
  *
  * @property int $id
- * @property string $result
+ * @property string|null $result
  * @property string|null $postal_code
  * @property string|null $country
  * @property string|null $country_iso_code
@@ -130,7 +130,6 @@ class CleanAddressResult extends ActiveRecord implements ResultInterface
     public function rules(): array
     {
         return [
-            [['result'], 'required'],
             [['fias_level', 'fias_actuality_state', 'capital_marker', 'qc_geo', 'qc_complete', 'qc_house'], 'integer'],
             [['metro'], 'string'],
             [['result'], 'string', 'max' => 500],
