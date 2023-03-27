@@ -14,7 +14,7 @@ class AddressDto implements DtoInterface
      */
     public $source;
     /**
-     * @var string
+     * @var string|null
      */
     public $result;
     /**
