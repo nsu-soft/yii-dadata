@@ -6,6 +6,7 @@ use nsusoft\dadata\adapters\methods\FindByIdAdapter;
 use nsusoft\dadata\adapters\methods\SuggestAdapter;
 use nsusoft\dadata\api\Client;
 use nsusoft\dadata\dto\DtoInterface;
+use nsusoft\dadata\exceptions\DadataException;
 use nsusoft\dadata\factories\DirectFactory;
 use nsusoft\dadata\factories\FactoryInterface;
 use nsusoft\dadata\Module;
@@ -58,6 +59,8 @@ class DirectHandler extends BaseHandler
 
     /**
      * @inheritDoc
+     * @throws DadataException
+     * @throws InvalidCallException
      */
     public function findById(string $type, string $value, array $options = []): ?DtoInterface
     {
@@ -75,7 +78,12 @@ class DirectHandler extends BaseHandler
         $adapter = $this->createFactory()->createFindById($type);
         $adapter->setSource($method->call());
 
-        return $adapter->populate()[0];
+        $result = $adapter->populate();
+        if (count($result) > 0) {
+            return $adapter->populate()[0];
+        } else {
+            throw new DadataException(Module::t('main', 'Dadata is unable to find any results.'), 404);
+        }
     }
 
     /**

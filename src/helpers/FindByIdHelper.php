@@ -12,6 +12,7 @@ use nsusoft\dadata\dto\suggest\MktuDto;
 use nsusoft\dadata\dto\suggest\OkpdDto;
 use nsusoft\dadata\dto\suggest\OktmoDto;
 use nsusoft\dadata\dto\suggest\OkvedDto;
+use nsusoft\dadata\dto\suggest\party\PartyDto;
 use nsusoft\dadata\dto\suggest\PostalUnitDto;
 use nsusoft\dadata\dto\suggest\RegionCourtDto;
 use nsusoft\dadata\types\enums\FindByIdType;
@@ -21,6 +22,17 @@ use nsusoft\dadata\types\enums\FindByIdType;
  */
 class FindByIdHelper
 {
+    /**
+     * @link https://dadata.ru/api/find-party/
+     * @param string $partyId    INN or OGRN as a string
+     * @param array $options
+     * @return PartyDto
+     */
+    public static function party(string $partyId, array $options = []): ?DtoInterface
+    {
+        return DadataHelper::findById(FindByIdType::PARTY, $partyId, $options);
+    }
+
     /**
      * @link https://dadata.ru/api/suggest/postal_unit/
      * @param string $postalUnit

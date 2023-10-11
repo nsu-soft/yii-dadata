@@ -4,6 +4,7 @@ namespace nsusoft\dadata\types\enums;
 
 class FindByIdType extends BaseEnum
 {
+    const PARTY = SuggestType::PARTY;
     const POSTAL_UNIT = SuggestType::POSTAL_UNIT;
     const FNS_UNIT = SuggestType::FNS_UNIT;
     const FTS_UNIT = SuggestType::FTS_UNIT;
@@ -22,6 +23,7 @@ class FindByIdType extends BaseEnum
     public static function all(): array
     {
         return [
+            self::PARTY,
             self::POSTAL_UNIT,
             self::FNS_UNIT,
             self::FTS_UNIT,
