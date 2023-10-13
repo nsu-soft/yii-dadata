@@ -77,6 +77,7 @@ return [
     'Invalid call of {className}::findOrCreate method.' => 'Недопустимый вызов метода {className}::findOrCreate.',
     'Invalid clean type.' => 'Неверный тип очистки.',
     'KLADR ID' => 'Идентификатор КЛАДР',
+    'Method not implemented.' => 'Метод не реализован',
     'Metro' => 'Метро',
     'OKATO' => 'ОКАТО',
     'OKTMO' => 'ОКТМО',
@@ -111,5 +112,6 @@ return [
     'Timezone' => 'Часовой пояс',
     'Unparsed parts' => 'Нераспознанные части',
     'Updated at' => 'Обновлено',
+    'Wrong search parameters.' => 'Неверные параметры для поиска',
     'You should specify token and secret before using DaData module.' => 'Вам следует указать токен и секретный ключ, прежде чем использовать модуль DaData.',
 ];

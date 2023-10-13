@@ -26,7 +26,7 @@ class SuggestPartiesAdapter extends BaseAdapter
             $dto->unrestrictedValue = $item['unrestricted_value'];
             $dto->inn = $item['data']['inn'];
             $dto->ogrn = $item['data']['ogrn'];
-            $dto->ogrnDate = $item['data']['ogrn_date'];
+            $dto->ogrnDate = date("Y-m-d", $item['data']['ogrn_date'] / 1000);
             $dto->hid = $item['data']['hid'];
             $dto->type = $item['data']['type'];
 
@@ -38,14 +38,14 @@ class SuggestPartiesAdapter extends BaseAdapter
                 $dto->owner = $ownerAdapter->populate();
             } else {
                 $dto->kpp = $item['data']['kpp'];
-
-                $managementAdapter = new SuggestManagementAdapter(['source' => $item['data']['management']]);
-                $dto->management = $managementAdapter->populate();
-
                 $dto->branchCount = $item['data']['branch_count'];
                 $dto->branchType = $item['data']['branch_type'];
-
                 $dto->invalid = $item['data']['invalid'];
+            }
+
+            if (isset($item['data']['management'])) {
+                $managementAdapter = new SuggestManagementAdapter(['source' => $item['data']['management']]);
+                $dto->management = $managementAdapter->populate();
             }
 
             $dto->okato = $item['data']['okato'];

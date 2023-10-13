@@ -2,6 +2,7 @@
 
 namespace nsusoft\dadata\factories;
 
+use nsusoft\dadata\cache\interfaces\ExtendedCacheInterface;
 use Psr\SimpleCache\CacheInterface;
 
 interface CacheFactoryInterface
@@ -23,4 +24,10 @@ interface CacheFactoryInterface
      * @return CacheInterface
      */
     public function createFindByIdCache(string $type): CacheInterface;
+
+    /**
+     * @param string $type
+     * @return ExtendedCacheInterface
+     */
+    public function createFindByIdExtendedCache(string $type): ExtendedCacheInterface;
 }
