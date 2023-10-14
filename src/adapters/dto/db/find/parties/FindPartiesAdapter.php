@@ -4,7 +4,7 @@ namespace nsusoft\dadata\adapters\dto\db\find\parties;
 
 use nsusoft\dadata\adapters\dto\BaseAdapter;
 use nsusoft\dadata\dto\DtoInterface;
-use nsusoft\dadata\dto\suggest\party\PartyDto;
+use nsusoft\dadata\dto\find\party\PartyDto;
 use nsusoft\dadata\dto\suggest\party\AddressDto;
 use nsusoft\dadata\dto\suggest\party\ManagementDto;
 use nsusoft\dadata\dto\suggest\party\OpfDto;
