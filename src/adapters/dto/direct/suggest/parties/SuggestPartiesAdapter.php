@@ -59,8 +59,10 @@ class SuggestPartiesAdapter extends BaseAdapter
             $opfAdapter = new SuggestOpfAdapter(['source' => $item['data']['opf']]);
             $dto->opf = $opfAdapter->populate();
 
-            $addressAdapter = new SuggestAddressAdapter(['source' => $item['data']['address']]);
-            $dto->address = $addressAdapter->populate();
+            if (isset($item['data']['address'])) {
+                $addressAdapter = new SuggestAddressAdapter(['source' => $item['data']['address']]);
+                $dto->address = $addressAdapter->populate();
+            }
 
             $stateAdapter = new SuggestStateAdapter(['source' => $item['data']['state']]);
             $dto->state = $stateAdapter->populate();

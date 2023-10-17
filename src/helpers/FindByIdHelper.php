@@ -12,7 +12,7 @@ use nsusoft\dadata\dto\suggest\MktuDto;
 use nsusoft\dadata\dto\suggest\OkpdDto;
 use nsusoft\dadata\dto\suggest\OktmoDto;
 use nsusoft\dadata\dto\suggest\OkvedDto;
-use nsusoft\dadata\dto\suggest\party\PartyDto;
+use nsusoft\dadata\dto\find\party\PartyDto;
 use nsusoft\dadata\dto\suggest\PostalUnitDto;
 use nsusoft\dadata\dto\suggest\RegionCourtDto;
 use nsusoft\dadata\types\enums\FindByIdType;
