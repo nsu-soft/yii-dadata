@@ -20,6 +20,7 @@ class SuggestManagementAdapter extends BaseAdapter
 
         $dto->name = $this->source['name'];
         $dto->post = $this->source['post'];
+        $dto->disqualified = $this->source['disqualified'];
 
         return $dto;
     }

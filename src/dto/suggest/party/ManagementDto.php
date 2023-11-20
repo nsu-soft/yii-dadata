@@ -14,4 +14,9 @@ class ManagementDto implements DtoInterface
      * @var string|null
      */
     public $post;
+
+    /**
+     * @var bool|null
+     */
+    public $disqualified;
 }

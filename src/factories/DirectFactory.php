@@ -111,7 +111,9 @@ class DirectFactory extends BaseFactory
      */
     public function createFindById(string $type): ?AdapterInterface
     {
-        if (FindByIdType::POSTAL_UNIT === $type) {
+        if (FindByIdType::PARTY === $type) {
+            return new SuggestPartiesAdapter();
+        } else if (FindByIdType::POSTAL_UNIT === $type) {
             return new SuggestPostalUnitsAdapter();
         } else if (FindByIdType::FNS_UNIT === $type) {
             return new SuggestFnsUnitsAdapter();
