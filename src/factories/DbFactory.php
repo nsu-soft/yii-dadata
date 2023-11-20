@@ -4,9 +4,13 @@ namespace nsusoft\dadata\factories;
 
 use nsusoft\dadata\adapters\dto\AdapterInterface;
 use nsusoft\dadata\adapters\dto\db\clean\CleanAddressAdapter;
+use nsusoft\dadata\adapters\dto\db\find\parties\FindPartiesAdapter;
 use nsusoft\dadata\cache\db\clean\CleanAddressCache;
+use nsusoft\dadata\cache\db\find\FindByIdPartyCache;
+use nsusoft\dadata\cache\interfaces\ExtendedCacheInterface;
 use nsusoft\dadata\Module;
 use nsusoft\dadata\types\enums\CleanType;
+use nsusoft\dadata\types\enums\FindByIdType;
 use Psr\SimpleCache\CacheInterface;
 use yii\base\InvalidCallException;
 
@@ -85,7 +89,10 @@ class DbFactory extends BaseFactory implements CacheFactoryInterface
      */
     public function createFindById(string $type): ?AdapterInterface
     {
-//        if (FindByIdType::POSTAL_UNIT === $type) {
+        if (FindByIdType::PARTY === $type) {
+            return new FindPartiesAdapter();
+        }
+//        else if (FindByIdType::POSTAL_UNIT === $type) {
 //
 //        } else if (FindByIdType::FNS_UNIT === $type) {
 //
@@ -206,6 +213,15 @@ class DbFactory extends BaseFactory implements CacheFactoryInterface
 //        } else if (FindByIdType::OKTMO === $type) {
 //
 //        }
+
+        throw new InvalidCallException(Module::t('main', 'Invalid suggest type.'));
+    }
+
+    public function createFindByIdExtendedCache(string $type): ExtendedCacheInterface
+    {
+        if (FindByIdType::PARTY === $type) {
+            return new FindByIdPartyCache();
+        }
 
         throw new InvalidCallException(Module::t('main', 'Invalid suggest type.'));
     }

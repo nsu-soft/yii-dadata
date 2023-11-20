@@ -60,6 +60,39 @@ class DbHandler extends BaseHandler
     }
 
     /**
+     * @inheritDoc
+     * @throws CacheException
+     * @throws InvalidArgumentException
+     */
+    public function findById(string $type, string $value, array $options = []): ?DtoInterface
+    {
+        $factory = $this->createFactory();
+        $adapter = $factory->createFindById($type);
+
+        if (is_null($adapter)) {
+            return parent::findById($type, $value);
+        }
+
+        $cache = $factory->createFindByIdExtendedCache($type);
+
+        if ($cache->has($value, $options)) {
+            $adapter->setSource($cache->get($value, $options));
+            return $adapter->populate();
+        }
+
+        $findByIdParent = parent::findById($type, $value, $options);
+
+        if (!$cache->set($value, $options, $findByIdParent)) {
+            throw new CacheException(Module::t('main', "A cache saving was failed."));
+        }
+
+        $cachedModel = $cache->get($value, $options);
+        $adapter->setSource($cachedModel);
+
+        return $adapter->populate();
+    }
+
+    /**
      * @return DbFactory
      */
     protected function createFactory(): FactoryInterface

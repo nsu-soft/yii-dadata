@@ -22,20 +22,31 @@ class SuggestPartiesAdapter extends BaseAdapter
         foreach ($this->source as $item) {
             $dto = $this->createDto();
 
-            $dto->value = $item['data']['value'];
-            $dto->unrestrictedValue = $item['data']['unrestricted_value'];
+            $dto->value = $item['value'];
+            $dto->unrestrictedValue = $item['unrestricted_value'];
             $dto->inn = $item['data']['inn'];
-            $dto->kpp = $item['data']['kpp'];
             $dto->ogrn = $item['data']['ogrn'];
-            $dto->ogrnDate = $item['data']['ogrn_date'];
+            $dto->ogrnDate = date("Y-m-d", $item['data']['ogrn_date'] / 1000);
             $dto->hid = $item['data']['hid'];
             $dto->type = $item['data']['type'];
 
             $organisationAdapter = new SuggestOrganisationAdapter(['source' => $item['data']['name']]);
             $dto->name = $organisationAdapter->populate();
 
-            $ownerAdapter = new SuggestOwnerAdapter(['source' => $item['data']['fio']]);
-            $dto->owner = $ownerAdapter->populate();
+            if (isset($item['data']['fio'])) {
+                $ownerAdapter = new SuggestOwnerAdapter(['source' => $item['data']['fio']]);
+                $dto->owner = $ownerAdapter->populate();
+            } else {
+                $dto->kpp = $item['data']['kpp'];
+                $dto->branchCount = $item['data']['branch_count'];
+                $dto->branchType = $item['data']['branch_type'];
+                $dto->invalid = $item['data']['invalid'];
+            }
+
+            if (isset($item['data']['management'])) {
+                $managementAdapter = new SuggestManagementAdapter(['source' => $item['data']['management']]);
+                $dto->management = $managementAdapter->populate();
+            }
 
             $dto->okato = $item['data']['okato'];
             $dto->oktmo = $item['data']['oktmo'];
@@ -48,19 +59,13 @@ class SuggestPartiesAdapter extends BaseAdapter
             $opfAdapter = new SuggestOpfAdapter(['source' => $item['data']['opf']]);
             $dto->opf = $opfAdapter->populate();
 
-            $managementAdapter = new SuggestManagementAdapter(['source' => $item['data']['management']]);
-            $dto->management = $managementAdapter->populate();
-
-            $dto->branchCount = $item['data']['branch_count'];
-            $dto->branchType = $item['data']['branch_type'];
-
-            $addressAdapter = new SuggestAddressAdapter(['source' => $item['data']['address']]);
-            $dto->address = $addressAdapter->populate();
+            if (isset($item['data']['address'])) {
+                $addressAdapter = new SuggestAddressAdapter(['source' => $item['data']['address']]);
+                $dto->address = $addressAdapter->populate();
+            }
 
             $stateAdapter = new SuggestStateAdapter(['source' => $item['data']['state']]);
             $dto->state = $stateAdapter->populate();
-
-            $dto->invalid = $item['data']['invalid'];
 
             $result[] = $dto;
         }

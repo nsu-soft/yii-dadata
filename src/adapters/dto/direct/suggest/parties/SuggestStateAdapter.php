@@ -18,9 +18,9 @@ class SuggestStateAdapter extends BaseAdapter
     {
         $dto = $this->createDto();
 
-        $dto->actualityDate = $this->source['actuality_date'];
-        $dto->registrationDate = $this->source['registration_date'];
-        $dto->liquidationDate = $this->source['liquidation_date'];
+        $dto->actualityDate = date("Y-m-d", $this->source['actuality_date'] / 1000);
+        $dto->registrationDate = date("Y-m-d", $this->source['registration_date'] / 1000);
+        $dto->liquidationDate = date("Y-m-d", $this->source['liquidation_date'] / 1000);
         $dto->status = $this->source['status'];
         $dto->code = $this->source['code'];
 
