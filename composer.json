@@ -2,7 +2,7 @@
     "name": "nsu-soft/yii-dadata",
     "description": "DaData module for Yii 2 Framework",
     "keywords": ["yii2", "dadata", "module", "cache"],
-    "version": "0.5",
+    "version": "0.5.1",
     "type": "library",
     "license": "BSD-3-Clause",
     "support": {

@@ -41,12 +41,12 @@ class SuggestAddressesAdapter extends BaseAdapter
             $dto->areaType = $item['data']['area_type'];
             $dto->areaTypeFull = $item['data']['area_type_full'];
             $dto->area = $item['data']['area'];
-            $dto->subAreaFiasId = $item['data']['sub_area_fias_id'];
-            $dto->subAreaKladrId = $item['data']['sub_area_kladr_id'];
-            $dto->subAreaWithType = $item['data']['sub_area_with_type'];
-            $dto->subAreaType = $item['data']['sub_area_type'];
-            $dto->subAreaTypeFull = $item['data']['sub_area_type_full'];
-            $dto->subArea = $item['data']['sub_area'];
+            $dto->subAreaFiasId = $item['data']['sub_area_fias_id'] ?? null;
+            $dto->subAreaKladrId = $item['data']['sub_area_kladr_id'] ?? null;
+            $dto->subAreaWithType = $item['data']['sub_area_with_type'] ?? null;
+            $dto->subAreaType = $item['data']['sub_area_type'] ?? null;
+            $dto->subAreaTypeFull = $item['data']['sub_area_type_full'] ?? null;
+            $dto->subArea = $item['data']['sub_area'] ?? null;
             $dto->cityFiasId = $item['data']['city_fias_id'];
             $dto->cityKladrId = $item['data']['city_kladr_id'];
             $dto->cityWithType = $item['data']['city_with_type'];
@@ -71,7 +71,7 @@ class SuggestAddressesAdapter extends BaseAdapter
             $dto->streetTypeFull = $item['data']['street_type_full'];
             $dto->street = $item['data']['street'];
             $dto->steadFiasId = $item['data']['stead_fias_id'];
-            $dto->steadKladrId = $item['data']['stead_kladr_id'];
+            $dto->steadKladrId = $item['data']['stead_kladr_id'] ?? null;
             $dto->steadType = $item['data']['stead_type'];
             $dto->steadTypeFull = $item['data']['stead_type_full'];
             $dto->stead = $item['data']['stead'];
